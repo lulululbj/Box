@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Box</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="app">应用</string>
+    <string name="open_app">打开</string>
+    <string name="uninstall_app">卸载</string>
+    <string name="properties">属性</string>
+    <string name="save_apk">备份安装包</string>
+    <string name="share_apk">分享安装包</string>
+    <string name="app_detail">应用详情</string>
+    <string name="open_in_store">在应用商店中查看</string>
+</resources>

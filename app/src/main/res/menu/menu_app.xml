@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/menu_open_app"
+            android:title="@string/open_app"/>
+    <item
+            android:id="@+id/menu_uninstall_app"
+            android:title="@string/uninstall_app"/>
+
+    <item
+            android:id="@+id/menu_app_properties"
+            android:title="@string/properties"/>
+
+    <item
+            android:id="@+id/menu_app_detail"
+            android:title="@string/app_detail"/>
+
+    <item
+            android:id="@+id/menu_save_apk"
+            android:title="@string/save_apk"/>
+
+    <item
+            android:id="@+id/menu_share_apk"
+            android:title="@string/share_apk"/>
+
+    <item
+            android:id="@+id/menu_open_in_store"
+            android:title="@string/open_in_store"/>
+</menu>

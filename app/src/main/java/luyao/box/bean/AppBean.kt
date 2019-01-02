@@ -10,5 +10,6 @@ data class AppBean(
     val appName: String,
     val packageName: String,
     val versionName: String,
+    val sourceDir:String,
     val icon: Drawable
 )

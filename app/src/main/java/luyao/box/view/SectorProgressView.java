@@ -33,7 +33,7 @@ public class SectorProgressView extends View {
             bgColor = a.getColor(R.styleable.SectorProgressView_bgColor, 0xffe5e5e5);
             fgColor = a.getColor(R.styleable.SectorProgressView_fgColor, 0xffff765c);
             percent = a.getFloat(R.styleable.SectorProgressView_percent, 0);
-            startAngle = a.getFloat(R.styleable.SectorProgressView_startAngle, 0);
+            startAngle = a.getFloat(R.styleable.SectorProgressView_startAngle, 90);
 
         } finally {
             a.recycle();

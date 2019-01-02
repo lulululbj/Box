@@ -1,19 +1,31 @@
 package luyao.box.ui
 
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.Manifest
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.title_layout.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import luyao.box.APK_PATH
+import luyao.box.BASE_PATH
 import luyao.box.R
 import luyao.box.common.base.BaseActivity
 import luyao.box.ui.appManager.AppListActivity
+import pub.devrel.easypermissions.EasyPermissions
+import java.io.File
 
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener,
+    EasyPermissions.PermissionCallbacks {
+
+    private val perms = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
 
     override fun getLayoutResId() = R.layout.activity_main
 
@@ -33,6 +45,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        checkPermissions()
     }
 
     override fun initData() {
@@ -87,5 +101,37 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    private fun checkPermissions() {
+        if (!EasyPermissions.hasPermissions(this, *perms)) {
+            EasyPermissions.requestPermissions(this, "权限申请", 1001, *perms)
+        } else {
+            finish()
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        if (perms.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            createBaseFile()
+        }
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+    }
+
+    private fun createBaseFile() {
+        GlobalScope.launch(Dispatchers.IO) {
+            val baseFolder = File(BASE_PATH)
+            if (!baseFolder.exists()) baseFolder.mkdirs()
+
+            val apkFolder = File(APK_PATH)
+            if (!apkFolder.exists()) apkFolder.mkdirs()
+        }
     }
 }

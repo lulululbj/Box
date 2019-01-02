@@ -25,6 +25,7 @@ object AppManager {
                 getAppName(context, it),
                 it.packageName,
                 it.versionName,
+                it.applicationInfo.sourceDir,
                 getAppIcon(context, it)
             )
             installedAppBeanList.add(appBean)

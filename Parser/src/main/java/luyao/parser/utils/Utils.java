@@ -83,6 +83,22 @@ public class Utils {
         return null;
     }
 
+    public static byte[] readAll(InputStream in) {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            BufferedInputStream bi = new BufferedInputStream(in);
+            byte[] b = new byte[1024];
+            int len = 0;
+            while ((len = bi.read(b)) != -1) {
+                bos.write(b, 0, len);
+            }
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static int readUnsignedLeb128(byte[] src, int offset) {
         int result = 0;
         int count = 0;

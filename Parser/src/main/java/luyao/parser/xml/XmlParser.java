@@ -1,7 +1,8 @@
 package luyao.parser.xml;
 
 import android.util.TypedValue;
-import luyao.parser.utils.Reader;
+import luyao.parser.utils.BytesReader;
+import luyao.parser.utils.Utils;
 import luyao.parser.xml.bean.Attribute;
 import luyao.parser.xml.bean.Xml;
 import luyao.parser.xml.bean.chunk.*;
@@ -19,13 +20,13 @@ import static luyao.parser.utils.Reader.log;
  */
 public class XmlParser {
 
-    private Reader reader;
+    private BytesReader reader;
 
     private List<String> stringChunkList = new ArrayList<>();
     private List<Chunk> chunkList = new ArrayList<>();
 
     public XmlParser(InputStream in) {
-        this.reader = new Reader(in, true);
+        this.reader = new BytesReader(Utils.readAll(in), true);
     }
 
     public String parse() {
@@ -112,6 +113,8 @@ public class XmlParser {
                 log("   %s", string);
             }
 
+            reader.moveTo(chunkSize + 8);
+
         } catch (IOException e) {
             e.printStackTrace();
             log("parse StringChunk error!");
@@ -121,7 +124,8 @@ public class XmlParser {
     private void parseResourceIdChunk() {
         try {
             String chunkType = reader.readHexString(4);
-
+//            if (!chunkType.equals("0x00080180"))
+//                chunkType = reader.readHexString(4); // 有时候 chunkType 前面会多一个 0000
             log("chunk type: %s", chunkType);
 
             int chunkSize = reader.readInt();
@@ -258,7 +262,7 @@ public class XmlParser {
                 String dataString = type == TypedValue.TYPE_STRING ? stringChunkList.get(data) : TypedValue.coerceToString(type, data);
                 log("   data: %s", dataString);
 
-                Attribute attribute = new Attribute(namespaceUriAttr==-1?null:stringChunkList.get(namespaceUriAttr),
+                Attribute attribute = new Attribute(namespaceUriAttr == -1 ? null : stringChunkList.get(namespaceUriAttr),
                         stringChunkList.get(nameAttr), valueStr, type, dataString);
                 attributes.add(attribute);
             }

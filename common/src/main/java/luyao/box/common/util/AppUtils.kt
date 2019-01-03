@@ -32,6 +32,22 @@ object AppUtils {
         return packageInfo.applicationInfo.loadLabel(context.packageManager).toString()
     }
 
+    fun getAppVersionName(context: Context,packageName: String):String{
+        return context.packageManager.getPackageInfo(packageName,0).versionName
+    }
+
+    fun getAppVersionCode(context: Context,packageName: String):Int{
+        return context.packageManager.getPackageInfo(packageName,0).versionCode
+    }
+
+    fun getAppTargetSdkVersion(context: Context,packageName: String):Int{
+        return context.packageManager.getPackageInfo(packageName,0).applicationInfo.targetSdkVersion
+    }
+
+    fun getAppMinSdkVersion(context: Context,packageName: String):Int{
+        return context.packageManager.getPackageInfo(packageName,0).applicationInfo.minSdkVersion
+    }
+
     fun uninstallApp(context: Context,packageName: String) {
         val intent = Intent(Intent.ACTION_DELETE)
         intent.data = Uri.parse("package:$packageName")

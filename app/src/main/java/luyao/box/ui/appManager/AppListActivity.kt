@@ -1,5 +1,6 @@
 package luyao.box.ui.appManager
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -41,7 +42,8 @@ class AppListActivity : BaseActivity() {
         itemDecoration.setDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.divider_bg)))
 
         appAdapter.setOnItemClickListener { _, _, position ->
-            Toast.makeText(this, appAdapter.getItem(position)?.appName, Toast.LENGTH_SHORT).show()
+            startActivity(
+                Intent(this, AppDetailActivity::class.java).putExtra("packageName", appAdapter.getItem(position)?.packageName))
         }
 
         appAdapter.openLoadAnimation()

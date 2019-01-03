@@ -1,5 +1,6 @@
 package luyao.box.ui.appManager
 
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_app_detail.*
 import kotlinx.android.synthetic.main.title_layout.*
 import kotlinx.coroutines.Dispatchers
@@ -8,6 +9,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import luyao.box.R
 import luyao.box.common.base.BaseActivity
+import luyao.box.common.util.AppUtils
 import luyao.parser.xml.XmlParser
 import java.io.File
 import java.util.zip.ZipEntry
@@ -29,6 +31,10 @@ class AppDetailActivity : BaseActivity() {
     }
 
     override fun initData() {
+        Log.e("box",AppUtils.getAppVersionName(this,packageName))
+        Log.e("box", AppUtils.getAppVersionCode(this,packageName).toString())
+//        Log.e("box", AppUtils.getAppMinSdkVersion(this,packageName).toString())
+        Log.e("box", AppUtils.getAppTargetSdkVersion(this,packageName).toString())
         GlobalScope.launch(Dispatchers.Main) {
 
             val xml=GlobalScope.async(Dispatchers.IO) {
@@ -40,7 +46,6 @@ class AppDetailActivity : BaseActivity() {
                     return@async xmlParser.parse()
                 }
             }
-
             xmlContent.text=xml.await()
         }
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/title_layout"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <EditText
+                android:id="@+id/textEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:fontFamily="sans-serif-light"
+                android:textSize="14sp"
+                android:ems="10"
+                android:gravity="left|top"
+                android:inputType="textCapSentences|textMultiLine"/>
+    </ScrollView>
+
+</LinearLayout>

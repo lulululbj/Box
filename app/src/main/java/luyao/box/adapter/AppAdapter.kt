@@ -7,8 +7,8 @@ import android.widget.ImageButton
 import android.widget.PopupMenu
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import luyao.box.APK_PATH
@@ -46,7 +46,12 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
                 R.id.menu_open_app -> AppUtils.openApp(context, appBean.packageName)
                 R.id.menu_uninstall_app -> AppUtils.uninstallApp(context, appBean.packageName) // TODO 卸载之后刷新列表
                 R.id.menu_app_properties -> AppUtils.openAppProperties(context, appBean.packageName)
-                R.id.menu_app_detail -> context.startActivity(Intent(context, AppDetailActivity::class.java).putExtra("packageName",appBean.packageName))
+                R.id.menu_app_detail -> context.startActivity(
+                    Intent(
+                        context,
+                        AppDetailActivity::class.java
+                    ).putExtra("packageName", appBean.packageName)
+                )
                 R.id.menu_save_apk -> saveApk(helper, context, appBean)
                 R.id.menu_share_apk -> shareApk()
                 R.id.menu_open_in_store -> AppUtils.openInStore(context, appBean.packageName)
@@ -57,7 +62,7 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
     }
 
     private fun saveApk(helper: BaseViewHolder, context: Context, appBean: AppBean) {
-        GlobalScope.launch(Dispatchers.Main) {
+        CoroutineScope(Dispatchers.Main).launch {
             val progressView = helper.getView<SectorProgressView>(R.id.appProgressView)
             val apkFile = File(appBean.sourceDir)
             val destFile = File("$APK_PATH${appBean.appName}${File.separator}${apkFile.name}")

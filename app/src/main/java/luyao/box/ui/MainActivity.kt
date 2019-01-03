@@ -9,8 +9,8 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.title_layout.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import luyao.box.APK_PATH
 import luyao.box.BASE_PATH
@@ -111,8 +111,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun checkPermissions() {
         if (!EasyPermissions.hasPermissions(this, *perms)) {
             EasyPermissions.requestPermissions(this, "权限申请", 1001, *perms)
-        } else {
-            finish()
         }
     }
 
@@ -126,7 +124,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun createBaseFile() {
-        GlobalScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             val baseFolder = File(BASE_PATH)
             if (!baseFolder.exists()) baseFolder.mkdirs()
 

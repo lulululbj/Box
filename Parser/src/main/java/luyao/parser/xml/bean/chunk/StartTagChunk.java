@@ -19,7 +19,6 @@ public class StartTagChunk extends Chunk {
     private List<Attribute> attributeList;
 
 
-
     public StartTagChunk(int nameSpaceUri, String name, List<Attribute> attributeList) {
         super(Xml.START_TAG_CHUNK_TYPE);
         this.nameSpaceUri = nameSpaceUri;
@@ -52,10 +51,10 @@ public class StartTagChunk extends Chunk {
     }
 
     @Override
-    public String toXmlString() {
-        StringBuilder builder=new StringBuilder();
-        System.out.println("test "+name+name.length());
-        if (name.replace(" ","").equals("manifest")) {
+    public String toXmlString(Xml xml) {
+        StringBuilder builder = new StringBuilder();
+        System.out.println("test " + name + name.length());
+        if (name.replace(" ", "").equals("manifest")) {
             builder.append("<manifest");
             for (String key : Xml.nameSpaceMap.keySet()) {
                 Xml.nameSpaceMap.put(Xml.nameSpaceMap.get(key), key);
@@ -70,6 +69,24 @@ public class StartTagChunk extends Chunk {
 
             String prefix = XmlParser.getNamespacePrefix(Xml.nameSpaceMap.get(attribute.getNamespaceUri()));
             builder.append(XmlParser.format("\n%s%s%s=\"%s\"", Xml.BLANK.toString(), prefix, attribute.getName(), attribute.getData()));
+
+            switch (attribute.getName()) {
+                case "versionCode":
+                    xml.versionCode = attribute.getData();
+                    break;
+                case "versionName":
+                    xml.versionName = attribute.getData();
+                    break;
+                case "package":
+                    xml.packageName = attribute.getData();
+                    break;
+                case "minSdkVersion":
+                    xml.minSdkVersion = attribute.getData();
+                    break;
+                case "targetSdkVersion":
+                    xml.targetSdkVersion = attribute.getData();
+                    break;
+            }
 
             if (i == attributeList.size() - 1) builder.append(">");
         }

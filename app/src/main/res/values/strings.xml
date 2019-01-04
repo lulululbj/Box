@@ -14,4 +14,9 @@
     <string name="share_apk">分享安装包</string>
     <string name="app_detail">应用详情</string>
     <string name="open_in_store">在应用商店中查看</string>
+    <string name="targetSdk">targetSdkVersion</string>
+    <string name="minSdk">minSdkVersion</string>
+    <string name="maxSdk">maxSdkVersion</string>
+    <string name="AndroidManifest">清单文件</string>
+    <string name="versionCode">versionCode</string>
 </resources>

@@ -1,15 +1,14 @@
 package luyao.box.ui.appManager
 
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_app_detail.*
 import kotlinx.android.synthetic.main.title_layout.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import luyao.box.R
 import luyao.box.common.base.BaseActivity
-import luyao.box.common.util.AppUtils
+import luyao.box.ui.editor.TextEditorActivity
 import luyao.parser.xml.XmlParser
 import java.io.File
 import java.util.zip.ZipEntry
@@ -31,23 +30,30 @@ class AppDetailActivity : BaseActivity() {
     }
 
     override fun initData() {
-        Log.e("box",AppUtils.getAppVersionName(this,packageName))
-        Log.e("box", AppUtils.getAppVersionCode(this,packageName).toString())
-//        Log.e("box", AppUtils.getAppMinSdkVersion(this,packageName).toString())
-        Log.e("box", AppUtils.getAppTargetSdkVersion(this,packageName).toString())
-        GlobalScope.launch(Dispatchers.Main) {
 
-            val xml=GlobalScope.async(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val xmlAsync = async(Dispatchers.IO) {
+                var xmlParser: XmlParser
                 val zipFile = ZipFile(File(sourceDir))
                 val zipEntry: ZipEntry? = zipFile.getEntry("AndroidManifest.xml")
                 zipEntry?.run {
                     val inputStream = zipFile.getInputStream(zipEntry)
-                    val xmlParser = XmlParser(inputStream)
+                    xmlParser = XmlParser(inputStream)
                     return@async xmlParser.parse()
                 }
             }
-            xmlContent.text=xml.await()
+
+            val xml = xmlAsync.await()
+
+            xml?.run {
+                detailVersionName.text = versionName
+                detailVersionCode.text = versionCode
+                detailPackageMame.text = packageName
+                detailTargetSdk.text = targetSdkVersion
+                detailMinSdk.text = minSdkVersion
+            }
         }
 
+        detailManifest.setOnClickListener { startActivity(TextEditorActivity::class.java, "sourceDir", sourceDir) }
     }
 }

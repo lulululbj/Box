@@ -24,4 +24,8 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun startActivity(z: Class<*>) {
         startActivity(Intent(this, z))
     }
+
+    protected fun startActivity(z: Class<*>,name:String,extra:String) {
+        startActivity(Intent(this, z).putExtra(name,extra))
+    }
 }

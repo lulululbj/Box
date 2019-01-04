@@ -38,7 +38,7 @@ public class EndTagChunk extends Chunk {
     }
 
     @Override
-    public String toXmlString() {
+    public String toXmlString(Xml xml) {
         if (name.equals("manifest"))
             BLANK.setLength(0);
         else

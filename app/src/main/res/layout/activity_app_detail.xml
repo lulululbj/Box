@@ -1,21 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:scrollbars="none">
 
-    <include layout="@layout/title_layout"/>
-
-    <ScrollView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-                android:id="@+id/xmlContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="16sp"/>
-    </ScrollView>
+        <include layout="@layout/title_layout"/>
 
-</LinearLayout>
+        <androidx.cardview.widget.CardView style="@style/OverView_CardView">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                <ImageView
+                        android:id="@+id/detailIcon"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/ic_launcher"/>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                            android:id="@+id/detailVersionName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            tools:text="1.0"/>
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                            android:id="@+id/detailPackageMame"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/text_gray"
+                            android:textSize="14sp"
+                            tools:text="luyao.box"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                style="@style/OverView_CardView">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/detailManifest"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"
+                    android:text="@string/AndroidManifest"
+                    android:background="@drawable/touch_bg"/>
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_navigate_next_black_24dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="16dp"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                style="@style/OverView_CardView">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp">
+
+                <RelativeLayout
+                        style="@style/OverView_rl">
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                            android:id="@+id/detailVersionCode"
+                            style="@style/OverView_tv"
+                            tools:text="1"/>
+
+                    <TextView
+                            style="@style/OverView_tv"
+                            android:layout_below="@id/detailVersionCode"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/versionCode"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                        style="@style/OverView_rl">
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                            android:id="@+id/detailTargetSdk"
+                            style="@style/OverView_tv"
+                            tools:text="1"/>
+
+                    <TextView
+                            style="@style/OverView_tv"
+                            android:layout_below="@id/detailTargetSdk"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/targetSdk"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                        style="@style/OverView_rl">
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                            android:id="@+id/detailMinSdk"
+                            style="@style/OverView_tv"
+                            tools:text="1"/>
+
+                    <TextView
+                            style="@style/OverView_tv"
+                            android:layout_below="@id/detailMinSdk"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/minSdk"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                style="@style/OverView_CardView">
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout style="@style/OverView_li">-->
+
+            <!--<ImageView-->
+            <!--style="@style/OverView_icon"-->
+            <!--android:src="@drawable/location" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/overview_location"-->
+            <!--style="@style/OverView_infoTv"-->
+            <!--tools:text="Shanghai" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout style="@style/OverView_li">-->
+
+            <!--<ImageView-->
+            <!--style="@style/OverView_icon"-->
+            <!--android:src="@drawable/company" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/overview_company"-->
+            <!--style="@style/OverView_infoTv"-->
+            <!--tools:text="Shanghai" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/emailLayout"-->
+            <!--style="@style/OverView_li">-->
+
+            <!--<ImageView-->
+            <!--style="@style/OverView_icon"-->
+            <!--android:src="@drawable/email" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/overview_email"-->
+            <!--style="@style/OverView_infoTv"-->
+            <!--android:autoLink="email"-->
+            <!--tools:text="Shanghai" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/blogLayout"-->
+            <!--style="@style/OverView_li">-->
+
+            <!--<ImageView-->
+            <!--style="@style/OverView_icon"-->
+            <!--android:src="@drawable/link" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/overview_link"-->
+            <!--style="@style/OverView_infoTv"-->
+            <!--android:autoLink="web"-->
+            <!--tools:text="Shanghai" />-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout style="@style/OverView_li">-->
+
+            <!--<ImageView-->
+            <!--style="@style/OverView_icon"-->
+            <!--android:src="@drawable/time" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/overview_time"-->
+            <!--style="@style/OverView_infoTv"-->
+            <!--tools:text="Shanghai" />-->
+
+            <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_app_list.*
 import kotlinx.android.synthetic.main.title_layout.*
 import luyao.box.R
@@ -43,7 +42,11 @@ class AppListActivity : BaseActivity() {
 
         appAdapter.setOnItemClickListener { _, _, position ->
             startActivity(
-                Intent(this, AppDetailActivity::class.java).putExtra("packageName", appAdapter.getItem(position)?.packageName))
+                Intent(this, AppDetailActivity::class.java).putExtra(
+                    "packageName",
+                    appAdapter.getItem(position)?.packageName
+                )
+            )
         }
 
         appAdapter.openLoadAnimation()

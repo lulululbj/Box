@@ -12,6 +12,13 @@ import java.util.Map;
  */
 public class Xml {
 
+    public String targetSdkVersion;
+    public String minSdkVersion;
+    public String versionCode;
+    public String versionName;
+    public String packageName;
+    public List<String> permissions;
+    public String xmlContent;
 
     public static final int START_NAMESPACE_CHUNK_TYPE = 0x00100100;
     public static final int END_NAMESPACE_CHUNK_TYPE = 0x00100101;
@@ -38,8 +45,10 @@ public class Xml {
         builder.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
 
         for (Chunk chunk : chunkList) {
-            builder.append(chunk.toXmlString());
+            builder.append(chunk.toXmlString(this));
         }
-        return builder.toString();
+
+        this.xmlContent=builder.toString();
+        return this.xmlContent;
     }
 }

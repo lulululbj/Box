@@ -37,7 +37,7 @@ public class EndNameSpaceChunk extends Chunk {
     }
 
     @Override
-    public String toXmlString() {
+    public String toXmlString(Xml xml) {
         return "";
     }
 }

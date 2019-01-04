@@ -29,7 +29,7 @@ public class XmlParser {
         this.reader = new BytesReader(Utils.readAll(in), true);
     }
 
-    public String parse() {
+    public Xml parse() {
         parseHeader();
         parseStringChunk();
         parseResourceIdChunk();
@@ -337,10 +337,10 @@ public class XmlParser {
         log("\nparse Text Chunk");
     }
 
-    private String generateXml() {
+    private Xml generateXml() {
         Xml xml = new Xml(stringChunkList, null, chunkList);
-        System.out.println(xml.toString());
-        return xml.toString();
+        log(xml.toString());
+        return xml;
     }
 
     public static String format(String format, Object... params) {

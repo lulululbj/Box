@@ -19,4 +19,8 @@
     <string name="maxSdk">maxSdkVersion</string>
     <string name="AndroidManifest">清单文件</string>
     <string name="versionCode">versionCode</string>
+    <string name="MD5">MD5</string>
+    <string name="SHA1">SHA1</string>
+    <string name="SHA256">SHA256</string>
+    <string name="has_copied">已复制到剪切板</string>
 </resources>

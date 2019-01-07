@@ -6,9 +6,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import luyao.box.APK_PATH
 import luyao.box.R
 import luyao.box.common.base.BaseActivity
+import luyao.box.common.util.AppUtils
+import luyao.box.common.util.HashUtils
 import luyao.box.ui.editor.TextEditorActivity
+import luyao.box.ui.editor.TextViewerActivity
+import luyao.box.util.Utils
 import luyao.parser.xml.XmlParser
 import java.io.File
 import java.util.zip.ZipEntry
@@ -20,6 +25,7 @@ import java.util.zip.ZipFile
  */
 class AppDetailActivity : BaseActivity() {
 
+    private val filePath by lazy { "$APK_PATH${AppUtils.getAppName(this@AppDetailActivity,mPackageName)}${File.separator}AndroidManifest.xml" }
     private val mPackageName by lazy { intent.getStringExtra("packageName") }
     private val sourceDir by lazy { applicationContext.packageManager.getApplicationInfo(mPackageName, 0).sourceDir }
 
@@ -27,9 +33,31 @@ class AppDetailActivity : BaseActivity() {
 
     override fun initView() {
         mToolbar.title = "应用详情"
+        detailIcon.setImageDrawable(AppUtils.getAppIcon(this, packageManager.getPackageInfo(mPackageName, 0)))
+        detailRefresh.isRefreshing = true
+        initListener()
     }
 
     override fun initData() {
+        refresh()
+    }
+
+    private fun initListener() {
+        detailRefresh.setOnRefreshListener { refresh() }
+        detailManifest.setOnClickListener {
+//            startActivity(TextEditorActivity::class.java, "sourceDir", sourceDir)
+            startActivity(TextViewerActivity::class.java,"filePath",filePath)
+        }
+        li_sigMD5.setOnClickListener { Utils.copy(this, sigMD5.text.toString()) }
+        li_sigSHA1.setOnClickListener { Utils.copy(this, sigSHA1.text.toString()) }
+        li_sigSHA256.setOnClickListener { Utils.copy(this, sig256.text.toString()) }
+    }
+
+    private fun refresh() {
+        val sig = AppUtils.getAppSignature(this, mPackageName)
+        sigMD5.text = AppUtils.byte2HexStr(HashUtils.hash(sig, HashUtils.Hash.MD5))
+        sigSHA1.text = AppUtils.byte2HexStr(HashUtils.hash(sig, HashUtils.Hash.SHA1))
+        sig256.text = AppUtils.byte2HexStr(HashUtils.hash(sig, HashUtils.Hash.SHA256))
 
         CoroutineScope(Dispatchers.Main).launch {
             val xmlAsync = async(Dispatchers.IO) {
@@ -42,9 +70,15 @@ class AppDetailActivity : BaseActivity() {
                     return@async xmlParser.parse()
                 }
             }
-
             val xml = xmlAsync.await()
+            launch(Dispatchers.IO) {
+                val destFile = File(filePath)
+                if (!destFile.parentFile.exists()) destFile.parentFile.mkdirs()
+                if (!destFile.exists()) destFile.createNewFile()
+                xml?.xmlContent?.let { destFile.writeText(it) }
+            }
 
+            detailRefresh.isRefreshing = false
             xml?.run {
                 detailVersionName.text = versionName
                 detailVersionCode.text = versionCode
@@ -53,7 +87,5 @@ class AppDetailActivity : BaseActivity() {
                 detailMinSdk.text = minSdkVersion
             }
         }
-
-        detailManifest.setOnClickListener { startActivity(TextEditorActivity::class.java, "sourceDir", sourceDir) }
     }
 }

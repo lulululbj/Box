@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <include layout="@layout/title_layout"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="?attr/colorPrimary"
+            android:gravity="center_vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mToolbar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@color/white">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+                android:id="@+id/findUp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_arrow_upward_black_24dp"
+                android:background="@drawable/ripple"
+                android:clickable="true"/>
+
+        <ImageView
+                android:id="@+id/findDown"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_arrow_downward_black_24dp"
+                android:background="@drawable/ripple"
+                android:clickable="true"/>
+
+    </LinearLayout>
 
     <WebView
             android:id="@+id/webView"

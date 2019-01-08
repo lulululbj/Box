@@ -3,6 +3,8 @@ package luyao.box.common.base
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.title_layout.*
+import luyao.box.common.R
 
 /**
  * Created by luyao
@@ -13,6 +15,8 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutResId())
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        mToolbar.setNavigationOnClickListener { onBackPressed() }
         initView()
         initData()
     }

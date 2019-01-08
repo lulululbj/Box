@@ -25,14 +25,15 @@ import java.util.zip.ZipFile
  */
 class AppDetailActivity : BaseActivity() {
 
-    private val filePath by lazy { "$APK_PATH${AppUtils.getAppName(this@AppDetailActivity,mPackageName)}${File.separator}AndroidManifest.xml" }
     private val mPackageName by lazy { intent.getStringExtra("packageName") }
+    private val appName by lazy { AppUtils.getAppName(this@AppDetailActivity,mPackageName) }
+    private val filePath by lazy { "$APK_PATH$appName${File.separator}AndroidManifest.xml" }
     private val sourceDir by lazy { applicationContext.packageManager.getApplicationInfo(mPackageName, 0).sourceDir }
 
     override fun getLayoutResId() = R.layout.activity_app_detail
 
     override fun initView() {
-        mToolbar.title = "应用详情"
+        mToolbar.title = appName
         detailIcon.setImageDrawable(AppUtils.getAppIcon(this, packageManager.getPackageInfo(mPackageName, 0)))
         detailRefresh.isRefreshing = true
         initListener()

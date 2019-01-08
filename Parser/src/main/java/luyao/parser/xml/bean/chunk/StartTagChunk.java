@@ -61,7 +61,10 @@ public class StartTagChunk extends Chunk {
                 builder.append(XmlParser.format(" xmlns:%s=\"%s\"", key, Xml.nameSpaceMap.get(key)));
             }
         } else {
-            builder.append(XmlParser.format("\n%s<%s", Xml.BLANK, name));
+            if ("intent-filter".equals(name))
+                builder.append(XmlParser.format("\n%s<%s>", Xml.BLANK, name));
+            else
+                builder.append(XmlParser.format("\n%s<%s", Xml.BLANK, name));
         }
         Xml.BLANK.append(blank);
         for (int i = 0; i < attributeList.size(); i++) {

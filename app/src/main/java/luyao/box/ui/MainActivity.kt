@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.title_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,7 @@ import luyao.box.APK_PATH
 import luyao.box.BASE_PATH
 import luyao.box.R
 import luyao.box.common.base.BaseActivity
+import luyao.box.ui.activity.CurrentActivity
 import luyao.box.ui.appManager.AppListActivity
 import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
@@ -45,6 +47,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        currentActivity.setOnClickListener { startActivity(CurrentActivity::class.java) }
 
         checkPermissions()
     }

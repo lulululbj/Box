@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.yhao.floatwindow.FloatWindow
+import com.yhao.floatwindow.Screen
 import luyao.box.R
 import luyao.box.adapter.HistoryAdapter
 import luyao.box.bean.HistoryBean
@@ -20,38 +22,28 @@ import luyao.box.dp2px
 class FloatWindowManager(mContext: Context) {
 
 
-    private val windowManager by lazy { mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager }
     private val windowAdapter by lazy { HistoryAdapter() }
     private val view by lazy { LayoutInflater.from(mContext).inflate(R.layout.window_history, null) }
-    private val layoutParams: WindowManager.LayoutParams by lazy { WindowManager.LayoutParams() }
     private val windowRecycleView by lazy { view.findViewById<RecyclerView>(R.id.windowRecycleView) }
 
     init {
-        layoutParams.run {
-            gravity=Gravity.START and Gravity.TOP
-            width = mContext.dp2px(200)
-            height = mContext.dp2px(150)
-            format = PixelFormat.TRANSPARENT
-            flags = 0x18
-            type = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1)
-                WindowManager.LayoutParams.TYPE_TOAST
-            else
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        }
-
 
         windowRecycleView.run {
             layoutManager = LinearLayoutManager(mContext)
             adapter = windowAdapter
         }
-        windowManager.addView(view, layoutParams)
+
+        FloatWindow.with(mContext)
+            .setView(view)
+            .setWidth(Screen.width,0.6f)
+            .setHeight(Screen.width,0.4f)
+            .setDesktopShow(true)
+            .build()
     }
 
     fun addItem(historyBean: HistoryBean) {
         windowAdapter.addData(0, historyBean)
-        windowAdapter.notifyDataSetChanged()
         windowRecycleView.scrollToPosition(0)
-        windowManager.updateViewLayout(view, layoutParams)
     }
 
 

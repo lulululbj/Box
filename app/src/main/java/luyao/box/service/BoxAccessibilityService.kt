@@ -3,6 +3,7 @@ package luyao.box.service
 import android.accessibilityservice.AccessibilityService
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
+import luyao.box.App
 import luyao.box.bean.HistoryBean
 import luyao.box.util.FloatWindowManager
 import luyao.box.util.Preference
@@ -10,7 +11,7 @@ import luyao.box.util.Preference
 class BoxAccessibilityService : AccessibilityService() {
 
     private var showWindow by Preference(Preference.SHOW_WINDOW, false)
-    private val floatWindowManager by lazy { FloatWindowManager(this) }
+    private val floatWindowManager by lazy { FloatWindowManager(App.CONTEXT) }
 
     override fun onInterrupt() {
 

@@ -5,11 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
+import luyao.box.service.BoxAccessibilityService
 
 object AccessibilityUtils {
 
+    fun checkBoxAccessibilityEnabled(context: Context): Boolean = checkAccessibilityEnabled(
+        "${context.packageName}/${BoxAccessibilityService::class.java.canonicalName.replace(context.packageName, "")}",
+        context
+    )
 
-     fun checkAccessibilityEnabled(serviceName: String, context: Context): Boolean {
+
+    fun checkAccessibilityEnabled(serviceName: String, context: Context): Boolean {
         val manager: AccessibilityManager =
             context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
         val enabledAccessibilityServiceList =

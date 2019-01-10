@@ -26,5 +26,5 @@
     <string name="current_activity">当前 Activity</string>
     <string name="accessibility_service_description">开启无障碍服务以查看当前 Activity</string>
     <string name="accessibility_service">无障碍服务</string>
-    <string name="float_window">悬浮窗</string>
+    <string name="float_window">显示悬浮窗</string>
 </resources>

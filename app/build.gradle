@@ -37,7 +37,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.43-alpha1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha01'
     implementation 'com.afollestad.material-dialogs:core:2.0.0-rc5'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'

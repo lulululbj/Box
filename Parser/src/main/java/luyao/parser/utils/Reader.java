@@ -125,9 +125,14 @@ public class Reader {
     }
 
     public static void log(String format, Object... params) {
-        if (showLog)
-            System.out.printf(format, params);
-        System.out.println();
+        try {
+            if (showLog)
+                System.out.printf(format, params);
+            System.out.println();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

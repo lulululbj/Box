@@ -15,6 +15,9 @@ object AccessibilityUtils {
     )
 
 
+    /*
+     * 不可用，高版本直接返回 Collections.emptyList()
+     */
     fun checkAccessibilityEnabled(serviceName: String, context: Context): Boolean {
         val manager: AccessibilityManager =
             context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager

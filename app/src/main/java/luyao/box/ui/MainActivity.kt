@@ -1,10 +1,14 @@
 package luyao.box.ui
 
 import android.Manifest
+import android.content.pm.PackageManager
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -19,14 +23,12 @@ import luyao.box.R
 import luyao.box.common.base.BaseActivity
 import luyao.box.ui.activity.CurrentActivity
 import luyao.box.ui.appManager.AppListActivity
-import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 
 
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener,
-    EasyPermissions.PermissionCallbacks {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private val perms = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
 
 
     override fun getLayoutResId() = R.layout.activity_main
@@ -108,22 +110,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            createBaseFile()
     }
 
     private fun checkPermissions() {
-        if (!EasyPermissions.hasPermissions(this, *perms)) {
-            EasyPermissions.requestPermissions(this, "权限申请", 1001, *perms)
-        }
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        if (perms.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            createBaseFile()
-        }
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            MaterialDialog(this).show {
+                title(R.string.permission_get)
+                message(R.string.permission_note)
+                positiveButton { ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), 1001) }
+            }
+        } else createBaseFile()
     }
 
     private fun createBaseFile() {

@@ -27,4 +27,6 @@
     <string name="accessibility_service_description">开启无障碍服务以查看当前 Activity</string>
     <string name="accessibility_service">无障碍服务</string>
     <string name="float_window">显示悬浮窗</string>
+    <string name="permission_get">权限申请</string>
+    <string name="permission_note">Box 需要申请读写权限以为您进行备份安装包等工作。</string>
 </resources>

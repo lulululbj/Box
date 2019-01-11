@@ -18,8 +18,7 @@ class CurrentActivity : BaseActivity() {
     override fun initView() {
         mToolbar.title = getString(R.string.current_activity)
 
-        accessibilitySwitch.setOnCheckedChangeListener { _, _ -> AccessibilityUtils.goToAccessibilitySetting(this) }
-        windowSwitch.setOnCheckedChangeListener { _, isChecked -> updateWindow(isChecked) }
+
     }
 
     override fun initData() {
@@ -27,21 +26,21 @@ class CurrentActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        windowSwitch.isChecked = windowEnabled
-        accessibilitySwitch.isChecked = BoxAccessibilityService.instance != null
+        refresh()
     }
 
-    private fun initAccessibilityService() {
-
-//        if (!accessibilitySwitch.isChecked)
-//            AccessibilityUtils.goToAccessibilitySetting(this)
+    private fun refresh() {
+        windowSwitch.isChecked = windowEnabled
+        accessibilitySwitch.isChecked = BoxAccessibilityService.instance != null
+        accessibilitySwitch.setOnCheckedChangeListener { _, _ -> AccessibilityUtils.goToAccessibilitySetting(this) }
+        windowSwitch.setOnCheckedChangeListener { _, isChecked -> updateWindow(isChecked) }
     }
 
     private fun updateWindow(isOpen: Boolean) {
         windowEnabled = isOpen
-        if (isOpen && BoxAccessibilityService.instance!=null){
+        if (isOpen && BoxAccessibilityService.instance != null) {
             FloatWindowManager.show()
-        }else{
+        } else {
             FloatWindowManager.hide()
         }
     }

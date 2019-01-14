@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.MainActivity"
+        android:orientation="vertical">
 
     <include layout="@layout/title_layout"/>
 
-    <include layout="@layout/content_main"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainRecycleView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email"/>
+            android:layout_marginTop="20dp"
+            android:layout_margin="2dp"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

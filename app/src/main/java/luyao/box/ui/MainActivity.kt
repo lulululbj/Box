@@ -8,37 +8,31 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.title_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import luyao.box.APK_PATH
-import luyao.box.BASE_PATH
-import luyao.box.R
+import luyao.box.*
+import luyao.box.adapter.MainAdapter
+import luyao.box.adapter.SpaceItemDecoration
 import luyao.box.common.base.BaseActivity
-import luyao.box.ui.activity.CurrentActivity
-import luyao.box.ui.appManager.AppListActivity
 import java.io.File
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
-
+    private val mainAdapter by lazy { MainAdapter() }
 
     override fun getLayoutResId() = R.layout.activity_main
 
     override fun initView() {
         setSupportActionBar(mToolbar)
-
-        fab.setOnClickListener {
-            startActivity(AppListActivity::class.java)
-        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, mToolbar,
@@ -49,12 +43,28 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-        currentActivity.setOnClickListener { startActivity(CurrentActivity::class.java) }
 
         checkPermissions()
+        initRecycleView()
+    }
+
+    private fun initRecycleView() {
+        mainRecycleView.run {
+            layoutManager = GridLayoutManager(this@MainActivity, 3)
+            addItemDecoration(SpaceItemDecoration(dp2px(5)))
+            adapter = mainAdapter
+        }
+
+        mainAdapter.setOnItemClickListener { _, _, position ->
+            if (position == mainAdapter.data.size - 1) {
+                toast("Coming soon !")
+            } else
+                startActivity(mainAdapter.data[position].clazz)
+        }
     }
 
     override fun initData() {
+        mainAdapter.setNewData(MAIN_LIST)
     }
 
     override fun onBackPressed() {

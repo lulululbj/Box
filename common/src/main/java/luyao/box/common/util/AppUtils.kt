@@ -8,6 +8,9 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
+import androidx.core.content.FileProvider
+import java.io.File
 
 /**
  * Created by luyao
@@ -111,5 +114,25 @@ object AppUtils {
             sb.append(hex.toUpperCase()).append(":")
         }
         return sb.toString().dropLast(1)
+    }
+
+    fun openFile(context: Context, file: File,mineType:String) {
+        if (!file.exists()) return
+
+
+        val intent=Intent().run {
+            action=Intent.ACTION_VIEW
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or  Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        }
+
+        if (Build.VERSION.SDK_INT >= 24) {
+            intent.setDataAndType(FileProvider.getUriForFile(context, "luyao.box.fileprovider", file),mineType)
+        } else {
+            intent.setDataAndType(Uri.fromFile(file),mineType)
+        }
+
+
+        context.startActivity(Intent.createChooser(intent,"Open with"))
     }
 }

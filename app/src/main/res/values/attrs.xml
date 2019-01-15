@@ -6,7 +6,7 @@
     <attr name="percent" format="float" />
     <attr name="startAngle" format="float" />
 
-    <declare-styleable name="SectorProgressView">
+    <declare-styleable name="CircleProgressView">
         <attr name="bgColor" />
         <attr name="fgColor" />
         <attr name="percent" />

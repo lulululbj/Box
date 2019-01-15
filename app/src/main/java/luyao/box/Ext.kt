@@ -2,6 +2,7 @@ package luyao.box
 
 import android.content.Context
 import android.widget.Toast
+import java.io.Closeable
 
 fun Context.toast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
@@ -19,4 +20,13 @@ fun Context.px2dp(pxValue: Int): Int {
 fun Context.dp2px(dpValue: Int): Int {
     val scale = resources.displayMetrics.density;
     return (dpValue * scale + 0.5f).toInt()
+}
+
+fun Context.getWidth()= resources.displayMetrics.widthPixels
+
+fun Context.getHeight()= resources.displayMetrics.heightPixels
+
+
+fun Closeable.finish(){
+    this.close()
 }

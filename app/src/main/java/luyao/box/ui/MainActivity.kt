@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -13,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.title_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +23,7 @@ import luyao.box.*
 import luyao.box.adapter.MainAdapter
 import luyao.box.adapter.SpaceItemDecoration
 import luyao.box.common.base.BaseActivity
+import luyao.box.common.util.AppUtils
 import java.io.File
 
 
@@ -42,10 +45,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
-
+        initNavView()
         checkPermissions()
         initRecycleView()
+    }
+
+    private fun initNavView(){
+        nav_view.setNavigationItemSelectedListener(this)
+        val versionTv = nav_view.getHeaderView(0).findViewById<TextView>(R.id.versionNameTv)
+        versionTv.text="V ${AppUtils.getAppVersionName(this,packageName)}"
     }
 
     private fun initRecycleView() {

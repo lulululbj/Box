@@ -15,8 +15,8 @@
 
         <ImageView
                 android:id="@+id/mainIcon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 tools:src="@drawable/ic_menu_gallery"/>
 
 
@@ -24,8 +24,8 @@
                 android:id="@+id/mainName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/text_gray"
+                android:textSize="12sp"
+                android:textColor="@color/black"
                 android:layout_marginTop="5dp"/>
     </LinearLayout>
 

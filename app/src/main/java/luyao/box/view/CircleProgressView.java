@@ -14,7 +14,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import luyao.box.R;
 
 
-public class SectorProgressView extends View {
+public class CircleProgressView extends View {
     private int bgColor;
     private int fgColor;
     private Paint bgPaint;
@@ -23,17 +23,17 @@ public class SectorProgressView extends View {
 
     private ObjectAnimator animator;
 
-    public SectorProgressView(Context context, AttributeSet attrs) {
+    public CircleProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
-                R.styleable.SectorProgressView,
+                R.styleable.CircleProgressView,
                 0,0);
 
         try {
-            bgColor = a.getColor(R.styleable.SectorProgressView_bgColor, 0xffe5e5e5);
-            fgColor = a.getColor(R.styleable.SectorProgressView_fgColor, 0xffff765c);
-            percent = a.getFloat(R.styleable.SectorProgressView_percent, 0);
-            startAngle = a.getFloat(R.styleable.SectorProgressView_startAngle, 90);
+            bgColor = a.getColor(R.styleable.CircleProgressView_bgColor, 0xffe5e5e5);
+            fgColor = a.getColor(R.styleable.CircleProgressView_fgColor, 0xffff765c);
+            percent = a.getFloat(R.styleable.CircleProgressView_percent, 0);
+            startAngle = a.getFloat(R.styleable.CircleProgressView_startAngle, 90);
 
         } finally {
             a.recycle();

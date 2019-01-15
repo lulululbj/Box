@@ -1,7 +1,8 @@
 package luyao.box.util
 
 import android.content.Context
-import luyao.box.APK_PATH
+import android.content.Intent
+import android.net.Uri
 import luyao.box.bean.AppBean
 import luyao.box.common.util.AppUtils.getAppIcon
 import luyao.box.common.util.AppUtils.getAppName
@@ -27,6 +28,16 @@ object AppManager {
             installedAppBeanList.add(appBean)
         }
         return installedAppBeanList
+    }
+
+    fun shareApk(mContext: Context, apkFile: File) {
+        val intent = Intent()
+        intent.run {
+            action = Intent.ACTION_SEND
+            type = "application/vnd.android.package-archive"
+            putExtra(Intent.EXTRA_STREAM, Uri.parse(apkFile.path))
+        }
+        mContext.startActivity(Intent.createChooser(intent,"Share to"))
     }
 
 //    fun getApkFile(context: Context,appBean: AppBean):File{

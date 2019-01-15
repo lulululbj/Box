@@ -39,7 +39,7 @@
             android:layout_marginRight="16dp"
             android:clickable="true"/>
 
-    <luyao.box.view.SectorProgressView
+    <luyao.box.view.CircleProgressView
             android:id="@+id/appProgressView"
             android:layout_width="28dp"
             android:layout_height="28dp"
@@ -47,7 +47,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             app:bgColor="#e5e5e5"
-            app:fgColor="#ff765c"
+            app:fgColor="#333"
             app:percent="0"
             app:startAngle="0"
             android:visibility="gone"/>

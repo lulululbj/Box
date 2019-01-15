@@ -58,4 +58,29 @@
             android:layout_height="1dp"
             android:background="@color/gray_color"/>
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"
+            android:text="使用步骤："/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"
+            android:text="@string/accessibility_note"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"
+            android:text="@string/floatwindow_note"/>
+
 </LinearLayout>

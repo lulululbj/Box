@@ -72,11 +72,11 @@ class FloatLifecycle extends BroadcastReceiver implements Application.ActivityLi
             }
         }
         resumeCount++;
-        if (needShow(activity)) {
-            mLifecycleListener.onShow();
-        } else {
-            mLifecycleListener.onHide();
-        }
+//        if (needShow(activity)) {
+//            mLifecycleListener.onShow();
+//        } else {
+//            mLifecycleListener.onHide();
+//        }
         if (appBackground) {
             appBackground = false;
         }

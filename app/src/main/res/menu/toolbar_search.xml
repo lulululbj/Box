@@ -6,8 +6,12 @@
             android:title="Search"
             android:orderInCategory="80"
             app:actionViewClass="androidx.appcompat.widget.SearchView"
-            android:icon="@drawable/ic_search_black_24dp"
-            app:showAsAction="always" />
+            android:icon="@drawable/ic_search_white_24dp"
+            app:showAsAction="always"/>
 
+    <item android:id="@+id/menu_webview_setting"
+          android:title="@string/open_in_other_app"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
 
 </menu>

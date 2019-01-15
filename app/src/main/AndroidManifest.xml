@@ -31,7 +31,8 @@
         <activity android:name=".ui.appManager.AppListActivity"/>
         <activity android:name=".ui.appManager.AppDetailActivity"/>
         <activity android:name=".ui.editor.TextEditorActivity"/>
-        <activity android:name=".ui.editor.TextViewerActivity"/>
+        <activity android:name=".ui.editor.TextViewerActivity"
+                android:theme="@style/SearchTheme"/>
         <activity android:name=".ui.activity.CurrentActivity"/>
 
         <service
@@ -46,6 +47,16 @@
                     android:name="android.accessibilityservice"
                     android:resource="@xml/accessibility_service_config"/>
         </service>
+        
+        <provider
+                android:authorities="luyao.box.fileprovider"
+                android:name="androidx.core.content.FileProvider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>

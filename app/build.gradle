@@ -1,19 +1,20 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply from: '../config.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compileSdkVersion
+
     defaultConfig {
         applicationId "luyao.box"
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.releaseVersionCode
+        versionName versions.releaseVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,17 +32,24 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.43-alpha1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha01'
-    implementation 'com.afollestad.material-dialogs:core:2.0.0-rc5'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
-    //    implementation 'com.github.yhaolpz:floatwindow:1.0.9'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + versions.kotlinx_coroutines_android
+
+    implementation 'androidx.appcompat:appcompat:' + versions.androidXCompat
+    implementation 'androidx.constraintlayout:constraintlayout:' + versions.androidXConstraintlayout
+    implementation 'androidx.recyclerview:recyclerview:' + versions.androidXRecycleView
+    implementation 'com.google.android.material:' + versions.googleMaterial
+
+    // test
+    testImplementation 'junit:junit:' + versions.junit
+    androidTestImplementation 'androidx.test:runner:' + versions.runner
+    androidTestImplementation 'androidx.test.espresso:' + versions.espresso_core
+
+    // third
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + versions.BaseRecyclerViewAdapter
+    implementation 'com.afollestad.material-dialogs:' + versions.material_dialogs_core
+    implementation "com.mikepenz:aboutlibraries:6.2.0"
+    
+    // module
     implementation project(':common')
     implementation project(':Parser')
     implementation project(':floatwindow')

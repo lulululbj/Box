@@ -1,0 +1,28 @@
+ext.versions = [
+
+        // for project
+        releaseVersionName      : '0.1.0',
+        releaseVersionCode      : 1,
+
+        minSdkVersion           : 16,
+        compileSdkVersion       : 28,
+        targetSdkVersion        : 58,
+
+        // androidx
+        androidXCompat          : '1.1.0-alpha01',
+        androidXRecycleView     : '1.1.0-alpha01',
+        androidXConstraintlayout: '2.0.0-alpha3',
+
+        googleMaterial          : 'material:1.1.0-alpha02',
+
+        // third
+        BaseRecyclerViewAdapter  : '2.9.43-alpha1',
+        material_dialogs_core : 'core:2.0.0-rc5',
+        kotlinx_coroutines_android : '1.0.0',
+
+        // test
+        junit : '4.12',
+        runner : '1.1.1',
+        espresso_core : 'espresso-core:3.1.1'
+
+]

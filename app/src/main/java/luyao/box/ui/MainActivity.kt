@@ -14,7 +14,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.title_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +23,7 @@ import luyao.box.adapter.MainAdapter
 import luyao.box.adapter.SpaceItemDecoration
 import luyao.box.common.base.BaseActivity
 import luyao.box.common.util.AppUtils
+import luyao.box.ui.setting.SettingActivity
 import java.io.File
 
 
@@ -50,10 +50,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         initRecycleView()
     }
 
-    private fun initNavView(){
+    private fun initNavView() {
         nav_view.setNavigationItemSelectedListener(this)
         val versionTv = nav_view.getHeaderView(0).findViewById<TextView>(R.id.versionNameTv)
-        versionTv.text="V ${AppUtils.getAppVersionName(this,packageName)}"
+        versionTv.text = "V ${AppUtils.getAppVersionName(this, packageName)}"
     }
 
     private fun initRecycleView() {
@@ -102,24 +102,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_setting ->{
+                startActivity(SettingActivity::class.java)
             }
-            R.id.nav_gallery -> {
+
+            R.id.nav_about -> {
 
             }
-            R.id.nav_slideshow -> {
+
+            R.id.nav_feedback -> {
 
             }
-            R.id.nav_manage -> {
 
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

@@ -5,7 +5,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">设置</string>
     <string name="app">应用</string>
     <string name="open_app">打开</string>
     <string name="uninstall_app">卸载</string>
@@ -34,4 +34,10 @@
     <string name="open_in_other_app">其它应用打开</string>
     <string name="accessibility_note">1. 打开无障碍服务\n\n    Box 通过无障碍服务来获取当前的 Activity 名称。开启无障碍服务需要您的手动确认，Box 保证不会收集任何信息。请在系统弹出的 无障碍 选项中找到 Box，并打开无障碍开关。</string>
     <string name="floatwindow_note">2. 打开悬浮窗\n\n    Box 将在悬浮窗中显示当前 Activity 名称。首次开启悬浮窗，系统将询问 Box 是否可在其他应用上层显示，请打开该选项。\n上面的 显示悬浮窗 开关可以控制悬浮窗的显示和关闭。\n拖动悬浮窗上部边缘可以移动悬浮窗。</string>
+    <string name="about">关于</string>
+    <string name="feedback">意见反馈</string>
+    <string name="note">提示</string>
+    <string name="delete_apk_note">将删除所有您已备份的 Apk 文件。</string>
+    <string name="clear_cache_note">将删除根目录 Box 文件夹下所有文件。</string>
+
 </resources>

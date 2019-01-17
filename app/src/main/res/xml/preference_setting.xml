@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <androidx.preference.Preference
+                android:key="setting_delete_apk"
+                android:title="删除已备份 Apk"/>
+
+        <androidx.preference.Preference
+                android:key="setting_clear_cache"
+                android:title="清除缓存"/>
+
+</androidx.preference.PreferenceScreen>

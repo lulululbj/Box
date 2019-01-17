@@ -37,6 +37,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:' + versions.androidXCompat
     implementation 'androidx.constraintlayout:constraintlayout:' + versions.androidXConstraintlayout
     implementation 'androidx.recyclerview:recyclerview:' + versions.androidXRecycleView
+    implementation 'androidx.preference:preference:'+versions.androidX
+
     implementation 'com.google.android.material:' + versions.googleMaterial
 
     // test
@@ -47,8 +49,7 @@ dependencies {
     // third
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + versions.BaseRecyclerViewAdapter
     implementation 'com.afollestad.material-dialogs:' + versions.material_dialogs_core
-    implementation "com.mikepenz:aboutlibraries:6.2.0"
-    
+
     // module
     implementation project(':common')
     implementation project(':Parser')

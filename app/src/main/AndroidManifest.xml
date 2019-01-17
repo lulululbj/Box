@@ -34,6 +34,7 @@
         <activity android:name=".ui.editor.TextViewerActivity"
                 android:theme="@style/SearchTheme"/>
         <activity android:name=".ui.activity.CurrentActivity"/>
+        <activity android:name=".ui.setting.SettingActivity"/>
 
         <service
                 android:name=".service.BoxAccessibilityService"

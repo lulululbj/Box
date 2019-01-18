@@ -2,7 +2,7 @@ package luyao.box
 
 import android.content.Context
 import android.widget.Toast
-import java.io.Closeable
+import luyao.box.common.util.FileUtils.deleteFile
 import java.io.File
 
 fun Context.toast(text: String) {
@@ -23,11 +23,13 @@ fun Context.dp2px(dpValue: Int): Int {
     return (dpValue * scale + 0.5f).toInt()
 }
 
-fun Context.getWidth()= resources.displayMetrics.widthPixels
+fun Context.getWidth() = resources.displayMetrics.widthPixels
 
-fun Context.getHeight()= resources.displayMetrics.heightPixels
+fun Context.getHeight() = resources.displayMetrics.heightPixels
 
-
-fun Closeable.finish(){
-    this.close()
+// delete file && folder
+fun File.deleteAll() {
+    deleteFile(this)
 }
+
+

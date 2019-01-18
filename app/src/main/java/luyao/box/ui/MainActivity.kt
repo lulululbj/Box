@@ -19,6 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import luyao.box.*
+import luyao.box.about.AboutActivity
 import luyao.box.adapter.MainAdapter
 import luyao.box.adapter.SpaceItemDecoration
 import luyao.box.common.base.BaseActivity
@@ -107,7 +108,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             R.id.nav_about -> {
-
+                startActivity(AboutActivity::class.java)
             }
 
             R.id.nav_feedback -> {

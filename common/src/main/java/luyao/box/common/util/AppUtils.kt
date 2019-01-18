@@ -135,4 +135,9 @@ object AppUtils {
 
         context.startActivity(Intent.createChooser(intent,"Open with"))
     }
+
+    fun openBrowser(context: Context,url:String){
+        val intent=Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        context.startActivity(intent)
+    }
 }

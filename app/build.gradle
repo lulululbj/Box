@@ -49,6 +49,7 @@ dependencies {
     // third
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + versions.BaseRecyclerViewAdapter
     implementation 'com.afollestad.material-dialogs:' + versions.material_dialogs_core
+    implementation 'de.psdev.licensesdialog:licensesdialog:1.9.0'
 
     // module
     implementation project(':common')

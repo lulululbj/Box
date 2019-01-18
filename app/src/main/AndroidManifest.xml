@@ -35,6 +35,7 @@
                 android:theme="@style/SearchTheme"/>
         <activity android:name=".ui.activity.CurrentActivity"/>
         <activity android:name=".ui.setting.SettingActivity"/>
+        <activity android:name=".about.AboutActivity"/>
 
         <service
                 android:name=".service.BoxAccessibilityService"

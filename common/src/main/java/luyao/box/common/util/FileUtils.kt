@@ -19,5 +19,13 @@ object FileUtils {
 
     }
 
+    fun deleteFile(file: File) {
+        if (file.isFile || file.listFiles().isEmpty()) file.delete()
+        else if (file.isDirectory) {
+            for (subFile in file.listFiles())
+                deleteFile(subFile)
+        }
+    }
+
 
 }

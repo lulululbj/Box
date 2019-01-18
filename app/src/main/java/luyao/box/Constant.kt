@@ -15,9 +15,15 @@ import java.io.File
 val BASE_PATH = "${Environment.getExternalStorageDirectory().path}${File.separator}Box${File.separator}"
 val APK_PATH = "${BASE_PATH}apk${File.separator}"
 
+const val GITHUB_PAGE = "https://github.com/lulululbj/Box"
+const val ISSUE_URL="https://github.com/lulululbj/Box/issues"
+const val DEVELOPER_EMAIL="sunluyao1993x@gmail.com"
+
 val MAIN_LIST = mutableListOf(
     MainBean(R.drawable.ic_menu_camera, "应用管理", AppListActivity::class.java),
     MainBean(R.drawable.ic_menu_gallery, "Activity历史", CurrentActivity::class.java),
     MainBean(R.drawable.ic_add_circle,"Coming Soon",MainAdapter::class.java)
 )
+
+
 

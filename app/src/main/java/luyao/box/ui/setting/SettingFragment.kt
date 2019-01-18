@@ -1,7 +1,6 @@
 package luyao.box.ui.setting
 
 import android.os.Bundle
-import android.util.Log
 import androidx.preference.PreferenceFragmentCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.coroutines.CoroutineScope
@@ -9,6 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import luyao.box.BASE_PATH
 import luyao.box.R
+import luyao.box.common.util.FileUtils
+import luyao.box.deleteAll
 import java.io.File
 
 /**
@@ -33,6 +34,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         }
 
         findPreference("setting_clear_cache").setOnPreferenceClickListener {
+            showDeleteDialog(CLEAR_CACHE)
             true
         }
     }
@@ -58,7 +60,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
             launch(Dispatchers.IO) {
                 for (file in fileList)
-                    Log.e("box", file.path)
+                    FileUtils.deleteFile(file)
             }
         }
 
@@ -72,7 +74,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             if (file.name.endsWith(".apk")) fileList.add(file)
         } else if (file.listFiles().isNotEmpty()) {
             for (subFile in file.listFiles()) {
-                filter(subFile)
+                subFile.deleteAll()
             }
         }
 

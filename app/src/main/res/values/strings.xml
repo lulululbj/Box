@@ -39,5 +39,16 @@
     <string name="note">提示</string>
     <string name="delete_apk_note">将删除所有您已备份的 Apk 文件。</string>
     <string name="clear_cache_note">将删除根目录 Box 文件夹下所有文件。</string>
+    <string name="license">开源协议</string>
+    <string name="source_url">源代码地址</string>
+    <string name="third_lib">第三方库</string>
+    <string name="developer">开发者</string>
+    <string name="send_email">发邮件</string>
+    <string name="open_issue">提issue</string>
+    <string name="sendto">mailto:sunluyao1993x@gmail.com</string>
+    <string name="mail_topic">Box Feedback</string>
+    <string name="device_model">Device Model :</string>
+    <string name="sdk_version">Sdk Version :</string>
+    <string name="version">App Version :</string>
 
 </resources>

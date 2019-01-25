@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_layout"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/brand"/>
+
+                <TextView
+                        android:id="@+id/brand"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/display"/>
+
+                <TextView
+                        android:id="@+id/display"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/product"/>
+
+                <TextView
+                        android:id="@+id/product"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/device"/>
+
+                <TextView
+                        android:id="@+id/device"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/board"/>
+
+                <TextView
+                        android:id="@+id/board"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/model"/>
+
+                <TextView
+                        android:id="@+id/model"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/manufacturer"/>
+
+                <TextView
+                        android:id="@+id/manufacturer"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/bootloader"/>
+
+                <TextView
+                        android:id="@+id/bootloader"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/hardware"/>
+
+                <TextView
+                        android:id="@+id/hardware"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/sdk"/>
+
+                <TextView
+                        android:id="@+id/api"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/android_version"/>
+
+                <TextView
+                        android:id="@+id/version"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/kernel_version"/>
+
+                <TextView
+                        android:id="@+id/os"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/imei"/>
+
+                <TextView
+                        android:id="@+id/imei"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/meid"/>
+
+                <TextView
+                        android:id="@+id/meid"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/sn"/>
+
+                <TextView
+                        android:id="@+id/sn"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/mac_address"/>
+
+                <TextView
+                        android:id="@+id/macAddress"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/abis"/>
+
+                <TextView
+                        android:id="@+id/abis"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Device_Lin">
+
+                <TextView
+                        style="@style/Device_Text"
+                        android:layout_width="100dp"
+                        android:text="@string/radio_version"/>
+
+                <TextView
+                        android:id="@+id/radioVersion"
+                        style="@style/Device_Text"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

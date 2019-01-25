@@ -54,7 +54,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun initNavView() {
         nav_view.setNavigationItemSelectedListener(this)
         val versionTv = nav_view.getHeaderView(0).findViewById<TextView>(R.id.versionNameTv)
-        versionTv.text = "V ${AppUtils.getAppVersionName(this, packageName)}"
+        versionTv.text=String.format("V %s",AppUtils.getAppVersionName(this, packageName))
     }
 
     private fun initRecycleView() {

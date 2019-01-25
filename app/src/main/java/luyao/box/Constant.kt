@@ -5,6 +5,7 @@ import luyao.box.adapter.MainAdapter
 import luyao.box.bean.MainBean
 import luyao.box.ui.activity.CurrentActivity
 import luyao.box.ui.appManager.AppListActivity
+import luyao.box.ui.device.DeviceInfoActivity
 import java.io.File
 
 /**
@@ -20,6 +21,7 @@ const val ISSUE_URL="https://github.com/lulululbj/Box/issues"
 const val DEVELOPER_EMAIL="sunluyao1993x@gmail.com"
 
 val MAIN_LIST = mutableListOf(
+    MainBean(R.drawable.ic_menu_slideshow,"本机信息", DeviceInfoActivity::class.java),
     MainBean(R.drawable.ic_menu_camera, "应用管理", AppListActivity::class.java),
     MainBean(R.drawable.ic_menu_gallery, "Activity历史", CurrentActivity::class.java),
     MainBean(R.drawable.ic_add_circle,"Coming Soon",MainAdapter::class.java)

@@ -110,11 +110,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_about -> {
                 startActivity(AboutActivity::class.java)
             }
-
-            R.id.nav_feedback -> {
-
-            }
-
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

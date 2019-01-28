@@ -54,7 +54,7 @@ class AboutActivity : BaseActivity() {
     }
 
     private fun showFeedBackMenu() {
-        val feedbackMenu = PopupMenu(this, feedback, Gravity.BOTTOM)
+        val feedbackMenu = PopupMenu(this, feedback, Gravity.RIGHT)
         feedbackMenu.menuInflater.inflate(R.menu.menu_feedback, feedbackMenu.menu)
         feedbackMenu.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {

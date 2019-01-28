@@ -14,10 +14,6 @@
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_camera"
                 android:title="@string/about"/>
-        <item
-                android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="@string/feedback"/>
 
     </group>
 

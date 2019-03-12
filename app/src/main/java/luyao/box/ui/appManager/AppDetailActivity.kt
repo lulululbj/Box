@@ -6,12 +6,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import luyao.box.APK_PATH
-import luyao.box.R
+import luyao.box.*
 import luyao.box.common.base.BaseActivity
 import luyao.box.common.util.AppUtils
-import luyao.box.common.util.HashUtils
-import luyao.box.ui.editor.TextEditorActivity
 import luyao.box.ui.editor.TextViewerActivity
 import luyao.box.util.Utils
 import luyao.parser.xml.XmlParser
@@ -46,7 +43,6 @@ class AppDetailActivity : BaseActivity() {
     private fun initListener() {
         detailRefresh.setOnRefreshListener { refresh() }
         detailManifest.setOnClickListener {
-//            startActivity(TextEditorActivity::class.java, "sourceDir", sourceDir)
             startActivity(TextViewerActivity::class.java,"filePath",filePath)
         }
         li_sigMD5.setOnClickListener { Utils.copy(this, sigMD5.text.toString()) }
@@ -56,9 +52,9 @@ class AppDetailActivity : BaseActivity() {
 
     private fun refresh() {
         val sig = AppUtils.getAppSignature(this, mPackageName)
-        sigMD5.text = AppUtils.byte2HexStr(HashUtils.hash(sig, HashUtils.Hash.MD5))
-        sigSHA1.text = AppUtils.byte2HexStr(HashUtils.hash(sig, HashUtils.Hash.SHA1))
-        sig256.text = AppUtils.byte2HexStr(HashUtils.hash(sig, HashUtils.Hash.SHA256))
+        sigMD5.text = sig.md5()
+        sigSHA1.text = sig.sha1()
+        sig256.text =sig.sha256()
 
         CoroutineScope(Dispatchers.Main).launch {
             val xmlAsync = async(Dispatchers.IO) {

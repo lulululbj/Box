@@ -37,7 +37,7 @@ class TextEditorActivity : BaseActivity() {
                     return@async xmlParser.parse()
                 }
             }
-            textEdit.setText(xml.await()?.xmlContent)
+            textEdit.setText(xml.await()?.xmlContent ?: "")
         }
     }
 }

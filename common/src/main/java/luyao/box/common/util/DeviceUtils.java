@@ -1,9 +1,12 @@
 package luyao.box.common.util;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 import android.telephony.TelephonyManager;
+import android.text.format.Formatter;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 
@@ -120,4 +123,35 @@ public class DeviceUtils {
         }
         return "";
     }
+
+    public static int getDeviceWidth(Context context){
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getDeviceHeight(Context context){
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    public static String getRamInfo(Context context){
+        long totalSize;
+        long availableSize;
+
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo memoryInfo=new ActivityManager.MemoryInfo();
+        activityManager.getMemoryInfo(memoryInfo);
+
+        totalSize=memoryInfo.totalMem;
+        availableSize=memoryInfo.availMem;
+
+        return String.format("%s / %s", Formatter.formatFileSize(context,availableSize),Formatter.formatFileSize(context,totalSize));
+    }
+
+    public static String getRomInfo(Context context){
+        long totalSize= Environment.getExternalStorageDirectory().getTotalSpace();
+        long availableSize=Environment.getExternalStorageDirectory().getFreeSpace();
+
+        return String.format("%s / %s", Formatter.formatFileSize(context,availableSize),Formatter.formatFileSize(context,totalSize));
+    }
+
+
 }

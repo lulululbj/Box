@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import luyao.box.BASE_PATH
 import luyao.box.R
 import luyao.box.common.util.FileUtils
-import luyao.box.deleteAll
 import java.io.File
 
 /**
@@ -63,7 +62,6 @@ class SettingFragment : PreferenceFragmentCompat() {
                     FileUtils.deleteFile(file)
             }
         }
-
     }
 
     private val fileList = arrayListOf<File>()
@@ -74,7 +72,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             if (file.name.endsWith(".apk")) fileList.add(file)
         } else if (file.listFiles().isNotEmpty()) {
             for (subFile in file.listFiles()) {
-                subFile.deleteAll()
+               filter(subFile)
             }
         }
 

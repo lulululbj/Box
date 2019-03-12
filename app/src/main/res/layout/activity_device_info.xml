@@ -114,6 +114,19 @@
                         <TextView
                                 style="@style/Device_Text"
                                 android:layout_width="100dp"
+                                android:text="@string/bootloader"/>
+
+                        <TextView
+                                android:id="@+id/bootloader"
+                                style="@style/Device_Text"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/Device_Lin">
+
+                        <TextView
+                                style="@style/Device_Text"
+                                android:layout_width="100dp"
                                 android:text="@string/manufacturer"/>
 
                         <TextView
@@ -143,10 +156,36 @@
                         <TextView
                                 style="@style/Device_Text"
                                 android:layout_width="100dp"
-                                android:text="@string/hardware"/>
+                                android:text="@string/screen"/>
 
                         <TextView
-                                android:id="@+id/hardware"
+                                android:id="@+id/screen"
+                                style="@style/Device_Text"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/Device_Lin">
+
+                        <TextView
+                                style="@style/Device_Text"
+                                android:layout_width="100dp"
+                                android:text="@string/ram"/>
+
+                        <TextView
+                                android:id="@+id/ram"
+                                style="@style/Device_Text"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/Device_Lin">
+
+                        <TextView
+                                style="@style/Device_Text"
+                                android:layout_width="100dp"
+                                android:text="@string/rom"/>
+
+                        <TextView
+                                android:id="@+id/rom"
                                 style="@style/Device_Text"/>
 
                     </LinearLayout>
@@ -174,6 +213,32 @@
 
                         <TextView
                                 android:id="@+id/version"
+                                style="@style/Device_Text"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/Device_Lin">
+
+                        <TextView
+                                style="@style/Device_Text"
+                                android:layout_width="100dp"
+                                android:text="@string/abis"/>
+
+                        <TextView
+                                android:id="@+id/abis"
+                                style="@style/Device_Text"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/Device_Lin">
+
+                        <TextView
+                                style="@style/Device_Text"
+                                android:layout_width="100dp"
+                                android:text="@string/hardware"/>
+
+                        <TextView
+                                android:id="@+id/hardware"
                                 style="@style/Device_Text"/>
 
                     </LinearLayout>
@@ -264,19 +329,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout style="@style/Device_Lin">
-
-                <TextView
-                        style="@style/Device_Text"
-                        android:layout_width="100dp"
-                        android:text="@string/bootloader"/>
-
-                <TextView
-                        android:id="@+id/bootloader"
-                        style="@style/Device_Text"/>
-
-            </LinearLayout>
-
 
             <LinearLayout style="@style/Device_Lin">
 
@@ -290,21 +342,6 @@
                         style="@style/Device_Text"/>
 
             </LinearLayout>
-
-
-            <LinearLayout style="@style/Device_Lin">
-
-                <TextView
-                        style="@style/Device_Text"
-                        android:layout_width="100dp"
-                        android:text="@string/abis"/>
-
-                <TextView
-                        android:id="@+id/abis"
-                        style="@style/Device_Text"/>
-
-            </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>

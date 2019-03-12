@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_device_info.*
@@ -50,6 +51,12 @@ class DeviceInfoActivity : BaseActivity() {
         version.text = DeviceUtils.getVersion()
         os.text = DeviceUtils.getKernelVersion()
         macAddress.text = DeviceUtils.getMacAddress()
+
+        screen.text=String.format("%s * %s", DeviceUtils.getDeviceWidth(this), DeviceUtils.getDeviceHeight(this))
+        ram.text=DeviceUtils.getRamInfo(this)
+        rom.text=DeviceUtils.getRomInfo(this)
+
+
     }
 
     private fun checkPermissions() {

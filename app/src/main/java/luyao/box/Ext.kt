@@ -1,8 +1,11 @@
 package luyao.box
 
 import android.content.Context
+import android.view.View
 import android.widget.Toast
+import luyao.box.common.util.AppUtils
 import luyao.box.common.util.FileUtils.deleteFile
+import luyao.box.common.util.HashUtils
 import java.io.File
 
 fun Context.toast(text: String) {
@@ -31,5 +34,14 @@ fun Context.getHeight() = resources.displayMetrics.heightPixels
 fun File.deleteAll() {
     deleteFile(this)
 }
+
+fun ByteArray.md5() = AppUtils.byte2HexStr(HashUtils.hash(this, HashUtils.Hash.MD5))
+fun ByteArray.sha1() = AppUtils.byte2HexStr(HashUtils.hash(this, HashUtils.Hash.SHA1))
+fun ByteArray.sha256() = AppUtils.byte2HexStr(HashUtils.hash(this, HashUtils.Hash.SHA256))
+
+fun View.click(){
+
+}
+
 
 

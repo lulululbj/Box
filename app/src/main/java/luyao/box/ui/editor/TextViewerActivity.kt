@@ -24,11 +24,12 @@ class TextViewerActivity : BaseActivity() {
         mToolbar.title = File(filePath).name
         mToolbar.inflateMenu(R.menu.toolbar_search)
 
-        val webSettings = webView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.setAppCacheEnabled(true)
-        webSettings.setSupportZoom(true)
-        webSettings.defaultTextEncodingName = "utf-8"
+        webView.settings.run {
+            javaScriptEnabled=true
+            setAppCacheEnabled(true)
+            setSupportZoom(true)
+            defaultTextEncodingName="utf-8"
+        }
         webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 if (newProgress == 100) {
@@ -44,8 +45,6 @@ class TextViewerActivity : BaseActivity() {
     }
 
     override fun initData() {
-
-//        webView.loadData(File(filePath).readText(),"text/xml","utf-8")
         webView.loadUrl("file:///$filePath")
     }
 

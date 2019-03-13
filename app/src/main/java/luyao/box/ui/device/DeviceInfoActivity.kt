@@ -49,7 +49,7 @@ class DeviceInfoActivity : BaseActivity() {
         radioVersion.text = Build.getRadioVersion()
         api.text = DeviceUtils.getSDK().toString()
         version.text = DeviceUtils.getVersion()
-        os.text = DeviceUtils.getKernelVersion()
+//        os.text = DeviceUtils.getKernelVersion()
         macAddress.text = DeviceUtils.getMacAddress()
 
         screen.text=String.format("%s * %s", DeviceUtils.getDeviceWidth(this), DeviceUtils.getDeviceHeight(this))

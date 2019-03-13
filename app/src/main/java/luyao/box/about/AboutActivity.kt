@@ -12,6 +12,7 @@ import de.psdev.licensesdialog.model.Notice
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.title_layout.*
 import luyao.box.GITHUB_PAGE
+import luyao.box.HOME_PAGE
 import luyao.box.ISSUE_URL
 import luyao.box.R
 import luyao.box.common.base.BaseActivity
@@ -34,7 +35,7 @@ class AboutActivity : BaseActivity() {
         source.setOnClickListener { AppUtils.openBrowser(this, GITHUB_PAGE) }
         feedback.setOnClickListener { showFeedBackMenu() }
         thirdLib.setOnClickListener { showLicenseDialog() }
-        developer.setOnClickListener { }
+        developer.setOnClickListener { AppUtils.openBrowser(this, HOME_PAGE)}
     }
 
     private fun showOwnLicense() {

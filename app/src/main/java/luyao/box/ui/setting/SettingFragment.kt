@@ -60,6 +60,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             launch(Dispatchers.IO) {
                 for (file in fileList)
                     FileUtils.deleteFile(file)
+                fileList.clear()
             }
         }
     }
@@ -70,7 +71,7 @@ class SettingFragment : PreferenceFragmentCompat() {
 
         if (file.isFile) {
             if (file.name.endsWith(".apk")) fileList.add(file)
-        } else if (file.listFiles().isNotEmpty()) {
+        } else if (file.listFiles() != null && file.listFiles().isNotEmpty()) {
             for (subFile in file.listFiles()) {
                filter(subFile)
             }

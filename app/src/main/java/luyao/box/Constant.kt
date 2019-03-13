@@ -19,6 +19,7 @@ val APK_PATH = "${BASE_PATH}apk${File.separator}"
 const val GITHUB_PAGE = "https://github.com/lulululbj/Box"
 const val ISSUE_URL="https://github.com/lulululbj/Box/issues"
 const val DEVELOPER_EMAIL="sunluyao1993x@gmail.com"
+const val HOME_PAGE = "http://sunluyao.com"
 
 val MAIN_LIST = mutableListOf(
     MainBean(R.drawable.ic_menu_slideshow,"本机信息", DeviceInfoActivity::class.java),

@@ -1,6 +1,9 @@
 package luyao.box.ui.appManager
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,6 +18,7 @@ import luyao.box.util.AppManager
 class AppListActivity : BaseActivity() {
 
     private val appAdapter by lazy { AppAdapter() }
+    private val appReceiver by lazy { AppReceiver() }
 
     override fun getLayoutResId() = R.layout.activity_app_list
 
@@ -25,6 +29,10 @@ class AppListActivity : BaseActivity() {
     }
 
     override fun initData() {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED)
+        intentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED)
+        registerReceiver(appReceiver,intentFilter)
         refresh()
     }
 
@@ -64,4 +72,19 @@ class AppListActivity : BaseActivity() {
         appAdapter.setNewData(installedAppBean)
         appRefreshLayout.isRefreshing = false
     }
+
+    inner class AppReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == Intent.ACTION_PACKAGE_ADDED ||
+                    intent.action == Intent.ACTION_PACKAGE_REMOVED){
+                refresh()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(appReceiver)
+    }
+
 }

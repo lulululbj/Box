@@ -67,7 +67,7 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
     private fun saveApk(helper: BaseViewHolder, context: Context, appBean: AppBean) {
         MaterialDialog(context)
             .title(R.string.backup)
-            .message(text = String.format("%s 的安装包将保存在手机根目录 /Box/apk/%s 文件夹下", appBean.appName, appBean.appName))
+            .message(text = String.format("%s 的安装包将保存在手机根目录 Box/apk/%s 文件夹下", appBean.appName, appBean.appName))
             .positiveButton { saveApkFile(helper, appBean) }
             .negativeButton { }
             .show()

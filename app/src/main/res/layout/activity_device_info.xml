@@ -330,18 +330,18 @@
             </androidx.cardview.widget.CardView>
 
 
-            <LinearLayout style="@style/Device_Lin">
+            <!--<LinearLayout style="@style/Device_Lin">-->
 
-                <TextView
-                        style="@style/Device_Text"
-                        android:layout_width="100dp"
-                        android:text="@string/kernel_version"/>
+                <!--<TextView-->
+                        <!--style="@style/Device_Text"-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:text="@string/kernel_version"/>-->
 
-                <TextView
-                        android:id="@+id/os"
-                        style="@style/Device_Text"/>
+                <!--<TextView-->
+                        <!--android:id="@+id/os"-->
+                        <!--style="@style/Device_Text"/>-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
         </LinearLayout>
     </ScrollView>

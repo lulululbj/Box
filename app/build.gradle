@@ -17,6 +17,12 @@ android {
 
     buildTypes {
         release {
+            zipAlignEnabled true
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -26,6 +32,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+
+            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/app/release/")
+
+            outputFileName = "Box_${releaseTime()}_v${defaultConfig.versionName}_${variant.buildType.name}.apk"
+
+        }
+    }
+}
+
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
 }
 
 
@@ -35,7 +55,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + versions.kotlinx_coroutines_android
 
     implementation 'androidx.appcompat:appcompat:' + versions.androidXCompat
-    implementation 'androidx.constraintlayout:constraintlayout:' + versions.androidXConstraintlayout
+//    implementation 'androidx.constraintlayout:constraintlayout:' + versions.androidXConstraintlayout
     implementation 'androidx.recyclerview:recyclerview:' + versions.androidXRecycleView
     implementation 'androidx.preference:preference:'+versions.androidX
 

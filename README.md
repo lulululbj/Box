@@ -6,6 +6,10 @@
 
 [Box 的由来]()
 
+## 下载
+
+[release](https://github.com/lulululbj/Box/releases)
+
 ## 功能
 
 1. 本机信息

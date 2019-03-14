@@ -27,12 +27,12 @@
 
 ## 截图
 
-![](https://user-gold-cdn.xitu.io/2019/3/14/1697c7a8f66058f6?w=1080&h=1920&f=png&s=144573)
-![](https://user-gold-cdn.xitu.io/2019/3/14/1697c7abb5c8c407?w=1080&h=1920&f=png&s=159211)
-![](https://user-gold-cdn.xitu.io/2019/3/14/1697c777479a57e9?w=1080&h=1920&f=png&s=142024)
-![](https://user-gold-cdn.xitu.io/2019/3/14/1697c77a70de71a0?w=1080&h=1920&f=png&s=405700)
-![](https://user-gold-cdn.xitu.io/2019/3/14/1697c6a76be49fc5?w=1080&h=1920&f=png&s=178188)
-![](https://user-gold-cdn.xitu.io/2019/3/14/1697c59b4e914c4e?w=1080&h=1920&f=png&s=110134)
+![](https://user-gold-cdn.xitu.io/2019/3/14/1697c7a8f66058f6?w=720&h=1080&f=png&s=144573)
+![](https://user-gold-cdn.xitu.io/2019/3/14/1697c7abb5c8c407?w=720&h=1080&f=png&s=159211)
+![](https://user-gold-cdn.xitu.io/2019/3/14/1697c777479a57e9?w=720&h=1080&f=png&s=142024)
+![](https://user-gold-cdn.xitu.io/2019/3/14/1697c77a70de71a0?w=720&h=1080&f=png&s=405700)
+![](https://user-gold-cdn.xitu.io/2019/3/14/1697c6a76be49fc5?w=720&h=1080&f=png&s=178188)
+![](https://user-gold-cdn.xitu.io/2019/3/14/1697c59b4e914c4e?w=720&h=1080&f=png&s=110134)
 
 ## 感谢
 

@@ -6,7 +6,7 @@ ext.versions = [
 
         minSdkVersion             : 16,
         compileSdkVersion         : 28,
-        targetSdkVersion          : 58,
+        targetSdkVersion          : 28,
 
         // androidx
         androidX                  : '1.0.0',

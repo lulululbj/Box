@@ -125,7 +125,7 @@ public class XmlParser {
         try {
             String chunkType = reader.readHexString(4);
 //            if (!chunkType.equals("0x00080180"))
-//                chunkType = reader.readHexString(4); // 有时候 chunkType 前面会多一个 0000
+//                chunkType = reader.readHexString(4);
             log("chunk type: %s", chunkType);
 
             int chunkSize = reader.readInt();

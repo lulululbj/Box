@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,9 +21,10 @@ import luyao.box.*
 import luyao.box.about.AboutActivity
 import luyao.box.adapter.MainAdapter
 import luyao.box.adapter.SpaceItemDecoration
-import luyao.box.common.base.BaseActivity
 import luyao.box.common.util.AppUtils
 import luyao.box.ui.setting.SettingActivity
+import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.permission.request
 import java.io.File
 
 
@@ -54,7 +54,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun initNavView() {
         nav_view.setNavigationItemSelectedListener(this)
         val versionTv = nav_view.getHeaderView(0).findViewById<TextView>(R.id.versionNameTv)
-        versionTv.text=String.format("V %s",AppUtils.getAppVersionName(this, packageName))
+        versionTv.text = String.format("V %s", AppUtils.getAppVersionName(this, packageName))
     }
 
     private fun initRecycleView() {
@@ -106,7 +106,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_setting ->{
+            R.id.nav_setting -> {
                 startActivity(SettingActivity::class.java)
             }
 
@@ -130,9 +130,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             MaterialDialog(this).show {
                 title(R.string.permission_get)
                 message(R.string.permission_note)
-                positiveButton { ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), 1001) }
+                positiveButton { requestPermission() }
             }
         } else createBaseFile()
+    }
+
+    private fun requestPermission() {
+        request(permission) {
+            onGranted { createBaseFile() }
+            onShowRationale { checkPermissions() }
+        }
     }
 
     private fun createBaseFile() {

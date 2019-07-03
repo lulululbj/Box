@@ -23,7 +23,7 @@ import java.util.zip.ZipFile
 class AppDetailActivity : BaseActivity() {
 
     private val mPackageName by lazy { intent.getStringExtra("packageName") }
-    private val appName by lazy { AppUtils.getAppName(this@AppDetailActivity,mPackageName) }
+    private val appName by lazy { AppUtils.getAppName(this@AppDetailActivity, mPackageName) }
     private val filePath by lazy { "$APK_PATH$appName${File.separator}AndroidManifest.xml" }
     private val sourceDir by lazy { applicationContext.packageManager.getApplicationInfo(mPackageName, 0).sourceDir }
 
@@ -43,7 +43,7 @@ class AppDetailActivity : BaseActivity() {
     private fun initListener() {
         detailRefresh.setOnRefreshListener { refresh() }
         detailManifest.setOnClickListener {
-            startActivity(TextViewerActivity::class.java,"filePath",filePath)
+            startActivity(TextViewerActivity::class.java, "filePath", filePath)
         }
         li_sigMD5.setOnClickListener { Utils.copy(this, sigMD5.text.toString()) }
         li_sigSHA1.setOnClickListener { Utils.copy(this, sigSHA1.text.toString()) }
@@ -54,7 +54,7 @@ class AppDetailActivity : BaseActivity() {
         val sig = AppUtils.getAppSignature(this, mPackageName)
         sigMD5.text = sig.md5()
         sigSHA1.text = sig.sha1()
-        sig256.text =sig.sha256()
+        sig256.text = sig.sha256()
 
         CoroutineScope(Dispatchers.Main).launch {
             val xmlAsync = async(Dispatchers.IO) {
@@ -77,7 +77,7 @@ class AppDetailActivity : BaseActivity() {
 
             detailRefresh.isRefreshing = false
             xml?.run {
-                detailVersionName.text = versionName
+                detailVersionName.text = versionName ?: "unknown"
                 detailVersionCode.text = versionCode
                 detailPackageMame.text = packageName
                 detailTargetSdk.text = targetSdkVersion

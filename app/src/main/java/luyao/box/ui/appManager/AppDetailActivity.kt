@@ -7,11 +7,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import luyao.box.*
-import luyao.box.common.base.BaseActivity
 import luyao.box.common.util.AppUtils
 import luyao.box.ui.editor.TextViewerActivity
-import luyao.box.util.Utils
 import luyao.parser.xml.XmlParser
+import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.Hash
+import luyao.util.ktx.ext.hash
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
@@ -30,6 +31,8 @@ class AppDetailActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_app_detail
 
     override fun initView() {
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        mToolbar.setNavigationOnClickListener { onBackPressed() }
         mToolbar.title = appName
         detailIcon.setImageDrawable(AppUtils.getAppIcon(this, packageManager.getPackageInfo(mPackageName, 0)))
         detailRefresh.isRefreshing = true
@@ -45,16 +48,16 @@ class AppDetailActivity : BaseActivity() {
         detailManifest.setOnClickListener {
             startActivity(TextViewerActivity::class.java, "filePath", filePath)
         }
-        li_sigMD5.setOnClickListener { Utils.copy(this, sigMD5.text.toString()) }
-        li_sigSHA1.setOnClickListener { Utils.copy(this, sigSHA1.text.toString()) }
-        li_sigSHA256.setOnClickListener { Utils.copy(this, sig256.text.toString()) }
+        li_sigMD5.setOnClickListener { copyToClipboard(sigMD5.text.toString()) }
+        li_sigSHA1.setOnClickListener { copyToClipboard(sigSHA1.text.toString()) }
+        li_sigSHA256.setOnClickListener { copyToClipboard(sig256.text.toString()) }
     }
 
     private fun refresh() {
-        val sig = AppUtils.getAppSignature(this, mPackageName)
-        sigMD5.text = sig.md5()
-        sigSHA1.text = sig.sha1()
-        sig256.text = sig.sha256()
+        val sig = getAppSignature(this, mPackageName)
+        sigMD5.text = sig.hash(Hash.MD5)
+        sigSHA1.text = sig.hash(Hash.SHA1)
+        sig256.text = sig.hash(Hash.SHA256)
 
         CoroutineScope(Dispatchers.Main).launch {
             val xmlAsync = async(Dispatchers.IO) {

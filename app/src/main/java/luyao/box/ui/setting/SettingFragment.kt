@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import luyao.box.BASE_PATH
 import luyao.box.R
-import luyao.box.common.util.FileUtils
+import luyao.box.deleteAll
 import java.io.File
 
 /**
@@ -59,7 +59,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
             launch(Dispatchers.IO) {
                 for (file in fileList)
-                    FileUtils.deleteFile(file)
+                    file.deleteAll()
                 fileList.clear()
             }
         }

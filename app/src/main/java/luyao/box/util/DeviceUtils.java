@@ -1,4 +1,4 @@
-package luyao.box.common.util;
+package luyao.box.util;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;

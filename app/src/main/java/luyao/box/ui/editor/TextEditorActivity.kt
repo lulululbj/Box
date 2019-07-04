@@ -6,8 +6,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import luyao.box.R
-import luyao.box.common.base.BaseActivity
 import luyao.parser.xml.XmlParser
+import luyao.util.ktx.base.BaseActivity
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile

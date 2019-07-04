@@ -77,9 +77,8 @@ dependencies {
     implementation 'de.psdev.licensesdialog:licensesdialog:1.9.0'
 
     // module
-    implementation project(':common')
     implementation project(':Parser')
     implementation project(':floatwindow')
 
-    implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.2'
+    implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.3'
 }

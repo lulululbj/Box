@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.ImageButton
 import android.widget.PopupMenu
+import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -12,14 +13,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import luyao.box.APK_PATH
-import luyao.box.R
+import luyao.box.*
 import luyao.box.bean.AppBean
-import luyao.box.common.util.AppUtils
-import luyao.box.toast
 import luyao.box.ui.appManager.AppDetailActivity
 import luyao.box.util.AppManager
 import luyao.box.view.CircleProgressView
+import luyao.util.ktx.ext.toast
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -46,9 +45,9 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
         popupMenu.menuInflater.inflate(R.menu.menu_app, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menu_open_app -> AppUtils.openApp(context, appBean.packageName)
-                R.id.menu_uninstall_app -> AppUtils.uninstallApp(context, appBean.packageName) // TODO 卸载之后刷新列表
-                R.id.menu_app_properties -> AppUtils.openAppProperties(context, appBean.packageName)
+                R.id.menu_open_app -> context.openApp(appBean.packageName)
+                R.id.menu_uninstall_app -> context.uninstallApp(appBean.packageName) // TODO 卸载之后刷新列表
+                R.id.menu_app_properties -> context.goToAppInfoPage(appBean.packageName)
                 R.id.menu_app_detail -> context.startActivity(
                     Intent(
                         context,
@@ -57,7 +56,7 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
                 )
                 R.id.menu_save_apk -> saveApk(helper, context, appBean)
                 R.id.menu_share_apk -> shareApk(appBean)
-                R.id.menu_open_in_store -> AppUtils.openInStore(context, appBean.packageName)
+                R.id.menu_open_in_store -> context.openInAppStore(appBean.packageName)
             }
             true
         }
@@ -106,7 +105,7 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
                 progressView.percent = x * 100
                 if (x == -1f) {
                     progressView.visibility = View.GONE
-                    mContext.toast(R.string.backup_finish)
+                    toast(mContext,R.string.backup_finish,Toast.LENGTH_SHORT)
                 }
             }
         }

@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_app_list.*
 import kotlinx.android.synthetic.main.title_layout.*
 import luyao.box.R
 import luyao.box.adapter.AppAdapter
-import luyao.box.common.base.BaseActivity
 import luyao.box.util.AppManager
+import luyao.util.ktx.base.BaseActivity
 
 class AppListActivity : BaseActivity() {
 
@@ -23,6 +23,8 @@ class AppListActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_app_list
 
     override fun initView() {
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        mToolbar.setNavigationOnClickListener { onBackPressed() }
         mToolbar.title = getString(R.string.app)
         initRefreshLayout()
         initRecycleView()

@@ -1,1 +1,1 @@
-include ':app', ':common', ':Parser', ':floatwindow'
+include ':app', ':Parser', ':floatwindow'

@@ -1,16 +1,14 @@
 package luyao.box.ui.editor
 
 import android.annotation.SuppressLint
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.appcompat.widget.SearchView
 import kotlinx.android.synthetic.main.activity_text_viewer.*
 import luyao.box.R
-import luyao.box.common.base.BaseActivity
 import luyao.box.common.util.AppUtils
+import luyao.util.ktx.base.BaseActivity
 import java.io.File
 
 class TextViewerActivity : BaseActivity() {
@@ -20,15 +18,16 @@ class TextViewerActivity : BaseActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun initView() {
-
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        mToolbar.setNavigationOnClickListener { onBackPressed() }
         mToolbar.title = File(filePath).name
         mToolbar.inflateMenu(R.menu.toolbar_search)
 
         webView.settings.run {
-            javaScriptEnabled=true
+            javaScriptEnabled = true
             setAppCacheEnabled(true)
             setSupportZoom(true)
-            defaultTextEncodingName="utf-8"
+            defaultTextEncodingName = "utf-8"
         }
         webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {

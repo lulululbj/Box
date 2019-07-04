@@ -17,14 +17,19 @@ import kotlinx.android.synthetic.main.title_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import luyao.box.*
+import luyao.box.APK_PATH
+import luyao.box.BASE_PATH
+import luyao.box.MAIN_LIST
+import luyao.box.R
 import luyao.box.about.AboutActivity
 import luyao.box.adapter.MainAdapter
 import luyao.box.adapter.SpaceItemDecoration
 import luyao.box.common.util.AppUtils
 import luyao.box.ui.setting.SettingActivity
 import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.dp2px
 import luyao.util.ktx.ext.permission.request
+import luyao.util.ktx.ext.toast
 import java.io.File
 
 
@@ -60,7 +65,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun initRecycleView() {
         mainRecycleView.run {
             layoutManager = GridLayoutManager(this@MainActivity, 3)
-            addItemDecoration(SpaceItemDecoration(dp2px(5)))
+            addItemDecoration(SpaceItemDecoration(dp2px(5f)))
             adapter = mainAdapter
         }
 

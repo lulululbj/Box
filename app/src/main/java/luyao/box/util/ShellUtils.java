@@ -1,4 +1,4 @@
-package luyao.box.common.util;
+package luyao.box.util;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.List;
+
+import static luyao.box.ExtKt.close;
+
 
 /**
  * Created by luyao
@@ -63,7 +66,7 @@ public class ShellUtils {
             errorBuilder.append("\n")
                     .append(e.getMessage());
         } finally {
-            CloseUtils.close(os, resultReader, errorReader);
+            close(os, resultReader, errorReader);
             if (process != null) process.destroy();
         }
         return new CommandResult(resultBuilder.toString(), errorBuilder.toString(), result);

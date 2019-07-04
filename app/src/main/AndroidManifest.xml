@@ -52,15 +52,15 @@
                     android:resource="@xml/accessibility_service_config"/>
         </service>
         
-        <provider
-                android:authorities="luyao.box.fileprovider"
-                android:name="androidx.core.content.FileProvider"
-                android:exported="false"
-                android:grantUriPermissions="true">
-            <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths"/>
-        </provider>
+        <!--<provider-->
+                <!--android:authorities="luyao.box.fileprovider"-->
+                <!--android:name="androidx.core.content.FileProvider"-->
+                <!--android:exported="false"-->
+                <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                    <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                    <!--android:resource="@xml/file_paths"/>-->
+        <!--</provider>-->
     </application>
 
 </manifest>

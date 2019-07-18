@@ -1,7 +1,5 @@
 package luyao.box.about
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.view.Gravity
 import android.view.MenuItem
@@ -15,6 +13,7 @@ import luyao.box.GITHUB_PAGE
 import luyao.box.HOME_PAGE
 import luyao.box.ISSUE_URL
 import luyao.box.R
+import luyao.box.ext.sendEmail
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.openBrowser
 
@@ -63,25 +62,20 @@ class AboutActivity : BaseActivity() {
             when (item.itemId) {
                 R.id.menu_issue -> {
                     openBrowser(ISSUE_URL)
-                    true
                 }
                 R.id.menu_email -> {
-                    val uri = Uri.parse(getString(R.string.sendto))
-                    val intent = Intent(Intent.ACTION_SENDTO, uri)
-                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.mail_topic))
-                    intent.putExtra(
-                        Intent.EXTRA_TEXT,
+
+                    sendEmail(
+                        getString(R.string.sendto),
+                        getString(R.string.mail_topic),
                         getString(R.string.device_model) + Build.MODEL + "\n"
                                 + getString(R.string.sdk_version) + Build.VERSION.RELEASE + "\n"
                                 + getString(R.string.version)
                     )
-                    startActivity(intent)
-                    true
-                }
-                else -> {
-                    true
+
                 }
             }
+            true
         }
         feedbackMenu.show()
     }

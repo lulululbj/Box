@@ -1,7 +1,6 @@
 package luyao.box.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -18,6 +17,7 @@ import luyao.box.bean.AppBean
 import luyao.box.ui.appManager.AppDetailActivity
 import luyao.box.util.AppManager
 import luyao.box.view.CircleProgressView
+import luyao.util.ktx.ext.startKtxActivity
 import luyao.util.ktx.ext.toast
 import java.io.File
 import java.io.FileInputStream
@@ -48,12 +48,8 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
                 R.id.menu_open_app -> context.openApp(appBean.packageName)
                 R.id.menu_uninstall_app -> context.uninstallApp(appBean.packageName) // TODO 卸载之后刷新列表
                 R.id.menu_app_properties -> context.goToAppInfoPage(appBean.packageName)
-                R.id.menu_app_detail -> context.startActivity(
-                    Intent(
-                        context,
-                        AppDetailActivity::class.java
-                    ).putExtra("packageName", appBean.packageName)
-                )
+                R.id.menu_app_detail ->
+                    context.startKtxActivity<AppDetailActivity>(value = "packageName" to appBean.packageName)
                 R.id.menu_save_apk -> saveApk(helper, context, appBean)
                 R.id.menu_share_apk -> shareApk(appBean)
                 R.id.menu_open_in_store -> context.openInAppStore(appBean.packageName)
@@ -105,7 +101,7 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
                 progressView.percent = x * 100
                 if (x == -1f) {
                     progressView.visibility = View.GONE
-                    toast(mContext,R.string.backup_finish,Toast.LENGTH_SHORT)
+                    toast(mContext, R.string.backup_finish, Toast.LENGTH_SHORT)
                 }
             }
         }

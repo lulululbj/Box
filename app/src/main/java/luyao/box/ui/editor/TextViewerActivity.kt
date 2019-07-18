@@ -7,8 +7,9 @@ import android.webkit.WebView
 import androidx.appcompat.widget.SearchView
 import kotlinx.android.synthetic.main.activity_text_viewer.*
 import luyao.box.R
-import luyao.box.common.util.AppUtils
+import luyao.box.util.AppUtils
 import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.listener.queryTextListener
 import java.io.File
 
 class TextViewerActivity : BaseActivity() {
@@ -63,19 +64,13 @@ class TextViewerActivity : BaseActivity() {
         mSearchAutoComplete.setHintTextColor(resources.getColor(android.R.color.white))//设置提示文字颜色
         mSearchAutoComplete.setTextColor(resources.getColor(android.R.color.white))//设置内容文字颜色
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
+        searchView.queryTextListener {
+            onQueryTextChange {
                 findUp.visibility = View.VISIBLE
                 findDown.visibility = View.VISIBLE
-                webView.findAllAsync(newText)
-                return true
+                webView.findAllAsync(it)
             }
-
-        })
+        }
 
         searchView.setOnCloseListener {
             findUp.visibility = View.GONE

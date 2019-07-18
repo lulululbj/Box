@@ -1,4 +1,4 @@
-package luyao.box.common.util
+package luyao.box.util
 
 import android.content.Context
 import android.content.Intent

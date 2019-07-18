@@ -23,12 +23,13 @@ import luyao.box.MAIN_LIST
 import luyao.box.R
 import luyao.box.about.AboutActivity
 import luyao.box.adapter.MainAdapter
-import luyao.box.adapter.SpaceItemDecoration
-import luyao.box.common.util.AppUtils
+import luyao.box.util.AppUtils
+import luyao.box.ext.itemPadding
 import luyao.box.ui.setting.SettingActivity
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.dp2px
 import luyao.util.ktx.ext.permission.request
+import luyao.util.ktx.ext.startKtxActivity
 import luyao.util.ktx.ext.toast
 import java.io.File
 
@@ -65,7 +66,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun initRecycleView() {
         mainRecycleView.run {
             layoutManager = GridLayoutManager(this@MainActivity, 3)
-            addItemDecoration(SpaceItemDecoration(dp2px(5f)))
+            itemPadding(5)
             adapter = mainAdapter
         }
 
@@ -101,7 +102,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> {
-                startActivity(SettingActivity::class.java)
+                startKtxActivity<SettingActivity>()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -112,11 +113,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_setting -> {
-                startActivity(SettingActivity::class.java)
+                startKtxActivity<SettingActivity>()
             }
 
             R.id.nav_about -> {
-                startActivity(AboutActivity::class.java)
+                startKtxActivity<AboutActivity>()
             }
         }
 

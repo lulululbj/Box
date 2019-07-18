@@ -2,15 +2,13 @@ package luyao.box.ui.device
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.os.Build
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_device_info.*
 import kotlinx.android.synthetic.main.title_layout.*
 import luyao.box.R
 import luyao.box.util.DeviceUtils
 import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.permission.request
 
 /**
  * Created by luyao
@@ -60,23 +58,15 @@ class DeviceInfoActivity : BaseActivity() {
 
     }
 
-    private fun checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(permission), 1001)
-        } else {
-            imei.text = DeviceUtils.getIMEI(this)
-            meid.text = DeviceUtils.getMEID(this)
-            sn.text = DeviceUtils.getSN()
-        }
-    }
-
     @SuppressLint("MissingPermission")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            imei.text = DeviceUtils.getIMEI(this)
-            meid.text = DeviceUtils.getMEID(this)
-            sn.text = DeviceUtils.getSN()
+    private fun checkPermissions() {
+
+        request(permission) {
+            onGranted {
+                imei.text = DeviceUtils.getIMEI(this@DeviceInfoActivity)
+                meid.text = DeviceUtils.getMEID(this@DeviceInfoActivity)
+                sn.text = DeviceUtils.getSN()
+            }
         }
     }
 }

@@ -84,12 +84,12 @@ class HistoryAdapter(layoutResId: Int = R.layout.item_history) :
             else SINGLE_NO_LINE
         }
 
-        if (data[position].packageName == data[position - 1].packageName) {
-            return if (data[position].packageName == data[position + 1].packageName)
+        return if (data[position].packageName == data[position - 1].packageName) {
+            if (data[position].packageName == data[position + 1].packageName)
                 SAME_NO_LINE
             else SAME_WITH_LINE
         } else {
-            return if (data[position].packageName == data[position + 1].packageName)
+            if (data[position].packageName == data[position + 1].packageName)
                 SINGLE_NO_LINE
             else SINGLE_WITH_LINE
         }

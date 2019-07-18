@@ -14,6 +14,7 @@ import luyao.box.R
 import luyao.box.adapter.AppAdapter
 import luyao.box.util.AppManager
 import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.startKtxActivity
 
 class AppListActivity : BaseActivity() {
 
@@ -51,12 +52,7 @@ class AppListActivity : BaseActivity() {
         itemDecoration.setDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.divider_bg)))
 
         appAdapter.setOnItemClickListener { _, _, position ->
-            startActivity(
-                Intent(this, AppDetailActivity::class.java).putExtra(
-                    "packageName",
-                    appAdapter.getItem(position)?.packageName
-                )
-            )
+            startKtxActivity<AppDetailActivity>(value = "packageName" to appAdapter.data[position].packageName)
         }
 
         appAdapter.openLoadAnimation()

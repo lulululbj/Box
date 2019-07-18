@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import luyao.box.bean.AppBean
-import luyao.box.common.util.AppUtils.getAppIcon
-import luyao.box.common.util.AppUtils.getAppName
-import luyao.box.common.util.AppUtils.getInstalledApp
+import luyao.box.util.AppUtils.getAppIcon
+import luyao.box.util.AppUtils.getAppName
+import luyao.box.util.AppUtils.getInstalledApp
 import java.io.File
 
 /**

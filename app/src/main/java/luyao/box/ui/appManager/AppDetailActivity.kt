@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import luyao.box.*
-import luyao.box.common.util.AppUtils
+import luyao.box.util.AppUtils
 import luyao.box.ui.editor.TextViewerActivity
 import luyao.parser.xml.XmlParser
 import luyao.util.ktx.base.BaseActivity

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="?android:attr/selectableItemBackground">
+
+
+    <ImageView
+            android:id="@+id/fileIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+
+
+    <ImageButton
+            android:id="@+id/fileMore"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:background="@drawable/ripple"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:clickable="true"/>
+
+    <TextView
+            android:id="@+id/fileName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toLeftOf="@id/fileMore"
+            android:layout_toRightOf="@id/fileIcon"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="asg"/>
+
+
+</RelativeLayout>

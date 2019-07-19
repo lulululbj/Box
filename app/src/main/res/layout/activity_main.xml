@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:openDrawer="start"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimaryDark">
 
     <include
             layout="@layout/app_bar_main"

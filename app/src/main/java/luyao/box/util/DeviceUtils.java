@@ -78,7 +78,7 @@ public class DeviceUtils {
 
     public static String getKernelVersion() {
         ShellUtils.CommandResult commandResult = ShellUtils.execCommand("cat /proc/version", false);
-        return commandResult.result == 0 ? commandResult.successResult : commandResult.errorResult;
+        return commandResult.result == 0 ? commandResult.successResult : "unknown";
     }
 
     public static int getSDK() {
@@ -124,33 +124,33 @@ public class DeviceUtils {
         return "";
     }
 
-    public static int getDeviceWidth(Context context){
+    public static int getDeviceWidth(Context context) {
         return context.getResources().getDisplayMetrics().widthPixels;
     }
 
-    public static int getDeviceHeight(Context context){
+    public static int getDeviceHeight(Context context) {
         return context.getResources().getDisplayMetrics().heightPixels;
     }
 
-    public static String getRamInfo(Context context){
+    public static String getRamInfo(Context context) {
         long totalSize;
         long availableSize;
 
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memoryInfo=new ActivityManager.MemoryInfo();
+        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
         activityManager.getMemoryInfo(memoryInfo);
 
-        totalSize=memoryInfo.totalMem;
-        availableSize=memoryInfo.availMem;
+        totalSize = memoryInfo.totalMem;
+        availableSize = memoryInfo.availMem;
 
-        return String.format("%s / %s", Formatter.formatFileSize(context,availableSize),Formatter.formatFileSize(context,totalSize));
+        return String.format("%s / %s", Formatter.formatFileSize(context, availableSize), Formatter.formatFileSize(context, totalSize));
     }
 
-    public static String getRomInfo(Context context){
-        long totalSize= Environment.getExternalStorageDirectory().getTotalSpace();
-        long availableSize=Environment.getExternalStorageDirectory().getFreeSpace();
+    public static String getRomInfo(Context context) {
+        long totalSize = Environment.getExternalStorageDirectory().getTotalSpace();
+        long availableSize = Environment.getExternalStorageDirectory().getFreeSpace();
 
-        return String.format("%s / %s", Formatter.formatFileSize(context,availableSize),Formatter.formatFileSize(context,totalSize));
+        return String.format("%s / %s", Formatter.formatFileSize(context, availableSize), Formatter.formatFileSize(context, totalSize));
     }
 
 

@@ -13,6 +13,7 @@ import luyao.parser.xml.XmlParser
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.Hash
 import luyao.util.ktx.ext.hash
+import luyao.util.ktx.ext.startKtxActivity
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
@@ -46,7 +47,7 @@ class AppDetailActivity : BaseActivity() {
     private fun initListener() {
         detailRefresh.setOnRefreshListener { refresh() }
         detailManifest.setOnClickListener {
-            startActivity(TextViewerActivity::class.java, "filePath", filePath)
+            startKtxActivity<TextViewerActivity>(value = "filePath" to filePath)
         }
         li_sigMD5.setOnClickListener { copyToClipboard(sigMD5.text.toString()) }
         li_sigSHA1.setOnClickListener { copyToClipboard(sigSHA1.text.toString()) }

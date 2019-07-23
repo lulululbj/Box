@@ -62,6 +62,10 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
 
         fileAdapter.run {
 
+            setMenuClickListener { view, file ->
+                showPopMenu(view, file)
+            }
+
             setOnItemClickListener { _, _, position ->
                 run {
                     val boxFile = fileAdapter.data[position]
@@ -80,10 +84,6 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
                         it.notifyDataSetChanged()
                     }
                     true
-                }
-
-                setMenuClickListener { view, file ->
-                    showPopMenu(view, file)
                 }
             }
         }

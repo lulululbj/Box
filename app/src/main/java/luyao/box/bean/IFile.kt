@@ -1,5 +1,7 @@
 package luyao.box.bean
 
+import java.io.File
+
 interface IFile {
 
     var checked: Boolean
@@ -24,7 +26,10 @@ interface IFile {
     fun getFreeSpace(): Long
     fun getUsableSpace(): Long
     fun getMimeType(): String?
+    fun getFile(): File
 
-    fun setSelectMode(boolean: Boolean) = { checked = boolean }
+    fun setSelectMode(boolean: Boolean) = run { checked = boolean }
     fun isSelectMode() = checked
+
+    fun delete(): Boolean
 }

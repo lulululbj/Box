@@ -5,6 +5,8 @@ import java.io.File
 
 class BoxFile(override val filePath: String) : IFile, Comparable<BoxFile> {
 
+    override fun getFile() = File(filePath)
+
     override var checked: Boolean = false
 
     override fun getName(): String = File(filePath).name
@@ -48,6 +50,8 @@ class BoxFile(override val filePath: String) : IFile, Comparable<BoxFile> {
     override fun getUsableSpace(): Long = File(filePath).usableSpace
 
     override fun getMimeType(): String? = MimeType.getMimeType(filePath, isDirectory())
+
+    override fun delete() = File(filePath).deleteRecursively()
 
     override fun compareTo(other: BoxFile): Int = if (this.isDirectory() && !other.isDirectory()) -1
     else if (!this.isDirectory() && other.isDirectory()) 1

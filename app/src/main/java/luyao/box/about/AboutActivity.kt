@@ -9,11 +9,7 @@ import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20
 import de.psdev.licensesdialog.model.Notice
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.title_layout.*
-import luyao.box.GITHUB_PAGE
-import luyao.box.HOME_PAGE
-import luyao.box.ISSUE_URL
-import luyao.box.R
-import luyao.box.ext.sendEmail
+import luyao.box.*
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.openBrowser
 

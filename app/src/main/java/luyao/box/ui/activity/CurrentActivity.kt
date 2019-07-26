@@ -3,11 +3,11 @@ package luyao.box.ui.activity
 import kotlinx.android.synthetic.main.activity_current.*
 import kotlinx.android.synthetic.main.title_layout.*
 import luyao.box.R
-import luyao.box.goToAccessibilitySetting
 import luyao.box.service.BoxAccessibilityService
 import luyao.box.util.FloatWindowManager
 import luyao.box.util.Preference
 import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.goToAccessibilitySetting
 
 class CurrentActivity : BaseActivity() {
 

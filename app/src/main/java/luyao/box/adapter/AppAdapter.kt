@@ -17,8 +17,7 @@ import luyao.box.bean.AppBean
 import luyao.box.ui.appManager.AppDetailActivity
 import luyao.box.util.AppManager
 import luyao.box.view.CircleProgressView
-import luyao.util.ktx.ext.startKtxActivity
-import luyao.util.ktx.ext.toast
+import luyao.util.ktx.ext.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

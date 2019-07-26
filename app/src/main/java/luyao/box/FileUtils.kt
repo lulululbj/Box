@@ -1,6 +1,5 @@
 package luyao.box
 
-import kotlinx.coroutines.DEBUG_PROPERTY_NAME
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -11,7 +10,10 @@ import java.nio.ByteBuffer
  * on 2019/7/23 9:29
  */
 
-fun copyFile(sourceFile: File, destFile: File, func: (i: Int) -> Unit) {
+fun copyFile(sourceFile: File, destFile: File, func: (file: File, i: Int) -> Unit) {
+
+    if (!sourceFile.exists()) return
+    if (!destFile.exists()) destFile.createNewFile()
 
     val inputStream = FileInputStream(sourceFile)
     val outputStream = FileOutputStream(destFile)
@@ -31,10 +33,10 @@ fun copyFile(sourceFile: File, destFile: File, func: (i: Int) -> Unit) {
         buffer.position(0)
         oChannel.write(buffer)
         hasRead += read
-        val newProgress = ((hasRead / totalSize)*100).toInt()
-        if (progress!=newProgress){
+        val newProgress = ((hasRead / totalSize) * 100).toInt()
+        if (progress != newProgress) {
             progress = newProgress
-            func(progress)
+            func(sourceFile, progress)
         }
     }
 
@@ -42,10 +44,29 @@ fun copyFile(sourceFile: File, destFile: File, func: (i: Int) -> Unit) {
     outputStream.close()
 }
 
+fun copyFolder(sourceFolder: File, destFolder: File, func: (file: File, i: Int) -> Unit) {
+    if (!sourceFolder.exists()) return
+
+    if (!destFolder.exists()) {
+        val result = destFolder.mkdirs()
+        if (!result) return
+    }
+
+    for (subFile in sourceFolder.listFiles()) {
+        if (subFile.isDirectory) {
+            copyFolder(subFile, File("${destFolder.path}${File.separator}${subFile.name}"), func)
+        } else {
+            copyFile(subFile, File(destFolder, subFile.name), func)
+        }
+    }
+}
+
 fun main() {
     val sourceFile = File("D://src.zip")
     val destFile = File("D://src2.zip")
-    copyFile(sourceFile,destFile) {
-        println(it.toString())
+    copyFile(sourceFile, destFile) { _, progress ->
+        run {
+            println(progress.toString())
+        }
     }
 }

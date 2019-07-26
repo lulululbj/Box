@@ -6,14 +6,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import luyao.box.*
-import luyao.box.util.AppUtils
+import luyao.box.APK_PATH
+import luyao.box.R
 import luyao.box.ui.editor.TextViewerActivity
+import luyao.box.util.AppUtils
 import luyao.parser.xml.XmlParser
 import luyao.util.ktx.base.BaseActivity
-import luyao.util.ktx.ext.Hash
-import luyao.util.ktx.ext.hash
-import luyao.util.ktx.ext.startKtxActivity
+import luyao.util.ktx.ext.*
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
@@ -49,16 +48,18 @@ class AppDetailActivity : BaseActivity() {
         detailManifest.setOnClickListener {
             startKtxActivity<TextViewerActivity>(value = "filePath" to filePath)
         }
-        li_sigMD5.setOnClickListener { copyToClipboard(sigMD5.text.toString()) }
-        li_sigSHA1.setOnClickListener { copyToClipboard(sigSHA1.text.toString()) }
-        li_sigSHA256.setOnClickListener { copyToClipboard(sig256.text.toString()) }
+        li_sigMD5.setOnClickListener { copyToClipboard("md5",sigMD5.text.toString()) }
+        li_sigSHA1.setOnClickListener { copyToClipboard("sha1",sigSHA1.text.toString()) }
+        li_sigSHA256.setOnClickListener { copyToClipboard("sha256",sig256.text.toString()) }
     }
 
     private fun refresh() {
-        val sig = getAppSignature(this, mPackageName)
-        sigMD5.text = sig.hash(Hash.MD5)
-        sigSHA1.text = sig.hash(Hash.SHA1)
-        sig256.text = sig.hash(Hash.SHA256)
+
+        getAppSignature(mPackageName)?.let {
+            sigMD5.text = it.hash(Hash.MD5)
+            sigSHA1.text = it.hash(Hash.SHA1)
+            sig256.text = it.hash(Hash.SHA256)
+        }
 
         CoroutineScope(Dispatchers.Main).launch {
             val xmlAsync = async(Dispatchers.IO) {

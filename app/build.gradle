@@ -80,5 +80,5 @@ dependencies {
     implementation project(':Parser')
     implementation project(':floatwindow')
 
-    implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.5'
+    implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.5-alpha03'
 }

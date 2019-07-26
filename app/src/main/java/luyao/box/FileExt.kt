@@ -44,13 +44,12 @@ fun File.moveTo(destFile: File, override: Boolean, reserve: Boolean): Boolean {
 /**
  *   [destFolder] dest folder
  *   [override] whether to override dest file/folder if exist
- *   [reserve] Whether to reserve source file/folder
  *   [func] progress callback (from 0 to 100)
  */
-fun File.moveToWithProgress(destFolder: File, override: Boolean, reserve: Boolean, func: (file:File,i: Int) -> Unit) {
+fun File.moveToWithProgress(destFolder: File, overwrite: Boolean, func: (file:File,i: Int) -> Unit) {
 
-    if (isDirectory) copyFolder(this, File(destFolder,name), func)
-    else copyFile(this, File(destFolder,name), func)
+    if (isDirectory) copyFolder(this, File(destFolder,name),overwrite, func)
+    else copyFile(this, File(destFolder,name),overwrite, func)
 }
 
 

@@ -10,9 +10,18 @@ import java.nio.ByteBuffer
  * on 2019/7/23 9:29
  */
 
-fun copyFile(sourceFile: File, destFile: File, func: (file: File, i: Int) -> Unit) {
+fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: (file: File, i: Int) -> Unit) {
 
     if (!sourceFile.exists()) return
+
+    if (destFile.exists()) {
+        val stillExists = if (!overwrite) true else !destFile.delete()
+
+        if (stillExists) {
+           return
+        }
+    }
+
     if (!destFile.exists()) destFile.createNewFile()
 
     val inputStream = FileInputStream(sourceFile)
@@ -44,7 +53,7 @@ fun copyFile(sourceFile: File, destFile: File, func: (file: File, i: Int) -> Uni
     outputStream.close()
 }
 
-fun copyFolder(sourceFolder: File, destFolder: File, func: (file: File, i: Int) -> Unit) {
+fun copyFolder(sourceFolder: File, destFolder: File, overwrite: Boolean, func: (file: File, i: Int) -> Unit) {
     if (!sourceFolder.exists()) return
 
     if (!destFolder.exists()) {
@@ -54,9 +63,9 @@ fun copyFolder(sourceFolder: File, destFolder: File, func: (file: File, i: Int) 
 
     for (subFile in sourceFolder.listFiles()) {
         if (subFile.isDirectory) {
-            copyFolder(subFile, File("${destFolder.path}${File.separator}${subFile.name}"), func)
+            copyFolder(subFile, File("${destFolder.path}${File.separator}${subFile.name}"), overwrite, func)
         } else {
-            copyFile(subFile, File(destFolder, subFile.name), func)
+            copyFile(subFile, File(destFolder, subFile.name), overwrite, func)
         }
     }
 }
@@ -64,7 +73,7 @@ fun copyFolder(sourceFolder: File, destFolder: File, func: (file: File, i: Int) 
 fun main() {
     val sourceFile = File("D://src.zip")
     val destFile = File("D://src2.zip")
-    copyFile(sourceFile, destFile) { _, progress ->
+    copyFile(sourceFile, destFile, true) { _, progress ->
         run {
             println(progress.toString())
         }

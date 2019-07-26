@@ -32,7 +32,7 @@ class FileViewModel : BaseViewModel() {
     fun pasteAsync(fileList: List<IFile>, destFolder: File, reserved: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             for (file in fileList) {
-                file.getFile().moveToWithProgress(destFolder, true, reserved) { file, progress ->
+                file.getFile().moveToWithProgress(destFolder, true) { file, progress ->
                     launchOnUITryCatch({
                         mCurrentFileName.value = file.name
                         mProgress.value = progress

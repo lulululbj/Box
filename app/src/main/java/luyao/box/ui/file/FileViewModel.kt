@@ -7,6 +7,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import luyao.box.bean.IFile
 import luyao.box.moveToWithProgress
+import luyao.box.rename
 import luyao.box.util.FileUtils
 import luyao.util.ktx.base.BaseViewModel
 import java.io.File
@@ -22,6 +23,13 @@ class FileViewModel : BaseViewModel() {
     val mCurrentFileName: MutableLiveData<String> = MutableLiveData() // 当前操作的文件名
     val mRefreshTag: MutableLiveData<Int> = MutableLiveData()
 
+    fun renameFile(file: File, newName: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            file.rename(newName)
+            launchOnUITryCatch({ mRefreshTag.value = 1 })
+        }
+    }
+
     fun getFileListAsync(rootPath: String) {
         launch {
             val result = async(Dispatchers.IO) { FileUtils.getFileList(rootPath) }
@@ -31,14 +39,13 @@ class FileViewModel : BaseViewModel() {
 
     fun pasteAsync(fileList: List<IFile>, destFolder: File, reserved: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            for (file in fileList) {
-                file.getFile().moveToWithProgress(destFolder, true) { file, progress ->
+            for (subFile in fileList) {
+                subFile.getFile().moveToWithProgress(destFolder, true, reserved) { file, progress ->
                     launchOnUITryCatch({
                         mCurrentFileName.value = file.name
                         mProgress.value = progress
                     })
                 }
-                if (!reserved) file.delete()
             }
             launchOnUITryCatch({
                 mProgress.value = -1

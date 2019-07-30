@@ -18,7 +18,8 @@ ext.versions = [
 
         // third
         BaseRecyclerViewAdapter   : '2.9.43-alpha1',
-        material_dialogs_core     : 'core:2.0.0-rc5',
+        material_dialogs_core     : 'core:3.1.0',
+        material_dialogs_input    : 'input:3.1.0',
         kotlinx_coroutines_android: '1.0.0',
 
         // test

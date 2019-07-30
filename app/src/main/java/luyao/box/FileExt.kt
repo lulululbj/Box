@@ -11,7 +11,8 @@ import java.io.File
 
 // 获取内部存储容量，可用，已用空间
 
-// 获取 File 大小
+// 获取 File 大小 文件/文件夹
+
 
 // chmod Os.chmod()  是否可用？
 
@@ -35,7 +36,7 @@ import java.io.File
  *   [override] whether to override dest file/folder if exist
  *   [reserve] Whether to reserve source file/folder
  */
-fun File.moveTo(destFile: File, override: Boolean, reserve: Boolean): Boolean {
+fun File.moveTo(destFile: File, override: Boolean = true, reserve: Boolean = true): Boolean {
     val dest = copyRecursively(destFile, override)
     if (!reserve) deleteRecursively()
     return dest
@@ -43,19 +44,31 @@ fun File.moveTo(destFile: File, override: Boolean, reserve: Boolean): Boolean {
 
 /**
  *   [destFolder] dest folder
- *   [override] whether to override dest file/folder if exist
+ *   [overwrite] whether to override dest file/folder if exist
  *   [func] progress callback (from 0 to 100)
  */
-fun File.moveToWithProgress(destFolder: File, overwrite: Boolean, func: (file:File,i: Int) -> Unit) {
+fun File.moveToWithProgress(
+    destFolder: File,
+    overwrite: Boolean = true,
+    reserve: Boolean = true,
+    func: (file: File, i: Int) -> Unit
+) {
 
-    if (isDirectory) copyFolder(this, File(destFolder,name),overwrite, func)
-    else copyFile(this, File(destFolder,name),overwrite, func)
+    if (isDirectory) copyFolder(this, File(destFolder, name), overwrite, func)
+    else copyFile(this, File(destFolder, name), overwrite, func)
+
+    if (!reserve) deleteRecursively()
 }
 
 
 // close
 
-// rename(String) rename(File)
+fun File.rename(newName: String) =
+    rename(File("$parent${File.separator}$newName"))
+
+fun File.rename(newFile: File) =
+    if (newFile.exists()) false else renameTo(newFile)
+
 
 // isFile  isFolder
 

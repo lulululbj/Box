@@ -1,12 +1,15 @@
 package luyao.box.ui.file
 
 import android.os.Environment
+import android.text.format.Formatter
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import kotlinx.android.synthetic.main.activity_file.*
 import luyao.box.R
 import luyao.box.adapter.FileAdapter
@@ -118,10 +121,12 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
                     mViewModel.deleteAsync(file.getFile())
                 }
                 R.id.menu_rename -> {
+                    showRenameDialog(file.getFile())
                 }
                 R.id.menu_encrypt -> {
                 }
                 R.id.menu_property -> {
+                    toast(Formatter.formatFileSize(applicationContext,file.length()))
                 }
             }
             true
@@ -131,6 +136,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
 
     private fun paste() {
         mViewModel.pasteAsync(selectFileList, currentFile, reserved)
+
     }
 
     private fun refreshFileData(fileList: List<IFile>) {
@@ -138,6 +144,17 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
         fileRefreshLayout.isRefreshing = false
         currentPathTv.text = rootPath
         currentFile = File(rootPath)
+    }
+
+    private fun showRenameDialog(file: File) {
+        MaterialDialog(this).show {
+            title(R.string.rename)
+            input(hint = file.name, allowEmpty = false) { _, text ->
+                mViewModel.renameFile(file,text.toString())
+            }
+            positiveButton(R.string.confirm)
+            negativeButton(R.string.cancel)
+        }
     }
 
     override fun startObserve() {

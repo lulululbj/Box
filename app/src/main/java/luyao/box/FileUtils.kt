@@ -4,11 +4,32 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.nio.ByteBuffer
+import java.text.DecimalFormat
 
 /**
  * Created by luyao
  * on 2019/7/23 9:29
  */
+
+fun getFolderSize(file: File): Long {
+    var total = 0L
+    for (subFile in file.listFiles()) {
+        total += if (subFile.isFile) subFile.length()
+        else getFolderSize(subFile)
+    }
+    return total
+}
+
+fun getFormatFileSize(size: Long,unit:Int = 1000): String {
+    val formatter = DecimalFormat("####.00")
+    return when {
+        size < 0 -> "0 B"
+        size < unit -> "$size B"
+        size < unit * unit -> "${formatter.format(size / unit)} KB"
+        size < unit * unit * unit -> "${formatter.format(size / unit / unit)} MB"
+        else -> "${formatter.format(size / unit / unit / unit)} GB"
+    }
+}
 
 fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: (file: File, i: Int) -> Unit) {
 
@@ -18,7 +39,7 @@ fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: (file: 
         val stillExists = if (!overwrite) true else !destFile.delete()
 
         if (stillExists) {
-           return
+            return
         }
     }
 

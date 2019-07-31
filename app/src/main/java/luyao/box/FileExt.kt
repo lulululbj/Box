@@ -7,12 +7,14 @@ import java.io.File
  * on 2019/7/18 9:25
  */
 
-// long 格式化 GB MB KB
 
 // 获取内部存储容量，可用，已用空间
 
-// 获取 File 大小 文件/文件夹
+val File.totalSize : Long
+    get() = if (isFile) length() else getFolderSize(this)
 
+val File.formatSize : String
+    get() = getFormatFileSize(totalSize)
 
 // chmod Os.chmod()  是否可用？
 
@@ -81,7 +83,5 @@ fun File.rename(newFile: File) =
 // 获取后缀名 获取文件名不含后缀
 
 // mimeType
-
-// parentPath
 
 // 文件名冲突

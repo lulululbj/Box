@@ -1,7 +1,6 @@
 package luyao.box.ui.file
 
 import android.os.Environment
-import android.text.format.Formatter
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_file.*
 import luyao.box.R
 import luyao.box.adapter.FileAdapter
 import luyao.box.bean.IFile
+import luyao.box.view.showCreateFileOrFolderDialog
+import luyao.box.view.showPropertiesDialog
 import luyao.util.ktx.base.BaseVMActivity
 import luyao.util.ktx.ext.invisible
 import luyao.util.ktx.ext.toast
@@ -51,6 +52,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
 
         initRefreshLayout()
         initRecycleView()
+        initFabMenu()
     }
 
     override fun initData() {
@@ -98,6 +100,25 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
         }
     }
 
+    private fun initFabMenu() {
+        fabMenu.inflate(R.menu.menu_fab)
+        fabMenu.setOnActionSelectedListener { item ->
+            when (item.id) {
+                R.id.menu_add_file -> {
+                    showCreateFileOrFolderDialog(this, false) {
+                        mViewModel.createFile(currentFile,it)
+                    }
+                }
+                R.id.menu_add_folder -> {
+                    showCreateFileOrFolderDialog(this, true) {
+                        mViewModel.createFolder(currentFile,it)
+                    }
+                }
+            }
+            false
+        }
+    }
+
     private fun refresh() {
         mViewModel.getFileListAsync(rootPath)
     }
@@ -126,7 +147,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
                 R.id.menu_encrypt -> {
                 }
                 R.id.menu_property -> {
-                    toast(Formatter.formatFileSize(applicationContext,file.length()))
+                    showPropertiesDialog(this, file.getFile())
                 }
             }
             true
@@ -134,9 +155,9 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
         popupMenu.show()
     }
 
+
     private fun paste() {
         mViewModel.pasteAsync(selectFileList, currentFile, reserved)
-
     }
 
     private fun refreshFileData(fileList: List<IFile>) {
@@ -150,7 +171,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
         MaterialDialog(this).show {
             title(R.string.rename)
             input(hint = file.name, allowEmpty = false) { _, text ->
-                mViewModel.renameFile(file,text.toString())
+                mViewModel.renameFile(file, text.toString())
             }
             positiveButton(R.string.confirm)
             negativeButton(R.string.cancel)
@@ -199,7 +220,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
     }
 
     override fun onBackPressed() {
-        if (currentFile.parentFile == null)
+        if (currentFile == Environment.getExternalStorageDirectory())
             super.onBackPressed()
         else {
             rootPath = currentFile.parent

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:minHeight="100dp"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:id="@+id/properties_dialog_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/name"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/title_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calculating"
+                    android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/properties_dialog_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/location"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/title_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calculating"
+                    android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/properties_dialog_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/size_capitalized"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calculating"
+                    android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/properties_dialog_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/date"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/title_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calculating"
+                    android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/properties_dialog_md5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/md5"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/title_md5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calculating"
+                    android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/properties_dialog_sha256"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/hash_sha256"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/title_sha256"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calculating"
+                    android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--<com.github.mikephil.charting.charts.PieChart-->
+    <!--android:id="@+id/chart"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="125dp" />-->
+
+    <!--<android.support.v7.widget.AppCompatButton-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/permission"-->
+    <!--android:id="@+id/permissionsButton"-->
+    <!--android:visibility="gone"/>-->
+
+    <!--<include-->
+    <!--android:id="@+id/permtable"-->
+    <!--android:visibility="gone"-->
+    <!--layout="@layout/permissiontable"/>-->
+
+    <!--<android.support.v7.widget.AppCompatButton-->
+    <!--android:id="@+id/set"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/set"-->
+    <!--android:visibility="gone"/>-->
+</LinearLayout>

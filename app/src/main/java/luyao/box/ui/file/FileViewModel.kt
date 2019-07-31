@@ -23,6 +23,18 @@ class FileViewModel : BaseViewModel() {
     val mCurrentFileName: MutableLiveData<String> = MutableLiveData() // 当前操作的文件名
     val mRefreshTag: MutableLiveData<Int> = MutableLiveData()
 
+    fun createFile(folder: File, name: String): Boolean {
+        val newFile = File("${folder.path}${File.separator}$name")
+        return if (newFile.exists()) false
+        else newFile.createNewFile()
+    }
+
+    fun createFolder(folder: File, name: String): Boolean {
+        val newFolder = File("${folder.path}${File.separator}$name")
+        return if (newFolder.exists()) false
+        else newFolder.mkdirs()
+    }
+
     fun renameFile(file: File, newName: String) {
         CoroutineScope(Dispatchers.IO).launch {
             file.rename(newName)

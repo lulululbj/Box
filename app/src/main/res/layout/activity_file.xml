@@ -67,5 +67,16 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <com.leinardi.android.speeddial.SpeedDialView
+            android:id="@+id/fabMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:sdMainFabClosedSrc="@drawable/ic_add_white_24dp"
+            app:sdMainFabOpenedSrc="@drawable/ic_close_white_24dp"
+            app:layout_behavior="@string/speeddial_scrolling_view_snackbar_behavior"
+            app:sdExpansionMode="top"
+            app:sdMainFabAnimationRotateAngle="90"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

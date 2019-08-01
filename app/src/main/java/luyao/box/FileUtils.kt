@@ -20,7 +20,7 @@ fun getFolderSize(file: File): Long {
     return total
 }
 
-fun getFormatFileSize(size: Long,unit:Int = 1000): String {
+fun getFormatFileSize(size: Long, unit: Int = 1000): String {
     val formatter = DecimalFormat("####.00")
     return when {
         size < 0 -> "0 B"
@@ -31,7 +31,16 @@ fun getFormatFileSize(size: Long,unit:Int = 1000): String {
     }
 }
 
-fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: (file: File, i: Int) -> Unit) {
+
+fun getAllSubFile(folder: File): Array<File> {
+    var fileList: Array<File> = arrayOf()
+    for (subFile in folder.listFiles())
+        fileList = if (subFile.isFile) fileList.plus(subFile)
+        else fileList.plus(getAllSubFile(subFile))
+    return fileList
+}
+
+fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: ((file: File, i: Int) -> Unit)? = null) {
 
     if (!sourceFile.exists()) return
 
@@ -63,10 +72,13 @@ fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: (file: 
         buffer.position(0)
         oChannel.write(buffer)
         hasRead += read
-        val newProgress = ((hasRead / totalSize) * 100).toInt()
-        if (progress != newProgress) {
-            progress = newProgress
-            func(sourceFile, progress)
+
+        func?.let {
+            val newProgress = ((hasRead / totalSize) * 100).toInt()
+            if (progress != newProgress) {
+                progress = newProgress
+                it(sourceFile, progress)
+            }
         }
     }
 
@@ -74,7 +86,7 @@ fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: (file: 
     outputStream.close()
 }
 
-fun copyFolder(sourceFolder: File, destFolder: File, overwrite: Boolean, func: (file: File, i: Int) -> Unit) {
+fun copyFolder(sourceFolder: File, destFolder: File, overwrite: Boolean, func: ((file: File, i: Int) -> Unit)? = null) {
     if (!sourceFolder.exists()) return
 
     if (!destFolder.exists()) {
@@ -92,11 +104,7 @@ fun copyFolder(sourceFolder: File, destFolder: File, overwrite: Boolean, func: (
 }
 
 fun main() {
-    val sourceFile = File("D://src.zip")
-    val destFile = File("D://src2.zip")
-    copyFile(sourceFile, destFile, true) { _, progress ->
-        run {
-            println(progress.toString())
-        }
-    }
+   var array : Array<String> = arrayOf()
+   array= array.plus("1")
+    println(array.size)
 }

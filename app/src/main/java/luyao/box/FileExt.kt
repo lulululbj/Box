@@ -10,12 +10,23 @@ import java.io.File
 
 // 获取内部存储容量，可用，已用空间
 
-val File.totalSize : Long
+val File.totalSize: Long
     get() = if (isFile) length() else getFolderSize(this)
 
-val File.formatSize : String
+val File.formatSize: String
     get() = getFormatFileSize(totalSize)
 
+fun File.listFiles(containsAll: Boolean = false, filter: ((file: File) -> Boolean)? = null): Array<out File> {
+    val fileList = if (!containsAll) listFiles() else getAllSubFile(this)
+    var result: Array<File> = arrayOf()
+    return if (filter == null) fileList
+    else {
+        for (file in fileList) {
+            if (filter(file)) result=result.plus(file)
+        }
+        result
+    }
+}
 // chmod Os.chmod()  是否可用？
 
 // createSymlink ？
@@ -53,7 +64,7 @@ fun File.moveToWithProgress(
     destFolder: File,
     overwrite: Boolean = true,
     reserve: Boolean = true,
-    func: (file: File, i: Int) -> Unit
+    func: ((file: File, i: Int) -> Unit)? = null
 ) {
 
     if (isDirectory) copyFolder(this, File(destFolder, name), overwrite, func)

@@ -1,6 +1,7 @@
 package luyao.box.ui.file
 
 import android.os.Environment
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,13 +14,16 @@ import kotlinx.android.synthetic.main.activity_file.*
 import luyao.box.R
 import luyao.box.adapter.FileAdapter
 import luyao.box.bean.IFile
+import luyao.box.listFiles
 import luyao.box.view.showCreateFileOrFolderDialog
 import luyao.box.view.showPropertiesDialog
 import luyao.util.ktx.base.BaseVMActivity
 import luyao.util.ktx.ext.invisible
+import luyao.util.ktx.ext.loge
 import luyao.util.ktx.ext.toast
 import luyao.util.ktx.ext.visible
 import java.io.File
+import java.io.FilenameFilter
 
 /**
  * Created by luyao
@@ -87,6 +91,11 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
                         boxFile.getMimeType()?.let {
                             toast(it)
                         }
+
+                    val listFiles = boxFile.getFile().listFiles(true) { it.name.endsWith("txt") }
+                    for (file in listFiles)
+                        file.path.loge("box")
+
                 }
 
                 setOnItemLongClickListener { _, _, position ->

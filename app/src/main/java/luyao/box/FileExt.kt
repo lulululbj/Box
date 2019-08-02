@@ -1,6 +1,8 @@
 package luyao.box
 
+import luyao.box.util.MimeType
 import java.io.File
+import java.nio.charset.Charset
 
 /**
  * Created by luyao
@@ -10,40 +12,42 @@ import java.io.File
 
 // 获取内部存储容量，可用，已用空间
 
+val File.canListFiles: Boolean
+    get() = canRead() and isDirectory
+
 val File.totalSize: Long
     get() = if (isFile) length() else getFolderSize(this)
 
 val File.formatSize: String
     get() = getFormatFileSize(totalSize)
 
-fun File.listFiles(containsAll: Boolean = false, filter: ((file: File) -> Boolean)? = null): Array<out File> {
-    val fileList = if (!containsAll) listFiles() else getAllSubFile(this)
+val File.mimeType: String
+    get() = MimeType.getMimeType(extension, isDirectory)
+
+fun File.listFiles(isRecursive: Boolean = false, filter: ((file: File) -> Boolean)? = null): Array<out File> {
+    val fileList = if (!isRecursive) listFiles() else getAllSubFile(this)
     var result: Array<File> = arrayOf()
     return if (filter == null) fileList
     else {
         for (file in fileList) {
-            if (filter(file)) result=result.plus(file)
+            if (filter(file)) result = result.plus(file)
         }
         result
     }
 }
-// chmod Os.chmod()  是否可用？
 
-// createSymlink ？
+fun File.writeText(append: Boolean = false, text: String, charset: Charset = Charsets.UTF_8) {
+    if (append) appendText(text, charset) else writeText(text, charset)
+}
 
-// isSymlink
-
-// create
-
-// delete deleteFile deleteFolder  delete(filter)
+fun File.writeBytes(append: Boolean = false, bytes: ByteArray) {
+    if (append) appendBytes(bytes) else writeBytes(bytes)
+}
 
 // writeToFile(InputStream)
 
 // writeToFile(ByteArray)
 
-// copyFile(File,File) copyFile(String,String)  /move
-
-// copyFolder(File,File) copyFolder(String,String) /move
 /**
  *   [destFile] dest file/folder
  *   [override] whether to override dest file/folder if exist
@@ -82,17 +86,6 @@ fun File.rename(newName: String) =
 fun File.rename(newFile: File) =
     if (newFile.exists()) false else renameTo(newFile)
 
-
-// isFile  isFolder
-
-// create(是否保留源文件)
-
-// listFile(filter) 是否遍历子文件夹
-
 // getCharset
 
-// 获取后缀名 获取文件名不含后缀
 
-// mimeType
-
-// 文件名冲突

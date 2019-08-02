@@ -1,8 +1,6 @@
 package luyao.box
 
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.*
 import java.nio.ByteBuffer
 import java.text.DecimalFormat
 
@@ -34,6 +32,7 @@ fun getFormatFileSize(size: Long, unit: Int = 1000): String {
 
 fun getAllSubFile(folder: File): Array<File> {
     var fileList: Array<File> = arrayOf()
+    if (!folder.canListFiles) return fileList
     for (subFile in folder.listFiles())
         fileList = if (subFile.isFile) fileList.plus(subFile)
         else fileList.plus(getAllSubFile(subFile))
@@ -58,6 +57,7 @@ fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: ((file:
     val outputStream = FileOutputStream(destFile)
     val iChannel = inputStream.channel
     val oChannel = outputStream.channel
+
 
     val totalSize = sourceFile.length()
     val buffer = ByteBuffer.allocate(1024)
@@ -104,7 +104,7 @@ fun copyFolder(sourceFolder: File, destFolder: File, overwrite: Boolean, func: (
 }
 
 fun main() {
-   var array : Array<String> = arrayOf()
-   array= array.plus("1")
+    var array: Array<String> = arrayOf()
+    array = array.plus("1")
     println(array.size)
 }

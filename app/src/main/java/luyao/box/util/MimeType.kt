@@ -10,21 +10,15 @@ class MimeType {
         private const val ALL_MIME_TYPES = "*/*"
         private val MIME_TYPES = HashMap<String, String>(1 + (66 / 0.75).toInt())
 
-        /**
-         * Get Mime Type of a file
-         * @param path the file of which mime type to get
-         * @return Mime type in form of String
-         */
-        fun getMimeType(path: String, isDirectory: Boolean): String? {
+        fun getMimeType(extension: String, isDirectory: Boolean): String {
             if (isDirectory) {
-                return null
+                return ""
             }
 
             var type: String? = ALL_MIME_TYPES
-            val extension = getExtension(path)
 
             // mapping extension to system mime types
-            if (!extension.isEmpty()) {
+            if (extension.isNotEmpty()) {
                 val extensionLowerCase = extension.toLowerCase(Locale
                         .getDefault())
                 val mime = MimeTypeMap.getSingleton()

@@ -2,6 +2,7 @@ package luyao.box
 
 import android.app.Application
 import android.content.Context
+import luyao.util.ktx.ext.showLog
 import kotlin.properties.Delegates
 
 /**
@@ -17,5 +18,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         CONTEXT = applicationContext
+        showLog = BuildConfig.DEBUG
     }
 }

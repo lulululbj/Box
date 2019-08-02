@@ -49,7 +49,7 @@ class BoxFile(override val filePath: String) : IFile, Comparable<BoxFile> {
 
     override fun getUsableSpace(): Long = File(filePath).usableSpace
 
-    override fun getMimeType(): String? = MimeType.getMimeType(filePath, isDirectory())
+    override fun getMimeType(): String? = MimeType.getMimeType(getFile().extension, isDirectory())
 
     override fun delete() = File(filePath).deleteRecursively()
 

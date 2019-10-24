@@ -1,0 +1,21 @@
+apply plugin: 'java-library'
+
+dependencies {
+	implementation fileTree(include: ['*.jar'], dir: 'libs')
+	runtime files('clsp-data/android-29-clst.jar')
+	runtime files('clsp-data/android-29-res.jar')
+	//	compile files('lib/dx-1.16.jar') // TODO: dx don't support java version > 9 (53)
+	compile 'org.ow2.asm:asm:7.1'
+	compile 'org.jetbrains:annotations:17.0.0'
+	compile 'com.google.code.gson:gson:2.8.5'
+	compile 'org.smali:baksmali:2.3'
+	compile('org.smali:smali:2.3') {
+		exclude group: 'com.google.guava'
+	}
+	compile 'com.google.guava:guava:28.0-jre'
+	compile 'org.slf4j:slf4j-api:1.7.28'
+	testCompile 'org.apache.commons:commons-lang3:3.9'
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"

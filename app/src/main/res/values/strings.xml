@@ -92,5 +92,6 @@
     <string name="hash_sha256">SHA-256</string>
     <string name="file">文件</string>
     <string name="folder">文件夹</string>
+    <string name="reverse">反编译</string>
 
 </resources>

@@ -100,8 +100,9 @@ public final class ResourcesLoader {
 			case ARSC:
 				return new ResTableParser(jadxRef.getRoot()).decodeFiles(inputStream);
 
-			case IMG:
-				return decodeImage(rf, inputStream);
+				// TODO 暂不处理图片
+//			case IMG:
+//				return decodeImage(rf, inputStream);
 
 			default:
 				return ResContainer.resourceFileLink(rf);

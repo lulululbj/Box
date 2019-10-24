@@ -1,6 +1,8 @@
 package luyao.box.adapter
 
 import android.content.Context
+import android.os.Environment
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -8,10 +10,10 @@ import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import jadx.api.JadxArgs
+import jadx.api.JadxDecompiler
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.launch
 import luyao.box.*
 import luyao.box.bean.AppBean
 import luyao.box.ui.appManager.AppDetailActivity
@@ -52,10 +54,25 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
                 R.id.menu_save_apk -> saveApk(helper, context, appBean)
                 R.id.menu_share_apk -> shareApk(appBean)
                 R.id.menu_open_in_store -> context.openInAppStore(appBean.packageName)
+                R.id.menu_app_reverse -> reverseApp(appBean)
             }
             true
         }
         popupMenu.show()
+    }
+
+    private fun reverseApp(appBean: AppBean){
+        val apkFile = File(appBean.sourceDir)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val args = JadxArgs().apply {
+                inputFiles.add(apkFile)
+                outDir = File(Environment.getExternalStorageDirectory(),"jadx")
+            }
+            val decompiler = JadxDecompiler(args)
+            decompiler.load()
+            decompiler.save()
+        }
     }
 
     private fun saveApk(helper: BaseViewHolder, context: Context, appBean: AppBean) {

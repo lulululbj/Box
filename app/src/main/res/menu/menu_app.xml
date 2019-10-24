@@ -13,6 +13,10 @@
             android:title="@string/properties"/>
 
     <item
+            android:id="@+id/menu_app_reverse"
+            android:title="@string/reverse"/>
+
+    <item
             android:id="@+id/menu_app_detail"
             android:title="@string/app_detail"/>
 

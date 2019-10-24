@@ -183,6 +183,7 @@ public final class JadxDecompiler {
 
 	private void appendResourcesSave(ExecutorService executor, File outDir) {
 		for (ResourceFile resourceFile : getResources()) {
+			System.out.println("box: save resource "+resourceFile.getName());
 			executor.execute(new ResourcesSaver(outDir, resourceFile));
 		}
 	}
@@ -196,6 +197,7 @@ public final class JadxDecompiler {
 			if (classFilter != null && !classFilter.test(cls.getFullName())) {
 				continue;
 			}
+			System.out.println("box: save source "+cls.getName());
 			executor.execute(() -> {
 				try {
 					ICodeInfo code = cls.getCodeInfo();

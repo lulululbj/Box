@@ -1,10 +1,7 @@
 package luyao.box.ui.editor
 
 import kotlinx.android.synthetic.main.activity_text_editor.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import luyao.box.R
 import luyao.parser.xml.XmlParser
 import luyao.util.ktx.base.BaseActivity
@@ -16,7 +13,7 @@ import java.util.zip.ZipFile
  * Created by luyao
  * on 2019/1/3 16:18
  */
-class TextEditorActivity : BaseActivity() {
+class TextEditorActivity : BaseActivity(),CoroutineScope by MainScope() {
 
     private val sourceDir by lazy { intent.getStringExtra("sourceDir") }
 
@@ -27,7 +24,9 @@ class TextEditorActivity : BaseActivity() {
     }
 
     override fun initData() {
-        CoroutineScope(Dispatchers.Main).launch {
+
+
+        launch {
             val xml = async(Dispatchers.IO) {
                 val zipFile = ZipFile(File(sourceDir))
                 val zipEntry: ZipEntry? = zipFile.getEntry("AndroidManifest.xml")
@@ -39,5 +38,10 @@ class TextEditorActivity : BaseActivity() {
             }
             textEdit.setText(xml.await()?.xmlContent ?: "")
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
     }
 }

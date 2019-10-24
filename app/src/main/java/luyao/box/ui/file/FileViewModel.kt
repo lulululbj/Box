@@ -43,6 +43,7 @@ class FileViewModel : BaseViewModel() {
     }
 
     fun getFileListAsync(rootPath: String) {
+
         launch {
             val result = async(Dispatchers.IO) { FileUtils.getFileList(rootPath) }
             fileListData.value = result.await()

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
-import luyao.util.ktx.ext.PaddingItemDecoration
 import java.io.Closeable
 import java.io.File
 import java.text.SimpleDateFormat
@@ -35,10 +34,10 @@ fun Context.sendEmail(email: String, subject: String?, text: String?) {
     }
 }
 
-/**  [padding] is dp */
-fun RecyclerView.itemPadding(padding: Int) {
-    addItemDecoration(PaddingItemDecoration(padding, padding, padding, padding))
-}
+///**  [padding] is dp */
+//fun RecyclerView.itemPadding(padding: Int) {
+//    addItemDecoration(PaddingItemDecoration(padding, padding, padding, padding))
+//}
 
 fun Long.toFormatTime(format: String) = formatTime(this, format)
 

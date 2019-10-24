@@ -13,6 +13,7 @@ android {
         versionCode versions.releaseVersionCode
         versionName versions.releaseVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -37,22 +38,7 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
-
-        android.applicationVariants.all { variant ->
-        variant.outputs.all {
-
-            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/app/release/")
-
-            outputFileName = "Box_${releaseTime()}_v${defaultConfig.versionName}_${variant.buildType.name}.apk"
-
-        }
-    }
 }
-
-static def releaseTime() {
-    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
-}
-
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -81,6 +67,7 @@ dependencies {
     implementation project(':Parser')
     implementation project(':floatwindow')
 
-    implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.5-alpha03'
+    implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.7-alpha02'
     implementation "com.leinardi.android:speed-dial:3.0.0"
+    implementation project(path: ':jadx-core')
 }

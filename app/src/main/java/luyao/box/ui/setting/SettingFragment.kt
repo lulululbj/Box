@@ -3,9 +3,7 @@ package luyao.box.ui.setting
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import com.afollestad.materialdialogs.MaterialDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import luyao.box.BASE_PATH
 import luyao.box.R
 import luyao.box.deleteAll
@@ -15,7 +13,7 @@ import java.io.File
  * Created by luyao
  * on 2019/1/17 14:11
  */
-class SettingFragment : PreferenceFragmentCompat() {
+class SettingFragment : PreferenceFragmentCompat() ,CoroutineScope by MainScope(){
 
     private val DELETE_APK = 1
     private val CLEAR_CACHE = 2
@@ -51,13 +49,13 @@ class SettingFragment : PreferenceFragmentCompat() {
 
 
     private fun delete(flag: Int) {
-        CoroutineScope(Dispatchers.Main).launch {
+        launch {
             if (flag == DELETE_APK) {
                 filter(File(BASE_PATH))
             } else if (flag == CLEAR_CACHE) {
                 fileList.add(File(BASE_PATH))
             }
-            launch(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
                 for (file in fileList)
                     file.deleteAll()
                 fileList.clear()

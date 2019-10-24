@@ -2,10 +2,7 @@ package luyao.box.ui.appManager
 
 import kotlinx.android.synthetic.main.activity_app_detail.*
 import kotlinx.android.synthetic.main.title_layout.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import luyao.box.APK_PATH
 import luyao.box.R
 import luyao.box.ui.editor.TextViewerActivity
@@ -21,7 +18,7 @@ import java.util.zip.ZipFile
  * Created by luyao
  * on 2018/12/29 16:35
  */
-class AppDetailActivity : BaseActivity() {
+class AppDetailActivity : BaseActivity(), CoroutineScope by MainScope() {
 
     private val mPackageName by lazy { intent.getStringExtra("packageName") }
     private val appName by lazy { AppUtils.getAppName(this@AppDetailActivity, mPackageName) }
@@ -48,9 +45,9 @@ class AppDetailActivity : BaseActivity() {
         detailManifest.setOnClickListener {
             startKtxActivity<TextViewerActivity>(value = "filePath" to filePath)
         }
-        li_sigMD5.setOnClickListener { copyToClipboard("md5",sigMD5.text.toString()) }
-        li_sigSHA1.setOnClickListener { copyToClipboard("sha1",sigSHA1.text.toString()) }
-        li_sigSHA256.setOnClickListener { copyToClipboard("sha256",sig256.text.toString()) }
+        li_sigMD5.setOnClickListener { copyToClipboard("md5", sigMD5.text.toString()) }
+        li_sigSHA1.setOnClickListener { copyToClipboard("sha1", sigSHA1.text.toString()) }
+        li_sigSHA256.setOnClickListener { copyToClipboard("sha256", sig256.text.toString()) }
     }
 
     private fun refresh() {
@@ -61,7 +58,7 @@ class AppDetailActivity : BaseActivity() {
             sig256.text = it.hash(Hash.SHA256)
         }
 
-        CoroutineScope(Dispatchers.Main).launch {
+        launch {
             val xmlAsync = async(Dispatchers.IO) {
                 var xmlParser: XmlParser
                 val zipFile = ZipFile(File(sourceDir))
@@ -89,5 +86,10 @@ class AppDetailActivity : BaseActivity() {
                 detailMinSdk.text = minSdkVersion
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
     }
 }

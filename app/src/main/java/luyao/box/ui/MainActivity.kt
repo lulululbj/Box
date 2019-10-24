@@ -14,9 +14,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.title_layout.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import luyao.box.*
 import luyao.box.about.AboutActivity
 import luyao.box.adapter.MainAdapter
@@ -26,6 +24,7 @@ import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.permission.request
 import luyao.util.ktx.ext.startKtxActivity
 import luyao.util.ktx.ext.toast
+import luyao.util.ktx.ext.view.itemPadding
 import java.io.File
 
 
@@ -120,14 +119,22 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
             createBaseFile()
     }
 
     private fun checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                permission
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             MaterialDialog(this).show {
                 title(R.string.permission_get)
                 message(R.string.permission_note)
@@ -143,13 +150,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    private fun createBaseFile() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val baseFolder = File(BASE_PATH)
-            if (!baseFolder.exists()) baseFolder.mkdirs()
+    private fun createBaseFile() = launch(Dispatchers.IO) {
+        val baseFolder = File(BASE_PATH)
+        if (!baseFolder.exists()) baseFolder.mkdirs()
 
-            val apkFolder = File(APK_PATH)
-            if (!apkFolder.exists()) apkFolder.mkdirs()
-        }
+        val apkFolder = File(APK_PATH)
+        if (!apkFolder.exists()) apkFolder.mkdirs()
     }
+
 }

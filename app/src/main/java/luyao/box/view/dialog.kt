@@ -12,9 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import luyao.box.R
-import luyao.box.formatSize
 import luyao.box.toFormatTime
 import luyao.util.ktx.ext.Hash
+import luyao.util.ktx.ext.formatSize
 import luyao.util.ktx.ext.hash
 import luyao.util.ktx.ext.visible
 import java.io.File

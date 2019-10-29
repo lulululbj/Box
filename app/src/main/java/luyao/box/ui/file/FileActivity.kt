@@ -13,11 +13,11 @@ import kotlinx.android.synthetic.main.activity_file.*
 import luyao.box.R
 import luyao.box.adapter.FileAdapter
 import luyao.box.bean.IFile
-import luyao.box.mimeType
 import luyao.box.view.showCreateFileOrFolderDialog
 import luyao.box.view.showPropertiesDialog
 import luyao.util.ktx.base.BaseVMActivity
 import luyao.util.ktx.ext.invisible
+import luyao.util.ktx.ext.mimeType
 import luyao.util.ktx.ext.toast
 import luyao.util.ktx.ext.visible
 import java.io.File

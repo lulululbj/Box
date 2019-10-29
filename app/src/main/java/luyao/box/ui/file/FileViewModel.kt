@@ -1,15 +1,16 @@
 package luyao.box.ui.file
 
 import androidx.lifecycle.MutableLiveData
+import jadx.core.utils.files.FileUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import luyao.box.bean.IFile
-import luyao.box.moveToWithProgress
-import luyao.box.rename
-import luyao.box.util.FileUtils
+import luyao.box.util.getFileList
 import luyao.util.ktx.base.BaseViewModel
+import luyao.util.ktx.ext.moveToWithProgress
+import luyao.util.ktx.ext.rename
 import java.io.File
 
 /**
@@ -45,7 +46,7 @@ class FileViewModel : BaseViewModel() {
     fun getFileListAsync(rootPath: String) {
 
         launch {
-            val result = async(Dispatchers.IO) { FileUtils.getFileList(rootPath) }
+            val result = async(Dispatchers.IO) { getFileList(rootPath) }
             fileListData.value = result.await()
         }
     }

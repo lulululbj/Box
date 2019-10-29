@@ -18,7 +18,7 @@ import java.util.zip.ZipFile
  * Created by luyao
  * on 2018/12/29 16:35
  */
-class AppDetailActivity : BaseActivity(), CoroutineScope by MainScope() {
+class AppDetailActivity : BaseActivity(){
 
     private val mPackageName by lazy { intent.getStringExtra("packageName") }
     private val appName by lazy { AppUtils.getAppName(this@AppDetailActivity, mPackageName) }
@@ -86,10 +86,5 @@ class AppDetailActivity : BaseActivity(), CoroutineScope by MainScope() {
                 detailMinSdk.text = minSdkVersion
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        cancel()
     }
 }

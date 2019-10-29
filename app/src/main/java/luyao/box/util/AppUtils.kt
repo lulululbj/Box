@@ -16,13 +16,12 @@ import java.io.File
  */
 object AppUtils {
 
-    /**
-     * 获取已安装非系统应用
-     */
-    fun getInstalledApp(context: Context): List<PackageInfo> {
+    fun getInstalledApp(context: Context, containSystem: Boolean = false): List<PackageInfo> {
         val packageManager = context.packageManager
-        return packageManager.getInstalledPackages(0)
-            .filter { (ApplicationInfo.FLAG_SYSTEM and it.applicationInfo.flags) == 0 }
+        return packageManager.getInstalledPackages(0).filter {
+            if (containSystem) (it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0
+            else (it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM) == 0
+        }
     }
 
 
@@ -31,7 +30,9 @@ object AppUtils {
     }
 
     fun getAppName(context: Context, packageName: String): String {
-        return context.packageManager.getPackageInfo(packageName, 0).applicationInfo.loadLabel(context.packageManager)
+        return context.packageManager.getPackageInfo(packageName, 0).applicationInfo.loadLabel(
+            context.packageManager
+        )
             .toString()
     }
 
@@ -48,7 +49,8 @@ object AppUtils {
     }
 
     fun getAppTargetSdkVersion(context: Context, packageName: String): Int {
-        return context.packageManager.getPackageInfo(packageName, 0).applicationInfo.targetSdkVersion
+        return context.packageManager.getPackageInfo(packageName, 0)
+            .applicationInfo.targetSdkVersion
     }
 
     fun getAppMinSdkVersion(context: Context, packageName: String): Int {

@@ -38,6 +38,7 @@
         <activity android:name=".ui.setting.SettingActivity"/>
         <activity android:name=".about.AboutActivity"/>
         <activity android:name=".ui.device.DeviceInfoActivity"/>
+        <activity android:name=".ui.logcat.LogcatActivity"/>
         <activity android:name=".ui.file.FileActivity"/>
         <activity android:name=".ui.appManager.AppManagerActivity" />
 

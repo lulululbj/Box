@@ -32,7 +32,8 @@
                     android:textColor="@color/white"
                     android:text="/sdcard/"
                     android:paddingLeft="40dp"
-                    android:ellipsize="start"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"/>
 
             <luyao.box.view.CircleProgressView

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/title_layout"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/open_logcat"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/logcatSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/logEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="关键字"
+                android:textSize="14sp"
+                android:background="@drawable/edit_bg"
+                android:padding="4dp"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/logSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="40dp"
+                android:gravity="center"
+                android:entries="@array/logArray">
+
+        </androidx.appcompat.widget.AppCompatSpinner>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/logcatRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

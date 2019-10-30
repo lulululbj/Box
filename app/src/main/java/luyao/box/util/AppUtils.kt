@@ -40,6 +40,7 @@ object AppUtils {
         return packageInfo.applicationInfo.loadLabel(context.packageManager).toString()
     }
 
+
     fun getAppVersionName(context: Context, packageName: String): String {
         return context.packageManager.getPackageInfo(packageName, 0).versionName
     }

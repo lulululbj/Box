@@ -62,7 +62,8 @@ class AppFragment : BaseFragment() {
         }
 
         appAdapter.setOnItemClickListener { _, _, position ->
-            startKtxActivity<AppDetailActivity>(value = "packageName" to appAdapter.data[position].packageName)
+            startKtxActivity<AppDetailActivity>(values = arrayListOf( "packageInfo" to appAdapter.data[position].packageInfo,
+                "apkPath" to appAdapter.data[position].sourceDir))
         }
 
         appAdapter.setOnReverseApp {app ->

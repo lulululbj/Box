@@ -1,5 +1,7 @@
 package luyao.box.ui.appManager
 
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import kotlinx.android.synthetic.main.activity_app_detail.*
 import kotlinx.android.synthetic.main.title_layout.*
 import kotlinx.coroutines.*
@@ -20,10 +22,11 @@ import java.util.zip.ZipFile
  */
 class AppDetailActivity : BaseActivity(){
 
-    private val mPackageName by lazy { intent.getStringExtra("packageName") }
-    private val appName by lazy { AppUtils.getAppName(this@AppDetailActivity, mPackageName) }
+    private val packageInfo by lazy { intent.getParcelableExtra("packageInfo") as PackageInfo}
+    private val appName by lazy { AppUtils.getAppName(this,packageInfo) }
+    private val mPackageName by lazy { packageInfo.packageName }
     private val filePath by lazy { "$APK_PATH$appName${File.separator}AndroidManifest.xml" }
-    private val sourceDir by lazy { applicationContext.packageManager.getApplicationInfo(mPackageName, 0).sourceDir }
+    private val sourceDir by lazy { intent.getStringExtra("apkPath") }
 
     override fun getLayoutResId() = R.layout.activity_app_detail
 
@@ -31,7 +34,7 @@ class AppDetailActivity : BaseActivity(){
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         mToolbar.setNavigationOnClickListener { onBackPressed() }
         mToolbar.title = appName
-        detailIcon.setImageDrawable(AppUtils.getAppIcon(this, packageManager.getPackageInfo(mPackageName, 0)))
+        detailIcon.setImageDrawable(AppUtils.getAppIcon(this, packageInfo))
         detailRefresh.isRefreshing = true
         initListener()
     }
@@ -52,7 +55,9 @@ class AppDetailActivity : BaseActivity(){
 
     private fun refresh() {
 
-        getAppSignature(mPackageName)?.let {
+        val pkgInfo = packageManager.getPackageArchiveInfo(sourceDir,PackageManager.GET_SIGNATURES)
+
+       pkgInfo.signatures[0].toByteArray()?.let {
             sigMD5.text = it.hash(Hash.MD5)
             sigSHA1.text = it.hash(Hash.SHA1)
             sig256.text = it.hash(Hash.SHA256)

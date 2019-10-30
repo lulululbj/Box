@@ -50,7 +50,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         mToolbar.setNavigationOnClickListener { onBackPressed() }
         mToolbar.title = "文件管理"
-
+        currentPathTv.isSelected = true
         initRefreshLayout()
         initRecycleView()
         initFabMenu()

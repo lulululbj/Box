@@ -70,5 +70,10 @@ object FloatWindowManager {
         FloatWindow.get().hide()
     }
 
+    fun clearView(){
+        windowAdapter.data.clear()
+        windowAdapter.notifyDataSetChanged()
+    }
+
 
 }

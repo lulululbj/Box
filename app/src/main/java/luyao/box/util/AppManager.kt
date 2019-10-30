@@ -26,7 +26,8 @@ object AppManager {
                 it.packageName,
                 it.versionName,
                 it.applicationInfo.sourceDir,
-                getAppIcon(context, it)
+                getAppIcon(context, it),
+                it
             )
             appBeanList.add(appBean)
         }
@@ -46,7 +47,8 @@ object AppManager {
                     pkgInfo.packageName,
                     pkgInfo.versionName,
                     it.first.path,
-                    getAppIcon(context, pkgInfo)
+                    getAppIcon(context, pkgInfo),
+                    it.second
                 )
                 appBeanList.add(appBean)
             }

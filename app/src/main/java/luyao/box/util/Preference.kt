@@ -12,6 +12,7 @@ class Preference<T>(val name: String, private val default: T) : ReadWritePropert
 
     companion object {
         const val SHOW_WINDOW = "show_window"
+        const val SHOW_LOG = "show_log"
     }
 
     private val prefs: SharedPreferences by lazy {

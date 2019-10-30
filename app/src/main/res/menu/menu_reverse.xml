@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/menu_reverse"
+            android:title="@string/reverse"/>
+    <item
+            android:id="@+id/menu_reverse_folder"
+            android:title="@string/goto_reverse_folder"/>
+</menu>

@@ -57,6 +57,21 @@ import jadx.core.xmlgen.ResourcesSaver;
  * </pre>
  */
 public final class JadxDecompiler {
+
+	private ReverseCallBack reverseCallBack;
+
+	public interface ReverseCallBack{
+		void currentFile(String fileName);
+	}
+
+	public void setReverseCallBack(ReverseCallBack reverseCallBack){
+		this.reverseCallBack = reverseCallBack;
+	}
+
+	private void callBackInfo(String info){
+		if (reverseCallBack!=null) reverseCallBack.currentFile(info);
+	}
+
 	private static final Logger LOG = LoggerFactory.getLogger(JadxDecompiler.class);
 
 	private JadxArgs args;
@@ -83,8 +98,8 @@ public final class JadxDecompiler {
 	public void load() {
 		reset();
 		JadxArgsValidator.validate(args);
-		LOG.info("loading ...");
-
+//		LOG.info("loading ...");
+		callBackInfo("Loading");
 		inputFiles = loadFiles(args.getInputFiles());
 
 		root = new RootNode(args);
@@ -172,19 +187,18 @@ public final class JadxDecompiler {
 			sourcesOutDir = args.getOutDirSrc();
 			resOutDir = args.getOutDirRes();
 		}
-		if (saveResources) {
-			appendResourcesSave(executor, resOutDir);
-		}
 		if (saveSources) {
 			appendSourcesSave(executor, sourcesOutDir);
+		}
+		if (saveResources) {
+			appendResourcesSave(executor, resOutDir);
 		}
 		return executor;
 	}
 
 	private void appendResourcesSave(ExecutorService executor, File outDir) {
 		for (ResourceFile resourceFile : getResources()) {
-			System.out.println("box: save resource "+resourceFile.getName());
-			executor.execute(new ResourcesSaver(outDir, resourceFile));
+			executor.execute(new ResourcesSaver(outDir, resourceFile,reverseCallBack));
 		}
 	}
 
@@ -197,11 +211,11 @@ public final class JadxDecompiler {
 			if (classFilter != null && !classFilter.test(cls.getFullName())) {
 				continue;
 			}
-			System.out.println("box: save source "+cls.getName());
 			executor.execute(() -> {
 				try {
 					ICodeInfo code = cls.getCodeInfo();
 					SaveCode.save(outDir, cls.getClassNode(), code);
+					if (reverseCallBack!=null) reverseCallBack.currentFile("Saving source :\n"+cls.getFullName());
 				} catch (Exception e) {
 					LOG.error("Error saving class: {}", cls.getFullName(), e);
 				}

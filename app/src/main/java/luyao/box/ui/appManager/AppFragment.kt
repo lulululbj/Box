@@ -33,7 +33,7 @@ class AppFragment : BaseFragment() {
         }
     }
 
-    private val appAdapter by lazy { AppAdapter() }
+    private val appAdapter by lazy { AppAdapter(onlyReverse = true) }
 
     override fun getLayoutResId() = R.layout.fragment_app
 
@@ -63,6 +63,10 @@ class AppFragment : BaseFragment() {
 
         appAdapter.setOnItemClickListener { _, _, position ->
             startKtxActivity<AppDetailActivity>(value = "packageName" to appAdapter.data[position].packageName)
+        }
+
+        appAdapter.setOnReverseApp {app ->
+            (activity as? AppManagerActivity)?.reverseApp(app)
         }
 
         appAdapter.openLoadAnimation()

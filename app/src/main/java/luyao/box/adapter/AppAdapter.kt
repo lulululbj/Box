@@ -2,7 +2,6 @@ package luyao.box.adapter
 
 import android.content.Context
 import android.os.Environment
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -12,9 +11,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import jadx.api.JadxArgs
 import jadx.api.JadxDecompiler
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
-import luyao.box.*
+import kotlinx.coroutines.launch
+import luyao.box.APK_PATH
+import luyao.box.R
 import luyao.box.bean.AppBean
 import luyao.box.ui.appManager.AppDetailActivity
 import luyao.box.util.AppManager
@@ -28,7 +31,16 @@ import java.io.FileOutputStream
  * Created by luyao
  * on 2018/12/29 10:44
  */
-class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBean, BaseViewHolder>(layoutResId) {
+class AppAdapter(layoutResId: Int = R.layout.item_app, onlyReverse: Boolean = false) :
+    BaseQuickAdapter<AppBean, BaseViewHolder>(layoutResId) {
+
+    private var onReverseApp: (AppBean) -> Unit = {}
+
+    fun setOnReverseApp(app: (AppBean) -> Unit) {
+        this.onReverseApp = app
+    }
+
+    private val _onlyReverse = onlyReverse
 
     override fun convert(helper: BaseViewHolder, item: AppBean) {
         helper.run {
@@ -41,9 +53,17 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
         }
     }
 
-    private fun showPopMenu(helper: BaseViewHolder, context: Context, view: View, appBean: AppBean) {
+    private fun showPopMenu(
+        helper: BaseViewHolder,
+        context: Context,
+        view: View,
+        appBean: AppBean
+    ) {
         val popupMenu = PopupMenu(context, view)
-        popupMenu.menuInflater.inflate(R.menu.menu_app, popupMenu.menu)
+        popupMenu.menuInflater.inflate(
+            if (_onlyReverse) R.menu.menu_reverse else R.menu.menu_app,
+            popupMenu.menu
+        )
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_open_app -> context.openApp(appBean.packageName)
@@ -54,31 +74,29 @@ class AppAdapter(layoutResId: Int = R.layout.item_app) : BaseQuickAdapter<AppBea
                 R.id.menu_save_apk -> saveApk(helper, context, appBean)
                 R.id.menu_share_apk -> shareApk(appBean)
                 R.id.menu_open_in_store -> context.openInAppStore(appBean.packageName)
-                R.id.menu_app_reverse -> reverseApp(appBean)
+                R.id.menu_app_reverse, R.id.menu_reverse -> onReverseApp(appBean)
+                R.id.menu_reverse_folder -> {
+                }
             }
             true
         }
         popupMenu.show()
     }
 
-    private fun reverseApp(appBean: AppBean){
-        val apkFile = File(appBean.sourceDir)
+    private fun reverseApp(appBean: AppBean) {
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val args = JadxArgs().apply {
-                inputFiles.add(apkFile)
-                outDir = File(Environment.getExternalStorageDirectory(),"jadx")
-            }
-            val decompiler = JadxDecompiler(args)
-            decompiler.load()
-            decompiler.save()
-        }
     }
 
     private fun saveApk(helper: BaseViewHolder, context: Context, appBean: AppBean) {
         MaterialDialog(context)
             .title(R.string.backup)
-            .message(text = String.format("%s 的安装包将保存在手机根目录 Box/apk/%s 文件夹下", appBean.appName, appBean.appName))
+            .message(
+                text = String.format(
+                    "%s 的安装包将保存在手机根目录 Box/apk/%s 文件夹下",
+                    appBean.appName,
+                    appBean.appName
+                )
+            )
             .positiveButton { saveApkFile(helper, appBean) }
             .negativeButton { }
             .show()

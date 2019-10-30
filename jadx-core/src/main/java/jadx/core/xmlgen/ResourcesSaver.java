@@ -7,6 +7,7 @@ import java.nio.file.StandardCopyOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jadx.api.JadxDecompiler;
 import jadx.api.ResourceFile;
 import jadx.api.ResourcesLoader;
 import jadx.core.codegen.CodeWriter;
@@ -20,10 +21,12 @@ public class ResourcesSaver implements Runnable {
 
 	private final ResourceFile resourceFile;
 	private File outDir;
+	private JadxDecompiler.ReverseCallBack reverseCallBack;
 
-	public ResourcesSaver(File outDir, ResourceFile resourceFile) {
+	public ResourcesSaver(File outDir, ResourceFile resourceFile, JadxDecompiler.ReverseCallBack reverseCallBack) {
 		this.resourceFile = resourceFile;
 		this.outDir = outDir;
+		this.reverseCallBack=reverseCallBack;
 	}
 
 	@Override
@@ -51,6 +54,7 @@ public class ResourcesSaver implements Runnable {
 			LOG.error("Path traversal attack detected, invalid resource name: {}", outFile.getPath());
 			return;
 		}
+		if (reverseCallBack!=null) reverseCallBack.currentFile("Saving resource :\n"+resourceFile.getName());
 		saveToFile(rc, outFile);
 	}
 

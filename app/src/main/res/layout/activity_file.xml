@@ -28,11 +28,12 @@
                     android:layout_weight="1"
                     android:layout_height="?attr/actionBarSize"
                     android:gravity="center_vertical"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     android:text="/sdcard/"
                     android:paddingLeft="40dp"
-                    android:maxLines="1"/>
+                    android:ellipsize="start"
+                    android:singleLine="true"/>
 
             <luyao.box.view.CircleProgressView
                     android:id="@+id/fileProgressView"

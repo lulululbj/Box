@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -27,21 +28,56 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/appRefreshLayout"
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/appRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <androidx.viewpager.widget.ViewPager
-                android:id="@+id/appViewPager"
+
+            <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/appViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            </androidx.viewpager.widget.ViewPager>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+                android:id="@+id/reverseView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:background="#ddffffff"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-        </androidx.viewpager.widget.ViewPager>
+            <ProgressBar
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <TextView
+                    android:id="@+id/currentReversetFile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/is_reversing_please_wait"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

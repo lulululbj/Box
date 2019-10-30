@@ -17,6 +17,7 @@ import java.io.File
 
 val BASE_PATH = "${Environment.getExternalStorageDirectory().path}${File.separator}Box${File.separator}"
 val APK_PATH = "${BASE_PATH}apk${File.separator}"
+val REVERSE_PATH = "${BASE_PATH}reverse${File.separator}"
 
 const val GITHUB_PAGE = "https://github.com/lulululbj/Box"
 const val ISSUE_URL="https://github.com/lulululbj/Box/issues"

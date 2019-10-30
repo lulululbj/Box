@@ -93,5 +93,7 @@
     <string name="file">文件</string>
     <string name="folder">文件夹</string>
     <string name="reverse">反编译</string>
+    <string name="goto_reverse_folder">查看反编译目录</string>
+    <string name="is_reversing_please_wait">正在反编译，请稍候...</string>
 
 </resources>

@@ -1,12 +1,19 @@
 package luyao.box.ui.appManager
 
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_app.*
 import luyao.box.R
+import luyao.box.bean.AppBean
+import luyao.box.ui.file.FileActivity
 import luyao.util.ktx.base.BaseVMActivity
+import luyao.util.ktx.ext.gone
 import luyao.util.ktx.ext.listener.onPageSelected
+import luyao.util.ktx.ext.loge
+import luyao.util.ktx.ext.startKtxActivity
 
 /**
  * Created by luyao
@@ -66,8 +73,12 @@ class AppManagerActivity : BaseVMActivity<AppViewModel>() {
         mViewModel.getAppList(this, false)
     }
 
-    fun loadLocalApk(){
+    fun loadLocalApk() {
         mViewModel.getLocalApkList(this)
+    }
+
+    fun reverseApp(app: AppBean) {
+        mViewModel.reverseApp(app)
     }
 
 
@@ -85,9 +96,26 @@ class AppManagerActivity : BaseVMActivity<AppViewModel>() {
             it.localAppBeanList?.let { data ->
                 localAppFragment.refreshUI(data)
             }
+
+            appRefreshLayout.isRefreshing = false
+        })
+
+        mViewModel.reverseUiState.observe(this, Observer {
+            it.isLoading?.let { show ->
+                reverseView.visibility = if (show) View.VISIBLE else View.GONE
+            }
+
+            it.currentFile?.let { fileName ->
+                "reverse : $fileName".loge("box")
+                currentReversetFile.text = fileName
+            }
+
+            it.showSuccess?.let {file ->
+                reverseView.gone()
+                startKtxActivity<FileActivity>(value = FileActivity.PATH to file.path)
+            }
         })
     }
-
 
     inner class AppPagerAdapter(fm: FragmentManager) :
         FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

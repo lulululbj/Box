@@ -1,6 +1,5 @@
 package luyao.box.ui.appManager
 
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -33,8 +32,8 @@ class AppManagerActivity : BaseVMActivity<AppViewModel>() {
 
     init {
         fragments.run {
-            add(systemAppFragment)
             add(thirdAppFragment)
+            add(systemAppFragment)
             add(localAppFragment)
         }
     }
@@ -43,7 +42,6 @@ class AppManagerActivity : BaseVMActivity<AppViewModel>() {
         appToolbar.title = getString(R.string.reverse)
         setSupportActionBar(appToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         initViewPager()
         initRefreshLayout()
@@ -110,7 +108,7 @@ class AppManagerActivity : BaseVMActivity<AppViewModel>() {
                 currentReversetFile.text = fileName
             }
 
-            it.showSuccess?.let {file ->
+            it.showSuccess?.let { file ->
                 reverseView.gone()
                 startKtxActivity<FileActivity>(value = FileActivity.PATH to file.path)
             }

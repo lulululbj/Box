@@ -5,6 +5,7 @@ import android.os.Environment
 import android.view.View
 import android.widget.ImageButton
 import android.widget.PopupMenu
+import android.widget.RelativeLayout
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -50,6 +51,18 @@ class AppAdapter(layoutResId: Int = R.layout.item_app, onlyReverse: Boolean = fa
             getView<ImageButton>(R.id.appPop).setOnClickListener {
                 showPopMenu(helper, helper.itemView.context, it, item)
             }
+
+            getView<RelativeLayout>(R.id.itemAppRoot).setOnClickListener {
+                if (_onlyReverse)  showPopMenu(helper, helper.itemView.context, it, item)
+                else {
+                    helper.itemView.context.startKtxActivity<AppDetailActivity>(
+                        values = arrayListOf(
+                            "packageInfo" to item.packageInfo,
+                            "apkPath" to item.sourceDir
+                        )
+                    )
+                }
+            }
         }
     }
 
@@ -81,10 +94,6 @@ class AppAdapter(layoutResId: Int = R.layout.item_app, onlyReverse: Boolean = fa
             true
         }
         popupMenu.show()
-    }
-
-    private fun reverseApp(appBean: AppBean) {
-
     }
 
     private fun saveApk(helper: BaseViewHolder, context: Context, appBean: AppBean) {

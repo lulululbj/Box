@@ -1,55 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/touch_bg">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/itemAppRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/touch_bg"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
     <ImageView
             android:id="@+id/appIcon"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            tools:src="@mipmap/ic_launcher"/>
+            android:layout_marginRight="16dp"
+            tools:src="@mipmap/ic_launcher" />
 
     <TextView
             android:id="@+id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            tools:text="Box"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@id/appIcon"
-            android:layout_centerVertical="true"/>
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="Box" />
 
     <ImageButton
             android:id="@+id/appPop"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:padding="4dp"
-            android:src="@drawable/ic_more_vert_black_24dp"
-            android:background="@drawable/ripple"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:clickable="true"/>
+            android:background="@drawable/ripple"
+            android:clickable="true"
+            android:padding="4dp"
+            android:src="@drawable/ic_more_vert_black_24dp" />
 
     <luyao.box.view.CircleProgressView
             android:id="@+id/appProgressView"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
+            android:visibility="gone"
             app:bgColor="#e5e5e5"
             app:fgColor="#333"
             app:percent="0"
-            app:startAngle="0"
-            android:visibility="gone"/>
+            app:startAngle="0" />
 
 </RelativeLayout>

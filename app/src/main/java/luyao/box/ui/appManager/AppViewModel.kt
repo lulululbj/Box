@@ -75,17 +75,17 @@ class AppViewModel : BaseViewModel() {
     }
 
     private fun emitUiState(
-        systemAppBeanList: List<AppBean>? = null,
         thirdAppBeanList: List<AppBean>? = null,
+        systemAppBeanList: List<AppBean>? = null,
         localAppBeanList: List<AppBean>? = null
     ) {
-        val appUiModel = AppUiModel(systemAppBeanList, thirdAppBeanList, localAppBeanList)
+        val appUiModel = AppUiModel(thirdAppBeanList,systemAppBeanList,  localAppBeanList)
         _uiState.value = appUiModel
     }
 
     class AppUiModel(
-        val systemAppBeanList: List<AppBean>? = null, // 系统 app
         val thirdAppBeanList: List<AppBean>? = null, // 第三方 app
+        val systemAppBeanList: List<AppBean>? = null, // 系统 app
         val localAppBeanList: List<AppBean>? = null // 本地安装包
     )
 

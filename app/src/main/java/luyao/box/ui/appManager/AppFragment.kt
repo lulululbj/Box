@@ -5,15 +5,13 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_app_list.appRecycleView
+import kotlinx.android.synthetic.main.activity_app_list.*
 import kotlinx.android.synthetic.main.fragment_app.*
 import luyao.box.R
 import luyao.box.adapter.AppAdapter
 import luyao.box.bean.AppBean
 import luyao.util.ktx.base.BaseFragment
-import luyao.util.ktx.ext.gone
 import luyao.util.ktx.ext.startKtxActivity
-import luyao.util.ktx.ext.visible
 
 /**
  * Created by luyao
@@ -42,7 +40,7 @@ class AppFragment : BaseFragment() {
     }
 
     override fun initData() {
-       refresh()
+        refresh()
     }
 
     private fun initRecycleView() {
@@ -62,17 +60,21 @@ class AppFragment : BaseFragment() {
         }
 
         appAdapter.setOnItemClickListener { _, _, position ->
-            startKtxActivity<AppDetailActivity>(values = arrayListOf( "packageInfo" to appAdapter.data[position].packageInfo,
-                "apkPath" to appAdapter.data[position].sourceDir))
+            startKtxActivity<AppDetailActivity>(
+                values = arrayListOf(
+                    "packageInfo" to appAdapter.data[position].packageInfo,
+                    "apkPath" to appAdapter.data[position].sourceDir
+                )
+            )
         }
 
-        appAdapter.setOnReverseApp {app ->
+        appAdapter.setOnReverseApp { app ->
             (activity as? AppManagerActivity)?.reverseApp(app)
         }
 
         appAdapter.openLoadAnimation()
 
-        appRecycleView.run {
+        appShimmerRecycleView.run {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(itemDecoration)
             setHasFixedSize(true)
@@ -80,9 +82,10 @@ class AppFragment : BaseFragment() {
         }
     }
 
-    fun refresh(){
+    fun refresh() {
+        appShimmerRecycleView.showShimmerAdapter()
         (activity as? AppManagerActivity)?.let {
-            when(type){
+            when (type) {
                 TYPE_SYSTEM -> it.loadSystemApp()
                 TYPE_THIRD -> it.loadThirdApp()
                 TYPE_LOCAL -> it.loadLocalApk()
@@ -91,8 +94,9 @@ class AppFragment : BaseFragment() {
     }
 
     fun refreshUI(installedAppBean: List<AppBean>) {
-        loadingView.gone()
-        appRecycleView.visible()
+//        loadingView.gone()
+//        appRecycleView.visible()
+        appShimmerRecycleView.hideShimmerAdapter()
         appAdapter.setNewData(installedAppBean)
     }
 }

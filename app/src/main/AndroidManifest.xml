@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
             android:name=".App"
@@ -38,7 +39,7 @@
         <activity android:name=".ui.setting.SettingActivity"/>
         <activity android:name=".about.AboutActivity"/>
         <activity android:name=".ui.device.DeviceInfoActivity"/>
-        <activity android:name=".ui.logcat.LogcatActivity"/>
+<!--        <activity android:name=".ui.logcat.LogcatActivity"/>-->
         <activity android:name=".ui.file.FileActivity"/>
         <activity android:name=".ui.appManager.AppManagerActivity" />
 
@@ -54,7 +55,8 @@
                     android:name="android.accessibilityservice"
                     android:resource="@xml/accessibility_service_config"/>
         </service>
-        
+
+        <service android:name="com.lzf.easyfloat.service.FloatService" />
         <!--<provider-->
                 <!--android:authorities="luyao.box.fileprovider"-->
                 <!--android:name="androidx.core.content.FileProvider"-->

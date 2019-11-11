@@ -73,7 +73,7 @@
             android:padding="10dp"
             android:textColor="@color/text_gray"
             android:textSize="14sp"
-            android:text="@string/accessibility_note"/>
+            android:text="@string/floatwindow_note"/>
 
     <TextView
             android:layout_width="match_parent"
@@ -81,6 +81,8 @@
             android:padding="10dp"
             android:textColor="@color/text_gray"
             android:textSize="14sp"
-            android:text="@string/floatwindow_note"/>
+            android:text="@string/accessibility_note"/>
+
+
 
 </LinearLayout>

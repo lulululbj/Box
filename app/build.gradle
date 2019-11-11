@@ -61,13 +61,14 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + versions.BaseRecyclerViewAdapter
     implementation 'com.afollestad.material-dialogs:' + versions.material_dialogs_core
     implementation 'com.afollestad.material-dialogs:' + versions.material_dialogs_input
-    implementation 'de.psdev.licensesdialog:licensesdialog:1.9.0'
+    implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
 
     // module
     implementation project(':Parser')
-    implementation project(':floatwindow')
 
     implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.7-alpha02'
-    implementation "com.leinardi.android:speed-dial:3.0.0"
+    implementation "com.leinardi.android:speed-dial:3.1.1"
+    implementation 'com.github.princekin-f:EasyFloat:1.1.2'
     implementation project(path: ':jadx-core')
 }

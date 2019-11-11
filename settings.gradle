@@ -1,1 +1,1 @@
-include ':app', ':Parser', ':floatwindow', ':jadx-core'
+include ':app', ':Parser', ':jadx-core'

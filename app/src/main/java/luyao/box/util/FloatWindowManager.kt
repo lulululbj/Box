@@ -1,16 +1,21 @@
 package luyao.box.util
 
+import android.app.*
 import android.content.Context
-import android.view.LayoutInflater
+import android.content.Intent
+import android.os.Build
+import android.view.Gravity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.yhao.floatwindow.FloatWindow
-import com.yhao.floatwindow.MoveType
-import com.yhao.floatwindow.Screen
+import com.lzf.easyfloat.EasyFloat
+import com.lzf.easyfloat.enums.ShowPattern
+import com.lzf.easyfloat.enums.SidePattern
+import com.lzf.easyfloat.interfaces.OnInvokeView
 import luyao.box.App
 import luyao.box.R
 import luyao.box.adapter.HistoryAdapter
 import luyao.box.bean.HistoryBean
+import luyao.box.ui.MainActivity
 
 /**
  * Created by luyao
@@ -19,58 +24,81 @@ import luyao.box.bean.HistoryBean
 object FloatWindowManager {
 
 
+    private var windowRecycleView: RecyclerView? = null
     private val windowAdapter by lazy { HistoryAdapter() }
-    private val view by lazy { LayoutInflater.from(App.CONTEXT).inflate(R.layout.window_history, null) }
-    private val windowRecycleView by lazy { view.findViewById<RecyclerView>(R.id.windowRecycleView) }
 
+    fun init(context: Activity) {
 
-    init {
-        windowRecycleView.run {
-            layoutManager = LinearLayoutManager(context)
-            adapter = windowAdapter
-        }
+        EasyFloat.with(context)
+            .setShowPattern(ShowPattern.ALL_TIME)
+            .setSidePattern(SidePattern.DEFAULT)
+            .setGravity(Gravity.TOP)
+            // 启动前台Service
+            .startForeground(true, myNotification(context))
+            .setLayout(R.layout.window_history, OnInvokeView { view ->
+                windowRecycleView = view.findViewById(R.id.windowRecycleView)
+                windowRecycleView?.let {
+                    it.layoutManager = LinearLayoutManager(context)
+                    it.adapter = windowAdapter
+                }
+            }).show()
 
-        FloatWindow.with(App.CONTEXT)
-            .setView(view)
-            .setWidth(Screen.width, 0.7f)
-            .setHeight(Screen.height, 0.3f)
-            .setDesktopShow(true)
-            .build()
-
-        addItem(HistoryBean("",""))
     }
 
-    fun init(context: Context){
-        windowRecycleView.run {
-            layoutManager = LinearLayoutManager(context)
-            adapter = windowAdapter
+    /**
+     * 自定义的通知栏消息，可根据业务需要进行配置
+     */
+    private fun myNotification(context: Activity): Notification = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+            // 创建消息渠道
+            val channel =
+                NotificationChannel("Box", "系统悬浮窗", NotificationManager.IMPORTANCE_MIN)
+            val manager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
+
+            Notification.Builder(context, "Box")
+                .setCategory(Notification.CATEGORY_SERVICE)
         }
 
-        FloatWindow.with(context)
-            .setView(view)
-            .setWidth(Screen.width, 0.6f)
-            .setHeight(Screen.width, 0.4f)
-            .setMoveType(MoveType.active)
-            .setDesktopShow(true)
-            .build()
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ->
+            Notification.Builder(context)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .setPriority(Notification.PRIORITY_MIN)
+
+        else -> Notification.Builder(context)
     }
+        .setAutoCancel(true)
+        .setOngoing(true)
+        .setContentTitle("Box 正在运行")
+//        .setContentText("浮窗从未如此简单……")
+        .setSmallIcon(R.mipmap.ic_launcher)
+        .setContentIntent(
+            PendingIntent.getActivity(
+                context,
+                0,
+                Intent(context, MainActivity::class.java),
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        )
+        .build()
 
 
     fun addItem(historyBean: HistoryBean) {
         windowAdapter.addData(0, historyBean)
-        windowRecycleView.scrollToPosition(0)
-//        windowAdapter.notifyDataSetChanged()
+        windowRecycleView?.scrollToPosition(0)
+        windowAdapter.notifyDataSetChanged()
     }
 
-    fun show(){
-        FloatWindow.get().show()
+    fun show() {
+        EasyFloat.showAppFloat(App.CONTEXT)
     }
 
-    fun hide(){
-        FloatWindow.get().hide()
+    fun hide() {
+        EasyFloat.hideAppFloat(App.CONTEXT)
     }
 
-    fun clearView(){
+    fun clearView() {
         windowAdapter.data.clear()
         windowAdapter.notifyDataSetChanged()
     }

@@ -4,7 +4,7 @@ ext.versions = [
         releaseVersionName        : '0.1.0',
         releaseVersionCode        : 1,
 
-        minSdkVersion             : 16,
+        minSdkVersion             : 19,
         compileSdkVersion         : 28,
         targetSdkVersion          : 28,
 

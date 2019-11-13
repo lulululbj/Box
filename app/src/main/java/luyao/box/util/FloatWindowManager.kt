@@ -23,12 +23,14 @@ import luyao.box.ui.MainActivity
  */
 object FloatWindowManager {
 
-
+    private var hasInit = false
     private var windowRecycleView: RecyclerView? = null
     private val windowAdapter by lazy { HistoryAdapter() }
 
-    fun init(context: Activity) {
+    fun hasInit() = hasInit
 
+    fun init(context: Activity) {
+        hasInit = true
         EasyFloat.with(context)
             .setShowPattern(ShowPattern.ALL_TIME)
             .setSidePattern(SidePattern.DEFAULT)

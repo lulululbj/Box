@@ -44,8 +44,9 @@ class CurrentActivity : BaseActivity() {
      * 检测浮窗权限是否开启，若没有给与申请提示框（非必须，申请依旧是EasyFloat内部内保进行）
      */
     private fun checkPermission() {
-        if (PermissionUtils.checkPermission(this) && windowEnabled) {
-            FloatWindowManager.init(this)
+
+        if (PermissionUtils.checkPermission(this)) {
+            if (windowEnabled) FloatWindowManager.init(this)
         } else {
             AlertDialog.Builder(this)
                 .setMessage("使用悬浮窗功能，需要您授权悬浮窗权限。")
@@ -60,6 +61,7 @@ class CurrentActivity : BaseActivity() {
     private fun updateWindow(isOpen: Boolean) {
         windowEnabled = isOpen
         if (isOpen) {
+            if (!FloatWindowManager.hasInit()) FloatWindowManager.init(this)
             FloatWindowManager.show()
         } else {
             FloatWindowManager.hide()

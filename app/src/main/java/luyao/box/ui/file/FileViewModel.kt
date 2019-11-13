@@ -1,7 +1,6 @@
 package luyao.box.ui.file
 
 import androidx.lifecycle.MutableLiveData
-import jadx.core.utils.files.FileUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

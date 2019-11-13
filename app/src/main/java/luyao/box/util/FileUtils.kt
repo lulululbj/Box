@@ -1,9 +1,7 @@
 package luyao.box.util
 
-import android.os.Environment
 import luyao.box.bean.BoxFile
 import luyao.box.bean.IFile
-import luyao.util.ktx.ext.listFiles
 import java.io.File
 import java.util.*
 

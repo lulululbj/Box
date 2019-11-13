@@ -20,23 +20,21 @@ import luyao.util.ktx.ext.startKtxActivity
  */
 class AppManagerActivity : BaseVMActivity<AppViewModel>() {
 
+    companion object{
+        val REVERSE = "reverse"
+    }
+
     private var selectedPosition = 0
     private val titles = arrayListOf("三方应用", "系统应用", "本地安装包")
+    private val isReverse by lazy { intent.getBooleanExtra(REVERSE,false) }
     private val fragments = ArrayList<AppFragment>()
-    private val systemAppFragment by lazy { AppFragment.getInstance(AppFragment.TYPE_SYSTEM) }
-    private val thirdAppFragment by lazy { AppFragment.getInstance(AppFragment.TYPE_THIRD) }
-    private val localAppFragment by lazy { AppFragment.getInstance(AppFragment.TYPE_LOCAL) }
+    private val systemAppFragment by lazy { AppFragment.getInstance(AppFragment.TYPE_SYSTEM,isReverse) }
+    private val thirdAppFragment by lazy { AppFragment.getInstance(AppFragment.TYPE_THIRD,isReverse) }
+    private val localAppFragment by lazy { AppFragment.getInstance(AppFragment.TYPE_LOCAL,isReverse) }
+
 
     override fun providerVMClass() = AppViewModel::class.java
     override fun getLayoutResId() = R.layout.activity_app
-
-    init {
-        fragments.run {
-            add(thirdAppFragment)
-            add(systemAppFragment)
-            add(localAppFragment)
-        }
-    }
 
     override fun initView() {
         appToolbar.title = getString(R.string.reverse)
@@ -51,6 +49,11 @@ class AppManagerActivity : BaseVMActivity<AppViewModel>() {
     }
 
     private fun initViewPager() {
+        fragments.run {
+            add(thirdAppFragment)
+            add(systemAppFragment)
+            add(localAppFragment)
+        }
         appViewPager.adapter = AppPagerAdapter(supportFragmentManager)
         appViewPager.offscreenPageLimit = 3
         appTabLayout.setupWithViewPager(appViewPager)

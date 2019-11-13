@@ -17,7 +17,6 @@ import luyao.box.view.showCreateFileOrFolderDialog
 import luyao.box.view.showPropertiesDialog
 import luyao.util.ktx.base.BaseVMActivity
 import luyao.util.ktx.ext.invisible
-import luyao.util.ktx.ext.mimeType
 import luyao.util.ktx.ext.toast
 import luyao.util.ktx.ext.visible
 import java.io.File
@@ -31,6 +30,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
     private var reserved = true // 是否保留源文件
     private var mMenu: Menu? = null
     private var rootPath: String = "/"
+    private var originRootPath = rootPath
     private var currentFile: File = File(rootPath)
     private val fileAdapter by lazy { FileAdapter() }
     override fun providerVMClass() = FileViewModel::class.java
@@ -46,7 +46,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
     override fun initView() {
         setSupportActionBar(mToolbar)
         rootPath = intent.getStringExtra(PATH) ?: Environment.getExternalStorageDirectory().path
-
+        originRootPath = rootPath
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         mToolbar.setNavigationOnClickListener { onBackPressed() }
         mToolbar.title = "文件管理"
@@ -89,7 +89,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
                             toast(it)
                         }
 
-                    toast("${boxFile.getFile().extension} ${boxFile.getFile().mimeType}")
+//                    toast("${boxFile.getFile().extension} ${boxFile.getFile().mimeType}")
 
                 }
 
@@ -224,7 +224,7 @@ class FileActivity : BaseVMActivity<FileViewModel>() {
     }
 
     override fun onBackPressed() {
-        if (currentFile == Environment.getExternalStorageDirectory())
+        if (currentFile.path == originRootPath)
             super.onBackPressed()
         else {
             rootPath = currentFile.parent

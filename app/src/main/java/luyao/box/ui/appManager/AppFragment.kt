@@ -5,13 +5,11 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_app_list.*
 import kotlinx.android.synthetic.main.fragment_app.*
 import luyao.box.R
 import luyao.box.adapter.AppAdapter
 import luyao.box.bean.AppBean
 import luyao.util.ktx.base.BaseFragment
-import luyao.util.ktx.ext.startKtxActivity
 
 /**
  * Created by luyao
@@ -20,18 +18,23 @@ import luyao.util.ktx.ext.startKtxActivity
 class AppFragment : BaseFragment() {
 
     private val type by lazy { arguments?.getInt(TYPE, -1) }
+    private val isReverse by lazy { arguments?.getBoolean(REVERSE, false) }
 
     companion object {
         const val TYPE = "type"
+        const val REVERSE = "reverse"
         const val TYPE_SYSTEM = 0
         const val TYPE_THIRD = 1
         const val TYPE_LOCAL = 2
-        fun getInstance(type: Int) = AppFragment().apply {
-            arguments = Bundle().apply { putInt(TYPE, type) }
+        fun getInstance(type: Int, isReverse: Boolean) = AppFragment().apply {
+            arguments = Bundle().apply {
+                putInt(TYPE, type)
+                putBoolean(REVERSE, isReverse)
+            }
         }
     }
 
-    private val appAdapter by lazy { AppAdapter(onlyReverse = true) }
+    private val appAdapter by lazy { AppAdapter(onlyReverse = isReverse ?: false) }
 
     override fun getLayoutResId() = R.layout.fragment_app
 

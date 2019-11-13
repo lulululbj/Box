@@ -3,7 +3,6 @@ package luyao.box
 import android.app.Application
 import android.content.Context
 import luyao.util.ktx.Ktx
-import luyao.util.ktx.core.lifecycle.KtxAppLifeObserver
 import luyao.util.ktx.ext.showLog
 import kotlin.properties.Delegates
 

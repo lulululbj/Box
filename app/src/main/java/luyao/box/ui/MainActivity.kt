@@ -14,12 +14,17 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.title_layout.*
-import kotlinx.coroutines.*
-import luyao.box.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import luyao.box.APK_PATH
+import luyao.box.BASE_PATH
+import luyao.box.MAIN_LIST
+import luyao.box.R
 import luyao.box.about.AboutActivity
 import luyao.box.adapter.MainAdapter
-import luyao.box.util.AppUtils
+import luyao.box.ui.appManager.AppManagerActivity
 import luyao.box.ui.setting.SettingActivity
+import luyao.box.util.AppUtils
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.permission.request
 import luyao.util.ktx.ext.startKtxActivity
@@ -65,10 +70,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
         mainAdapter.setOnItemClickListener { _, _, position ->
-            if (position == mainAdapter.data.size - 1) {
-                toast("Coming soon !")
-            } else
-                startActivity(mainAdapter.data[position].clazz)
+            when (position) {
+                mainAdapter.data.size - 1 -> toast("Coming soon !")
+                0 -> startKtxActivity<AppManagerActivity>(value = AppManagerActivity.REVERSE to true)
+                2 -> startKtxActivity<AppManagerActivity>(value = AppManagerActivity.REVERSE to false)
+                else -> startActivity(mainAdapter.data[position].clazz)
+            }
         }
     }
 

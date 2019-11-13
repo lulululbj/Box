@@ -1,7 +1,6 @@
 package luyao.box.adapter
 
 import android.content.Context
-import android.os.Environment
 import android.view.View
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -10,17 +9,16 @@ import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import jadx.api.JadxArgs
-import jadx.api.JadxDecompiler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import luyao.box.APK_PATH
 import luyao.box.R
+import luyao.box.REVERSE_PATH
 import luyao.box.bean.AppBean
 import luyao.box.ui.appManager.AppDetailActivity
+import luyao.box.ui.file.FileActivity
 import luyao.box.util.AppManager
 import luyao.box.view.CircleProgressView
 import luyao.util.ktx.ext.*
@@ -48,12 +46,13 @@ class AppAdapter(layoutResId: Int = R.layout.item_app, onlyReverse: Boolean = fa
             setImageDrawable(R.id.appIcon, item.icon)
             setText(R.id.appName, item.appName)
 
-            getView<ImageButton>(R.id.appPop).setOnClickListener {
+            val appPopView = getView<ImageButton>(R.id.appPop)
+           appPopView.setOnClickListener {
                 showPopMenu(helper, helper.itemView.context, it, item)
             }
 
             getView<RelativeLayout>(R.id.itemAppRoot).setOnClickListener {
-                if (_onlyReverse)  showPopMenu(helper, helper.itemView.context, it, item)
+                if (_onlyReverse) showPopMenu(helper, helper.itemView.context, appPopView, item)
                 else {
                     helper.itemView.context.startKtxActivity<AppDetailActivity>(
                         values = arrayListOf(
@@ -88,12 +87,25 @@ class AppAdapter(layoutResId: Int = R.layout.item_app, onlyReverse: Boolean = fa
                 R.id.menu_share_apk -> shareApk(appBean)
                 R.id.menu_open_in_store -> context.openInAppStore(appBean.packageName)
                 R.id.menu_app_reverse, R.id.menu_reverse -> onReverseApp(appBean)
-                R.id.menu_reverse_folder -> {
-                }
+                R.id.menu_reverse_folder -> goToReverseFolder(appBean,context)
             }
             true
         }
         popupMenu.show()
+    }
+
+    private fun goToReverseFolder(appBean: AppBean,context: Context){
+        val reverseFolder = File("$REVERSE_PATH${appBean.appName}_${appBean.versionName}")
+        if (reverseFolder.exists())
+            context.startKtxActivity<FileActivity>(value = FileActivity.PATH to reverseFolder.path)
+        else
+            MaterialDialog(context).show {
+                message(text = "尚未反编译，是否立即反编译？")
+                positiveButton(R.string.confirm){
+                    onReverseApp(appBean)
+                }
+                negativeButton(R.string.cancel)
+            }
     }
 
     private fun saveApk(helper: BaseViewHolder, context: Context, appBean: AppBean) {

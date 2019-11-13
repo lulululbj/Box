@@ -4,7 +4,6 @@ import android.os.Environment
 import luyao.box.adapter.MainAdapter
 import luyao.box.bean.MainBean
 import luyao.box.ui.activity.CurrentActivity
-import luyao.box.ui.appManager.AppListActivity
 import luyao.box.ui.appManager.AppManagerActivity
 import luyao.box.ui.device.DeviceInfoActivity
 import luyao.box.ui.file.FileActivity
@@ -26,11 +25,10 @@ const val HOME_PAGE = "http://sunluyao.com"
 
 val MAIN_LIST = mutableListOf(
     MainBean(R.drawable.ic_menu_slideshow,"反编译", AppManagerActivity::class.java),
+    MainBean(R.drawable.ic_menu_gallery, "当前Activity", CurrentActivity::class.java),
+    MainBean(R.drawable.ic_menu_camera, "应用管理", AppManagerActivity::class.java),
     MainBean(R.drawable.ic_menu_slideshow,"文件管理", FileActivity::class.java),
     MainBean(R.drawable.ic_menu_slideshow,"本机信息", DeviceInfoActivity::class.java),
-    MainBean(R.drawable.ic_menu_slideshow, "本机信息", DeviceInfoActivity::class.java),
-    MainBean(R.drawable.ic_menu_camera, "应用管理", AppListActivity::class.java),
-    MainBean(R.drawable.ic_menu_gallery, "Activity历史", CurrentActivity::class.java),
 //    MainBean(R.drawable.ic_add_circle, "Logcat", LogcatActivity::class.java),
     MainBean(R.drawable.ic_add_circle, "Coming Soon", MainAdapter::class.java)
 )

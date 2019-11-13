@@ -2,7 +2,6 @@ package luyao.box.service
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
-import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import luyao.box.bean.HistoryBean
 import luyao.box.util.FloatWindowManager

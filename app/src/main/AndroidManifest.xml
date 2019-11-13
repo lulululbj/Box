@@ -30,7 +30,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.appManager.AppListActivity"/>
         <activity android:name=".ui.appManager.AppDetailActivity"/>
         <activity android:name=".ui.editor.TextEditorActivity"/>
         <activity android:name=".ui.editor.TextViewerActivity"

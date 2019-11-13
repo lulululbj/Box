@@ -1,8 +1,8 @@
 ext.versions = [
 
         // for project
-        releaseVersionName        : '0.1.0',
-        releaseVersionCode        : 1,
+        releaseVersionName        : '0.2.0',
+        releaseVersionCode        : 2,
 
         minSdkVersion             : 19,
         compileSdkVersion         : 28,

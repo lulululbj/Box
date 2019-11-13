@@ -89,7 +89,7 @@ object FloatWindowManager {
     fun addItem(historyBean: HistoryBean) {
         windowAdapter.addData(0, historyBean)
         windowRecycleView?.scrollToPosition(0)
-        windowAdapter.notifyDataSetChanged()
+//        windowAdapter.notifyDataSetChanged()
     }
 
     fun show() {

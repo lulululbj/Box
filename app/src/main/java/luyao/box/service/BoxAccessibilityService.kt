@@ -14,7 +14,7 @@ class BoxAccessibilityService : AccessibilityService() {
         var instance: BoxAccessibilityService? = null
     }
 
-    private var showWindow by Preference(Preference.SHOW_WINDOW, false)
+//    private var showWindow by Preference(Preference.SHOW_WINDOW, false)
 
     override fun onInterrupt() {
 
@@ -23,7 +23,6 @@ class BoxAccessibilityService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             "${event.packageName}$\n${event.className}".loge("box")
-            if (showWindow)
                 FloatWindowManager.addItem(HistoryBean(event.packageName.toString(), event.className.toString()))
         }
     }

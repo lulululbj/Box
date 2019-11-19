@@ -180,3 +180,7 @@
 -dontwarn androidx.**
 
 -keep class android.util.TypedValue {*;}
+
+# bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

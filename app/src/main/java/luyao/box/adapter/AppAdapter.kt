@@ -2,10 +2,7 @@ package luyao.box.adapter
 
 import android.content.Context
 import android.view.View
-import android.widget.ImageButton
-import android.widget.PopupMenu
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -45,13 +42,14 @@ class AppAdapter(layoutResId: Int = R.layout.item_app, onlyReverse: Boolean = fa
         helper.run {
             setImageDrawable(R.id.appIcon, item.icon)
             setText(R.id.appName, item.appName)
+            helper.getView<TextView>(R.id.appName).isSelected = true
 
             val appPopView = getView<ImageButton>(R.id.appPop)
            appPopView.setOnClickListener {
                 showPopMenu(helper, helper.itemView.context, it, item)
             }
 
-            getView<RelativeLayout>(R.id.itemAppRoot).setOnClickListener {
+            getView<LinearLayout>(R.id.itemAppRoot).setOnClickListener {
                 if (_onlyReverse) showPopMenu(helper, helper.itemView.context, appPopView, item)
                 else {
                     helper.itemView.context.startKtxActivity<AppDetailActivity>(

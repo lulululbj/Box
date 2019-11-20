@@ -42,15 +42,18 @@ object AppManager {
             .map { it to context.packageManager.getPackageArchiveInfo(it.path,0) }
             .forEach {
                 val pkgInfo = it.second
-                val appBean = AppBean(
-                    it.first.name,
-                    pkgInfo.packageName,
-                    pkgInfo.versionName,
-                    it.first.path,
-                    getAppIcon(context, pkgInfo),
-                    it.second
-                )
-                appBeanList.add(appBean)
+                pkgInfo?.let { pkgInfo ->
+                    val appBean = AppBean(
+                        it.first.name,
+                        pkgInfo.packageName,
+                        pkgInfo.versionName,
+                        it.first.path,
+                        getAppIcon(context, pkgInfo),
+                        it.second
+                    )
+                    appBeanList.add(appBean)
+                }
+
             }
         return appBeanList
     }

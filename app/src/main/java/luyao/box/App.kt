@@ -2,6 +2,7 @@ package luyao.box
 
 import android.app.Application
 import android.content.Context
+import com.tencent.bugly.crashreport.CrashReport
 import luyao.util.ktx.Ktx
 import luyao.util.ktx.ext.showLog
 import kotlin.properties.Delegates
@@ -21,5 +22,6 @@ class App : Application() {
         CONTEXT = applicationContext
         showLog = BuildConfig.DEBUG
         Ktx.watchAppLife = false
+        CrashReport.initCrashReport(applicationContext, "ecba9e150d", BuildConfig.DEBUG)
     }
 }

@@ -63,7 +63,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:' + versions.material_dialogs_input
     implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
     implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
-
+    implementation 'com.tencent.bugly:crashreport:3.1.0'
     // module
     implementation project(':Parser')
 

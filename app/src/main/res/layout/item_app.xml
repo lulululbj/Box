@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/itemAppRoot"
@@ -21,37 +21,43 @@
 
     <TextView
             android:id="@+id/appName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/appIcon"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:paddingRight="4dp"
             tools:text="Box" />
 
-    <ImageButton
-            android:id="@+id/appPop"
+
+    <RelativeLayout
             android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/ripple"
-            android:clickable="true"
-            android:padding="4dp"
-            android:src="@drawable/ic_more_vert_black_24dp" />
+            android:layout_height="wrap_content">
 
-    <luyao.box.view.CircleProgressView
-            android:id="@+id/appProgressView"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:visibility="gone"
-            app:bgColor="#e5e5e5"
-            app:fgColor="#333"
-            app:percent="0"
-            app:startAngle="0" />
+        <ImageButton
+                android:id="@+id/appPop"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ripple"
+                android:padding="4dp"
+                android:src="@drawable/ic_more_vert_black_24dp" />
 
-</RelativeLayout>
+        <luyao.box.view.CircleProgressView
+                android:id="@+id/appProgressView"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                app:bgColor="#e5e5e5"
+                app:fgColor="#333"
+                app:percent="0"
+                app:startAngle="0"
+                tools:visibility="visible" />
+    </RelativeLayout>
+
+
+</LinearLayout>

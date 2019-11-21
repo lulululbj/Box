@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.navigation.NavigationView
-import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.title_layout.*
@@ -73,9 +72,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         mainAdapter.setOnItemClickListener { _, _, position ->
             when (position) {
                 mainAdapter.data.size - 1 -> toast("Coming soon !")
-                0 ->
-                    CrashReport.testJavaCrash()
-//                    startKtxActivity<AppManagerActivity>(value = AppManagerActivity.REVERSE to true)
+                0 -> startKtxActivity<AppManagerActivity>(value = AppManagerActivity.REVERSE to true)
                 2 -> startKtxActivity<AppManagerActivity>(value = AppManagerActivity.REVERSE to false)
                 else -> startActivity(mainAdapter.data[position].clazz)
             }

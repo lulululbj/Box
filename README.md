@@ -10,7 +10,7 @@
 
 ## 下载
 
-[release](https://github.com/lulululbj/Box/releases)
+> 现已上架酷安，[点我下载](https://www.coolapk.com/apk/249191)
 
 ## 功能
 

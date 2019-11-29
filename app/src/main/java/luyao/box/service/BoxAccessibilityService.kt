@@ -23,7 +23,7 @@ class BoxAccessibilityService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             "${event.packageName}$\n${event.className}".loge("box")
-                FloatWindowManager.addItem(HistoryBean(event.packageName.toString(), event.className.toString()))
+                FloatWindowManager.addItem(HistoryBean(event.packageName?.toString(), event.className?.toString()))
         }
     }
 

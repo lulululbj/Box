@@ -4,6 +4,8 @@ import android.os.Build
 import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.widget.PopupMenu
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import de.psdev.licensesdialog.LicensesDialog
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20
 import de.psdev.licensesdialog.model.Notice
@@ -32,7 +34,13 @@ class AboutActivity : BaseActivity() {
         source.setOnClickListener { openBrowser(GITHUB_PAGE) }
         feedback.setOnClickListener { showFeedBackMenu() }
         thirdLib.setOnClickListener { showLicenseDialog() }
-        developer.setOnClickListener { openBrowser(HOME_PAGE) }
+        developer.setOnClickListener { showMe() }
+    }
+
+    private fun showMe(){
+        MaterialDialog(this).show {
+            customView(R.layout.dialog_me)
+        }
     }
 
     private fun showOwnLicense() {

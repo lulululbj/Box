@@ -5,6 +5,6 @@ package luyao.box.bean
  * on 2019/1/10 13:18
  */
 data class HistoryBean(
-    val packageName:String,
-    val windowName:String
+    val packageName:String?,
+    val windowName:String?
 )
